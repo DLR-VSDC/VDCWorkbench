@@ -5,7 +5,7 @@ The library was submitted for the "Call for Libraries" at the [Modelica Conferen
 
 ## Introduction
 The ability to systematically compare and evaluate diverse control strategies is essential for the development of effective control algorithms in autonomous driving. To facilitate this, the contribution introduces the VDCWorkbench Modelica Library, a holistic platform for developing, testing, and validating vehicle dynamics controllers and hybrid vehicle energy management algorithms. The presented Library is an extension of the IEEE VTS Motor Vehicle Challenge 2023 models and offers multi-physical component modeling, including a battery with aging model, as well as vehicle dynamics control for autonomous driving research projects. Two path-following approaches are featured: an open-loop lateral controller with a static inversion of a single-track model, and a closed-loop state-dependent geometric path-following controller with static control allocation. The library may also serve as the foundation for development of vehicle control methods, such as two-degree-of-freedom control approaches concepts. One example for this is the combination of a feedforward controller combined with residual reinforcement learning, where a learned agent improves the performance of the open loop controller.
-<img width="672" height="797" alt="image" src="https://github.com/user-attachments/assets/9298a1c7-db41-441a-bf0e-db589ce71271" />
+<img width="901" height="982" alt="image" src="https://github.com/user-attachments/assets/1bd548ef-712a-43f8-a27a-67dcfef34c46" />
 
 ## Dependencies
 In order to work properly, the library requires the following Modelica packages.
