@@ -44,7 +44,7 @@ equation
       points={{79,-20},{62,-20}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(constantSpeed.flange, prismatic_x.flange_a) annotation (Line(points={{-30,20},{-30,-10}}, color={0,127,0}));
+  connect(constantSpeed.flange, prismatic_x.axis) annotation (Line(points={{-30,20},{-30,-10}}, color={0,127,0}));
   connect(prismatic_x.frame_b, wheelSingle.frame_a) annotation (Line(
       points={{-20,-20},{6,-20}},
       color={95,95,95},

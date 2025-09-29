@@ -5,14 +5,14 @@ package VDCWorkbenchModels
 
   annotation (
     preferredView = "info",
-    version = "0.2.0",
+    version="0.3.0",
     versionDate = "2025-08-31",
-    dateModified = "2025-08-31",
+    dateModified = "2025-09-29",
     uses(
-      Modelica(version="4.0.0"),
-      ModelicaServices(version="4.0.0"),
-      PlanarMechanics(version="1.6.0"),
-      VehicleInterfaces(version="2.0.1")),
+      Modelica(version="4.1.0"),
+      ModelicaServices(version="4.1.0"),
+      PlanarMechanics(version="2.0.0"),
+      VehicleInterfaces(version="2.0.2")),
     Documentation(
       revisions="<html>
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">

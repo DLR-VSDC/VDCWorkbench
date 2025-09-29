@@ -113,17 +113,15 @@ equation
       points={{34,-30},{34,0},{46,0}},
       color={95,95,95},
       thickness=0.5));
-  connect(bearingLeft.flange_a, bearingRight.flange_a)
-    annotation (Line(points={{-24,-40},{24,-40}},
-        color={0,0,0}));
+  connect(bearingLeft.axis, bearingRight.axis)
+    annotation (Line(points={{-24,-40},{24,-40}}, color={0,0,0}));
   connect(wheelInertiaL.flange_b, wheelLeft.flange_a)
-    annotation (Line(points={{-70,0},{-62,0},{-62,1.33227e-15},{-60,1.33227e-15}},
-        color={0,0,0}));
+    annotation (Line(points={{-70,0},{-62,0},{-62,1.33227e-15},{-60,1.33227e-15}}, color={0,0,0}));
   connect(wheelRight.flange_a, wheelInertiaR.flange_a)
     annotation (Line(points={{60,0},{70,0}}, color={0,0,0}));
   connect(flangeWheelRight, wheelInertiaR.flange_b)
     annotation (Line(points={{100,0},{90,0}}, color={0,0,0}));
-  connect(bearingLeft.flange_a, inertiaSteering.flange_b)
+  connect(bearingLeft.axis, inertiaSteering.flange_b)
     annotation (Line(points={{-24,-40},{10,-40},{10,-3.55271e-15}}, color={0,0,0}));
   connect(flangeSteeringWheel, steeringGear.flange_a)
     annotation (Line(points={{40,100},{10,100},{10,60}}, color={0,0,0}));
