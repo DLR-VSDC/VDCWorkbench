@@ -41,19 +41,24 @@ expandable connector ControlBus
   VehicleInterfaces.Interfaces.TransmissionControlBus transmissionControlBus
     "Transmission control bus" annotation(Dialog(enable=false));
   RexBus rexBus "Range extender (H2) bus" annotation(Dialog(enable=false));
-  RefBus refBus "Reference signals for bWMS" annotation(Dialog(enable=false));
-  EMAControls eMAControls "Control variables for EMA" annotation(Dialog(enable=false));
-  ScoreBus scoreBus "Bus connector used for score values of the EMA" annotation(Dialog(enable=false));
-  MotionDemandBus motionDemandBus "Bus connector used for PFC and CA vehicle control" annotation(Dialog(enable=false));
+  RefBus refBus "Bus of reference signals for bWMS" annotation(Dialog(enable=false));
+  EMAControls eMAControls "Bus of control variables for EMA" annotation(Dialog(enable=false));
+  ScoreBus scoreBus "Bus of score values of the EMA" annotation(Dialog(enable=false));
+  MotionDemandBus motionDemandBus "Bus of PFC and CA vehicle control signals" annotation(Dialog(enable=false));
 
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
-    	  Rectangle(
+    Icon(
+      coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+      graphics={
+        Rectangle(
           extent={{-20,2},{20,-2}},
           lineColor={255,204,51},
           lineThickness=0.5)}),
     Documentation(
       info="<html>
-<p>An empty expandable connector used as the top-level control signal bus in VehicleInterfaces.</p>
+<p>
+An empty expandable connector used as the top-level control signal bus in
+VDCWorkbenchModels.
+</p>
 </html>"));
 end ControlBus;
