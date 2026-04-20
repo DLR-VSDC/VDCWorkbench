@@ -1,38 +1,41 @@
-# VDC Workbench
-The VDCWorkbench Modelica Library is a holistic platform for developing, testing, and validating vehicle dynamics controllers and hybrid vehicle energy management algorithms.
-
-The library was submitted for the "Call for Libraries" at the [Modelica Conference 2025](https://modelica.org/events/modelica2025/).
-
+# VDCWorkbench: A Source-Available Modelica Toolbox for Research and Education on Vehicle Dynamics and Control
 ## Introduction
-The ability to systematically compare and evaluate diverse control strategies is essential for the development of effective control algorithms in autonomous driving. To facilitate this, the contribution introduces the VDCWorkbench Modelica Library, a holistic platform for developing, testing, and validating vehicle dynamics controllers and hybrid vehicle energy management algorithms. The presented Library is an extension of the IEEE VTS Motor Vehicle Challenge 2023 models and offers multi-physical component modeling, including a battery with aging model, as well as vehicle dynamics control for autonomous driving research projects. Two path-following approaches are featured: an open-loop lateral controller with a static inversion of a single-track model, and a closed-loop state-dependent geometric path-following controller with static control allocation. The library may also serve as the foundation for development of vehicle control methods, such as two-degree-of-freedom control approaches concepts. One example for this is the combination of a feedforward controller combined with residual reinforcement learning, where a learned agent improves the performance of the open loop controller.
-<img width="901" height="982" alt="image" src="https://github.com/user-attachments/assets/1bd548ef-712a-43f8-a27a-67dcfef34c46" />
+VDCWorkbench is a source-available Modelica library for modeling, simulation, and control of electric and software-defined vehicles (SDVs). It provides a unified framework to integrate mechanical, electrical, thermal, and control domains, enabling the development of advanced vehicle architectures from battery-electric and hybrid powertrains to over-actuated by-wire systems. The library supports modular customization of components (tires, actuators, energy storage) and includes state-of-the-art controllers for path following, energy management, and AI-driven control.
+<img width="2830" height="4014" alt="Library_Overview_OJVT2026_v2" src="https://github.com/user-attachments/assets/2a0fcb52-f89f-4456-9c08-32b41a7c35a6" />
+*Map based on [BayernAtlas](https://atlas.bayern.de) (&copy; Bayerische Vermessungsverwaltung 2026)*
+
+The library was submitted as suplementary for the sumbission to the [2026 Joint Submission of papers to Vehicle Power Propulsion Conference (VPPC)
+and IEEE Open Journal of Vehicular Technology (OJVT)](https://events.vtsociety.org/vppc2026/authors/joint-submission-for-ieee-vppc-2026-and-ieee-ojvt/).
+
+The full article is available here as open access: [VDCWorkbench: A Source-Available Modelica Toolbox for Research and Education on Vehicle Dynamics and Control](https://ieeexplore.ieee.org/document/11573019).
+
 
 ## Dependencies
 In order to work properly, the library requires the following Modelica packages.
-- [VehicleInterfaces](https://github.com/modelica/VehicleInterfaces)
+- [Credibility](https://github.com/DLR-SR/Credibility)
 - [PlanarMechanics](https://github.com/dzimmer/PlanarMechanics)
+- [SMArtInt](https://github.com/xrg-simulation/SMArtInt) - *OpenModelica users*: please use the branch [dev](https://github.com/xrg-simulation/SMArtInt/tree/dev) as long as there is no SMArtInt release later then v0.5.2 since there is a bug when using SMArtInt for multi-dimensional problems
+- [VehicleInterfaces](https://github.com/modelica/VehicleInterfaces)
 
 Consult the library user's guide for particular versions of the abovementioned packages which are needed.
 
-## Tool compatibility 
-The current release was developed/tested using following tools.
-
-- [Dymola 2025x Refresh&nbsp;1](https://www.3ds.com/products-services/catia/products/dymola/): The library has been developed using Dymola.
-- [Open Modelica v1.25.0](https://www.openmodelica.org/): The library was tested and is fully compatible to Open Modelica.  
-- [Modelon Impact](https://www.modelon.com/modelon-impact/): The library is reported to be fully compatible to Modelon Impact.
-
-## Reference results
-The reference results for regression testing can be found in [VDCWorkbench_ReferenceResults](https://github.com/DLR-VSDC/VDCWorkbench_ReferenceResults).
+## Tool compatibility
+The current branch release was developed/tested using following tools.
+- [Dymola 2026x Refresh 1](https://www.3ds.com/products-services/catia/products/dymola/): The library has been developed using Dymola.
+- [OpenModelica v1.27.0 (64-bit)](https://www.openmodelica.org/): The library was tested and is fully compatible to Open Modelica.
 
 ## Bibliography
-- J. Brembeck, R. de Castro, J. Tobol&aacute;&rcaron; and I. Ebrahimi:
-IEEE VTS Motor Vehicles Challenge 2023: A Multi-physical Benchmark Problem for Next Generation Energy Management Algorithms, 
-*19th IEEE Vehicle Power and Propulsion Conference (VPPC)*, 2022
-- J. Brembeck, R. de Castro, J. Ultsch, J. Tobolar, Ch. Winter and K. Ahmic:
-VDCWorkbench: A Vehicle Dynamics Control Test &amp; Evaluation Library for Model and AI-based Control Approaches,
-accepted for the *16th International Modelica and FMI Conference*, Lucerne, Switzerland, 2025
+- J. Brembeck, R. de Castro, J. Tobol&aacute;&rcaron; and I. Ebrahimi: IEEE VTS Motor Vehicles Challenge 2023: A Multi-physical Benchmark Problem for Next Generation Energy Management Algorithms, *19th IEEE Vehicle Power and Propulsion Conference (VPPC)*, 2022
+- J. Brembeck, R. de Castro, J. Ultsch, J. Tobolar, Ch. Winter and K. Ahmic: VDCWorkbench: A Vehicle Dynamics Control Test &amp; Evaluation Library for Model and AI-based Control Approaches, *16th International Modelica and FMI Conference*, Lucerne, Switzerland, doi: [10.3384/ecp218585](https://doi.org/10.3384/ecp218585), 2025
+- J. Brembeck et al.: VDCWorkbench: A Source-Available Modelica Toolbox for Research and Education on Vehicle Dynamics and Control, in *IEEE Open Journal of Vehicular Technology*, doi: [10.1109/OJVT.2026.3705616](https://doi.org/10.1109/OJVT.2026.3705616), 2026
 
 ## License
-Copyright &copy; 2022-2025 DLR & UCM. 
+Copyright &copy; 2022-2026 DLR & UCM.
 The code is released under the [CC BY-NC-ND 4.0 license](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode).
 Link to [short summary of CC BY-NC-ND 4.0 license](https://creativecommons.org/licenses/by-nc-nd/4.0/). For attribution see also [license file](LICENSE.md).
+
+## Appendix: Nomenclature
+Download as pdf: [ovjt4-Nomenclature.pdf](https://github.com/user-attachments/files/28633609/ovjt4-Nomeclature.pdf)
+
+<img width="4961" height="6111" alt="ovjt4-Nomeclature" src="https://github.com/user-attachments/assets/c6dc5d56-9c16-457a-a735-146531e405b1" />
+
