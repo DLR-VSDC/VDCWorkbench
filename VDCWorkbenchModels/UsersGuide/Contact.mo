@@ -30,10 +30,16 @@ Germany
     Dr. Jonathan Brembeck (DLR-FK-FSR)
   </li>
   <li>
-    Dr. Ricardo Pinto de Castro, (University of California Merced)
+    Dr. Ricardo Pinto de Castro (University of California Merced)
   </li>
   <li>
-    Dr. Jakub Tobolar, PhD, (DLR-FK-FSR)
+    Johannes Rein (DLR-FK-FSR)
+  </li>
+  <li>
+    Dr. Jakub Tobolar (DLR-FK-FSR)
+  </li>
+  <li>
+    Johannes Ultsch (DLR-FK-FSR)
   </li>
 </ul>
 
