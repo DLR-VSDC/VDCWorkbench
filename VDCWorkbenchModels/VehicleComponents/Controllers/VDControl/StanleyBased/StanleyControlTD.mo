@@ -1,0 +1,109 @@
+within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.StanleyBased;
+model StanleyControlTD "Time-discrete classic Stanley lateral control law"
+  extends BaseClasses.BaseStanley;
+  import Modelica.Math.{cos,sin,atan,atan2};
+
+  parameter Real k = 5 "Stanley gain";
+  parameter Modelica.Units.SI.Velocity v_eps = 0.1  "Small velocity to avoid division by zero";
+  parameter Real k_d_yaw = 0.14 "Factor for yaw rate related damping";
+  parameter Real k_d_steer = 0.0 "Factor penalizing rate of steering angle change";
+
+  parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
+
+  parameter Real K_vctrl = 0.5 "Gain of torque control" annotation (Dialog(group="Drive torque controller"));
+  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Drive torque controller"));
+
+  parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
+
+  parameter Modelica.Units.SI.Mass m = 7.151 "Vehicle mass" annotation(Dialog(group="Vehicle parameters"));
+  parameter Modelica.Units.SI.Length lf = 0.1805 "Distance of CoG to front axle" annotation(Dialog(group="Vehicle parameters"));
+  parameter Modelica.Units.SI.Length lr = 0.1805 "Distance of CoG to rear axle" annotation(Dialog(group="Vehicle parameters"));
+  parameter Real C_Tire = 150 "Tire stiffnes for slip angle compensation" annotation(Dialog(group="Vehicle parameters"));
+
+public
+  Real e_lat;
+  Real e_psi;
+  Real x_front, y_front;
+  Real yawRate_path;
+  Real delta_raw;
+  Real delta_yaw;
+  Real delta_steer;
+  Real dpsi;
+  Real psi_ss;
+
+  discrete Real delta_km1(start=0);
+  discrete Real delta_km2(start=0);
+
+algorithm
+  when sample(0, Ts) then
+    // set coordinates to center of front axle
+    x_front :=xveh + lf*cos(psiveh);
+    y_front :=yveh + lf*sin(psiveh);
+
+    // calc errors
+    e_lat := -(x_path - x_front)*sin(psi_path) + (y_path - y_front)*cos(psi_path);
+
+    // Slip angle compensation
+    yawRate_path := vveh_long * kappa_path;
+    psi_ss := m / (C_Tire * (1 + lf/lr)) * vveh_long * yawRate_path;
+    dpsi := psi_path - psiveh - psi_ss;
+    e_psi := atan2(sin(dpsi), cos(dpsi));
+
+    // yaw rate damping
+    delta_yaw := k_d_yaw * (yawRate_path - yaw_rate);
+
+    // steer response damping
+    delta_steer := k_d_steer * (delta_km1 - delta_km2);
+
+    // Stanley control law
+    delta_raw := e_psi + atan(k*e_lat/(vveh_long + v_eps)) + delta_yaw + delta_steer;
+    delta := min(deltaMax, max(-deltaMax, delta_raw));
+
+    torque := min(tauDriveMax, max(-tauDriveMax, K_vctrl*(v_path - vveh_long)));
+
+    delta_km2 := delta_km1;
+    delta_km1 := delta;
+
+  end when;
+
+  annotation (
+    Icon(
+      graphics={
+        Polygon(
+          points={{-100,-100},{-100,100},{100,100},{100,-100},{-100,-100}},
+          lineColor={28,108,200},
+          fillColor={0,140,72},
+          fillPattern=FillPattern.Forward,
+          pattern=LinePattern.DashDot),
+        Text(
+          extent={{-100,60},{100,30}},
+          textColor={255,255,255},
+          textString="Stanley"),
+        Line(
+          points={{-80,-80},{-80,-40},{-30,-40},{-30,-20},{20,-20},{20,-60},{70,-60},{70,-10}},
+          color={255,255,255},
+          pattern=LinePattern.Dot),
+        Ellipse(
+          extent={{-86,-34},{-74,-46}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-36,-14},{-24,-26}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{14,-54},{26,-66}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}),
+    Documentation(
+      info="<html>
+<p>
+Path following <em>time-discrete Stanley</em> controller. Refer to
+<a href=\"modelica://VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.StanleyBased.StanleyControl\">StanleyControl</a>
+for controller description.
+</p>
+</html>"));
+end StanleyControlTD;

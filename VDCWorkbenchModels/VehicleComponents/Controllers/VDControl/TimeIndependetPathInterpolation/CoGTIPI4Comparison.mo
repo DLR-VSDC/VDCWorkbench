@@ -1,27 +1,30 @@
-within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.GeoPFC;
-block TimeIndependentPathInterpolation "Time independent path interpolation"
+within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.TimeIndependetPathInterpolation;
+block CoGTIPI4Comparison "Time independent path interpolation"
   parameter Real e_long_gain=80 "TIPI Controller gain to force e_long to 0";
-  parameter Real s_start=0 "Arc length value at start position";
+  parameter Modelica.Units.SI.Position s_start=0 "Arc length value at start position";
   parameter String filePath = ModelicaServices.ExternalReferences.loadResource(
-    "modelica://VDCWorkbenchModels/Resources/Maps/Techlab2SBahn-NonOpt_TIPI.mat")
+    "modelica://VDCWorkbenchModels/Resources/Maps/RacetrackMini.mat")
     "File where path table pathName is stored" annotation (
       Dialog(
         group="Path data",
         loadSelector(
           filter="Matlab files(*.mat)",
           caption="Open data file")));
-  parameter String pathName = "path_TIPI" "Table name in filePath" annotation (Dialog(group="Path data"));
-  parameter Real maxArcLength = 2.312560625428274e+03 "Maximum arc length value on path file" annotation (Dialog(group="Path data"));
+  parameter String pathName = "path" "Table name in filePath" annotation (Dialog(group="Path data"));
+  parameter Modelica.Units.SI.Position maxArcLength = 22.737000000000002 "Maximum arc length value on path file" annotation (Dialog(group="Path data"));
   //Can be improved in final version (store in MAT file)
 
   Real sDot "Time derivative of arc length";
   Real tvI_P[2] "Tangent of desired path in inertial frame I (normalized)";
-  Real nvI_P[2] "Vector normal to tvI_P; rotated tvI_P +90° in inertial frame I (normalized)";
+  Real nvI_P[2]
+    "Vector normal to tvI_P; rotated tvI_P +90° in inertial frame I (normalized)";
   //Real vI_C[2] "Vehicle speed in inertial frame of reference"; // -> Not considered since this value is a direct input
   Real e[2] "Distance vector from path reference to vehicle position in inertial frame I";
   Real e_lat "Distance of vehicle to path in direction of nvI_P";
   Real e_long "Distance of vehicle to path in direction of nvI_P";
-  Real kappa "Curvature of path, derivative of psi_ref with respect to parameter s";
+  Real e_psi "Orientation error of the vehicle";
+  Real kappa
+    "Curvature of path, derivative of psi_ref with respect to parameter s";
   Real lambda[5];
 
   Modelica.Blocks.Tables.CombiTable1Ds combiTablePath(
@@ -88,10 +91,12 @@ public
     annotation (Placement(transformation(extent={{0,30},{20,50}})));
   Modelica.Blocks.Continuous.Integrator sIntegrator(y_start=s_start)
     annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
-  Modelica.Blocks.Sources.RealExpression realExpression_e_long(y=e_long)
+  Modelica.Blocks.Sources.RealExpression realExpression_s(y=sIntegrator.y)
     annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
   Modelica.Blocks.Sources.RealExpression realExpression_e_lat(y=e_lat)
     annotation (Placement(transformation(extent={{40,-62},{60,-42}})));
+  Modelica.Blocks.Sources.RealExpression realExpression_e_psi(y=e_psi)
+    annotation (Placement(transformation(extent={{40,-20},{60,0}})));
   Utilities.Blocks.Modulo modulo(k=maxArcLength) annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
   VDCWorkbenchModels.Utilities.Interfaces.ControlBus controlBus annotation (
       Placement(transformation(extent={{-20,-20},{20,20}},
@@ -124,9 +129,11 @@ equation
   lambda[4] = combiTablePath.y[4]*v_scl "scaled long speed";
   lambda[5] = combiTablePath.y[5] "curvature";
   kappa = combiTablePath.y[5];
-  if sIntegrator.y > (maxArcLength-1.0) then
-    terminate("Vehicle reached end of path");
-  end if;
+  //if sIntegrator.y > (maxArcLength-1.0) then
+  //  terminate("Vehicle reached end of path");
+  //end if;
+
+  e_psi = combiTablePath.y[3] - sI_C[3];
 
   connect(combiTablePath.u, sampler.y) annotation (Line(
       points={{38,40},{21,40}},
@@ -138,73 +145,10 @@ equation
         color={0,0,127}));
   connect(sIntegrator.y, modulo.u) annotation (Line(points={{-39,40},{-32,40}},
         color={0,0,127}));
-  connect(realExpression_sDot.y, motionDemandBus.s_dot) annotation (Line(points={{-79,40},{-70,40},{-70,-2},{80,-2},{80,0}},
-        color={0,0,127}),
-      Text(
-        string="%second",
-        index=3,
-        extent={{6,3},{6,3}},
-        horizontalAlignment=TextAlignment.Left));
-  connect(sampler.y, motionDemandBus.arc_length) annotation (Line(points={{21,40},{30,40},{30,0},{80,0}},
-        color={0,0,127}),
-      Text(
-        string="%second",
-        index=3,
-        extent={{6,3},{6,3}},
-        horizontalAlignment=TextAlignment.Left));
-  connect(realExpression_e_long.y, motionDemandBus.e_long) annotation (Line(
-        points={{61,-30},{80,-30},{80,0}}, color={0,0,127}),
-      Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}},
-        horizontalAlignment=TextAlignment.Left));
-  connect(realExpression_e_lat.y, motionDemandBus.e_lat) annotation (Line(
-        points={{61,-52},{82,-52},{82,0},{80,0}}, color={0,0,127}),
-      Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}},
-        horizontalAlignment=TextAlignment.Left));
   connect(motionDemandBus, controlBus.motionDemandBus) annotation (Line(
         points={{80,0},{80,-0.1},{100.1,-0.1}},
         color={255,204,51},
         thickness=0.5));
-  connect(combiTablePath.y[2], motionDemandBus.y_path) annotation (Line(points={{61,40},{80,40},{80,0}},
-        color={0,0,127}),
-      Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}},
-        horizontalAlignment=TextAlignment.Left));
-  connect(combiTablePath.y[1], motionDemandBus.x_path) annotation (Line(points={{61,40},{64,40},{64,42},{82,42},{82,0},{80,0}},
-        color={0,0,127}),
-      Text(
-        string="%second",
-        index=3,
-        extent={{6,2},{6,2}},
-        horizontalAlignment=TextAlignment.Left));
-  connect(combiTablePath.y[3], motionDemandBus.psi_path) annotation (Line(points={{61,40},{64,40},{64,34},{74,34},{74,0},{80,0}},
-        color={0,0,127}),
-      Text(
-        string="%second",
-        index=3,
-        extent={{6,2},{6,2}},
-        horizontalAlignment=TextAlignment.Left));
-  connect(combiTablePath.y[4], motionDemandBus.v_path) annotation (Line(points={{61,40},{66,40},{66,36},{76,36},{76,0},{80,0}},
-        color={0,0,127}),
-      Text(
-        string="%second",
-        index=3,
-        extent={{6,2},{6,2}},
-        horizontalAlignment=TextAlignment.Left));
-  connect(combiTablePath.y[5], motionDemandBus.kappa_path) annotation (Line(points={{61,40},{68,40},{68,38},{78,38},{78,0},{80,0}},
-        color={0,0,127}),
-      Text(
-        string="%second",
-        index=3,
-        extent={{6,2},{6,2}},
-        horizontalAlignment=TextAlignment.Left));
   connect(chassisBus, controlBus.chassisBus) annotation (Line(
       points={{20,-80},{100.1,-80},{100.1,-0.1}},
       color={255,204,51},
@@ -217,6 +161,31 @@ equation
         color={0,0,127}));
   connect(vI_C[1], chassisBus.velocity_dx) annotation (Line(points={{-10,-92.5},{20,-92.5},{20,-80}}, color={0,0,127}));
   connect(vI_C[2], chassisBus.velocity_dy) annotation (Line(points={{-10,-87.5},{18,-87.5},{18,-80},{20,-80}}, color={0,0,127}));
+  connect(realExpression_s.y, motionDemandBus.CoG_path_s) annotation (Line(points={{61,-30},{80,-30},{80,0}},
+        color={0,0,127}),
+      Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+  connect(realExpression_e_lat.y, motionDemandBus.COG_e_lat) annotation (
+      Line(
+        points={{61,-52},{82,-52},{82,0},{80,0}},
+        color={0,0,127}),
+      Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+  connect(realExpression_e_psi.y, motionDemandBus.COG_e_psi) annotation (
+      Line(
+        points={{61,-10},{78,-10},{78,0},{80,0}},
+        color={0,0,127}),
+      Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
   annotation (
     Icon(
       coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
@@ -225,11 +194,7 @@ equation
           points={{0,100},{100,-100},{-100,-100},{0,100}},
           lineColor={28,108,200},
           fillColor={255,255,0},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-212,108},{202,78}},
-          textColor={0,0,255},
-          textString=""),
+          fillPattern=FillPattern.CrossDiag),
         Line(
           points={{-92,-86},{-68,-20},{-24,30},{64,98}},
           color={238,46,47},
@@ -250,13 +215,9 @@ equation
         Text(
           extent={{-28,2},{0,-12}},
           textColor={238,46,47},
-          textString="s"),
-        Text(
-          extent={{-10,-50},{70,-80}},
-          textColor={0,0,0},
-          textString="TIPI")}),
+          textString="s")}),
     Diagram(
-      coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,100}}),
+      coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
       graphics={
         Text(
           extent={{10,100},{90,50}},
@@ -268,4 +229,4 @@ equation
 'longitudinal Speed'
 'Curvature         '
 ")}));
-end TimeIndependentPathInterpolation;
+end CoGTIPI4Comparison;

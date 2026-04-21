@@ -1,11 +1,12 @@
 within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.GeoPFC;
-model ControlAllocation
+model ControlAllocationTD "Time-discrete control allocation"
   //Implementation based on https://elib.dlr.de/105041/1/IV2016_PeterRitzer.pdf based on Python Code from Kenan Ahmic c DLR 2025
 
   parameter Modelica.Units.SI.Length lf = 1.2 "Distance of CoG to front axle";
   parameter Modelica.Units.SI.Length lr = 1.2 "Distance of CoG to rear axle";
   parameter Modelica.Units.SI.Torque maxTau=4*160 "Maximal torque";
   parameter Real Kspeedctrl = 4000 "P gain of velocity controller";
+  parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
 protected
   parameter Modelica.Units.SI.Torque torque_max = maxTau;
@@ -14,9 +15,9 @@ protected
   Real vx_sens, vy_sens;
 
 public
-  Modelica.Blocks.Interfaces.RealOutput delta(final unit="rad") "Front steering angle"
+  Modelica.Blocks.Interfaces.RealOutput delta "Front steering angle [rad]"
     annotation (Placement(transformation(extent={{100,70},{120,90}})));
-  Modelica.Blocks.Interfaces.RealOutput torque(final unit="N.m") "Summarized propulsion torque"
+  Modelica.Blocks.Interfaces.RealOutput torque "Summarized propulsion torque [Nm]"
     annotation (Placement(transformation(extent={{100,30},{120,50}})));
   VDCWorkbenchModels.Utilities.Interfaces.ControlBus controlBus annotation (Placement(
         transformation(
@@ -46,25 +47,22 @@ protected
   Modelica.Blocks.Interfaces.RealOutput beta_geo
     "Desired side slip angle of geo pfc" annotation (Placement(transformation(
           extent={{0,-60},{-20,-40}}), iconTransformation(extent={{-52,62},{-30,
-            84}})));
-equation
-    // Geometric calculation of steering angle
-    vx_sens = cos(beta_geo);
-    vy_sens = sin(beta_geo) + kappaICR_geo * lf;
+        84}})));
 
-    delta = atan2(vy_sens, vx_sens);
+algorithm
+  when sample(0, Ts) then
+    // Geometric calculation of steering angle
+    vx_sens :=cos(beta_geo);
+    vy_sens :=sin(beta_geo) + kappaICR_geo*lf;
+
+    delta :=atan2(vy_sens, vx_sens);
 
     // Total motortorque speed controller
-    torque = min(1.0 * torque_max, max(torque_min, Kspeedctrl * (v_path - vveh)));
+    torque :=min(1.0*torque_max, max(torque_min, Kspeedctrl*(v_path - vveh)));
 
-  /*
-    vx_sens = {cos(beta_geo), cos(beta_geo)};
-    vy_sens = {(sin(beta_geo) + kappaICR_geo * lf), (sin(beta_geo) - kappaICR_geo * lr)};
+  end when;
 
-    delta = atan2(vy_sens[1], vx_sens[1]);
-
-    torque = min(1.0 * torque_max, max(torque_min, Kspeedctrl * (v_path - vveh)));
-*/
+equation
 
   connect(chassisBus,controlBus. chassisBus) annotation (Line(
       points={{60,0},{98,0},{98,-0.1},{100.1,-0.1}},
@@ -100,5 +98,24 @@ equation
           extent={{-100,60},{100,0}},
           textColor={255,255,255},
           textString="Control
-Allocation")}));
-end ControlAllocation;
+Allocation"),
+        Line(
+          points={{-80,-80},{-80,-40},{-30,-40},{-30,-20},{20,-20},{20,-60},{70,-60},{70,-10}},
+          color={255,255,255},
+          pattern=LinePattern.Dot),
+        Ellipse(
+          extent={{-86,-34},{-74,-46}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-36,-14},{-24,-26}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{14,-54},{26,-66}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}));
+end ControlAllocationTD;
