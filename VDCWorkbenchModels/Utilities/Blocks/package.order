@@ -1,7 +1,10 @@
-MapControlBusSignals
+AssembleRLfeatureVec
+VelocityError
 DeMultiplexChassisBus
 DeMultiplexElectricDriveBus
 IntervalTest
+MapControlBusSignals
+MapFmuOutputsBusSignals
 Max
 Modulo
 TerminateSimulation
