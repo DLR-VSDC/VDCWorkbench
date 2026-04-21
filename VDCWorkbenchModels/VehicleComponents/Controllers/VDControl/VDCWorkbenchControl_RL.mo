@@ -28,7 +28,7 @@ model VDCWorkbenchControl_RL "Geometry based path following control for residual
   Modelica.Blocks.Nonlinear.Limiter v_scl_lim(uMax=1, uMin=0)
     annotation (Placement(transformation(extent={{-72,-6},{-60,6}})));
 
-  GeoPFC.TimeIndependentPathInterpolation tIPI_bus(
+  TimeIndependetPathInterpolation.CoGTIPI tIPI_bus(
     e_long_gain=e_long_gain,
     filePath=filePath,
     pathName=pathName)
