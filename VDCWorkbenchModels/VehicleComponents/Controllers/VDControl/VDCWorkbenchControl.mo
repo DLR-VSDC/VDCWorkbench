@@ -54,7 +54,8 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(TV_ratio, torqueVectoring.alpha_TV) annotation (Line(points={{-120,-82},{-90,-82},{-90,-76},{18,-76}},
+  connect(TV_ratio, torqueVectoring.alpha_TV) annotation (Line(points={{-120,
+          -80},{-90,-80},{-90,-76},{18,-76}},
         color={0,0,127}));
   connect(chassisBus, controlBus.chassisBus) annotation (Line(
       points={{80,10},{80,-90},{0.1,-90},{0.1,-99.9}},
@@ -88,7 +89,7 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(torqueVectoring.torque_dem_rearRight, electricMotorControlBusRR.torque) annotation (Line(points={{41,-76},{64,-76},{64,-80},{80,-80}}, color={0,0,127}), Text(
+  connect(torqueVectoring.torque_dem_rearRight, electricMotorControlBusRR.torque) annotation (Line(points={{41,-76},{62,-76},{62,-80},{80,-80}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
