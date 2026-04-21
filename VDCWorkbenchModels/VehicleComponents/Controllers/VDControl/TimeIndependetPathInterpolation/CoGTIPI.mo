@@ -1,5 +1,5 @@
-within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.GeoPFC;
-block TimeIndependentPathInterpolation "Time independent path interpolation"
+within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.TimeIndependetPathInterpolation;
+block CoGTIPI "Time-independent path interpolation"
   parameter Real e_long_gain=80 "TIPI Controller gain to force e_long to 0";
   parameter Real s_start=0 "Arc length value at start position";
   parameter String filePath = ModelicaServices.ExternalReferences.loadResource(
@@ -268,4 +268,4 @@ equation
 'longitudinal Speed'
 'Curvature         '
 ")}));
-end TimeIndependentPathInterpolation;
+end CoGTIPI;
