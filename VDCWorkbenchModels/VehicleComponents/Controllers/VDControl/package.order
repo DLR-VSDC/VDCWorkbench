@@ -1,6 +1,15 @@
+MiniAFMGeoPFCTD
+MiniAFMGeoPFC
 MVCLateralControl
 VDCWorkbenchControl
 VDCWorkbenchControl_RL
+StanleyController
+StanleyControllerTD
+RearAxleStanleyController
+RearAxleStanleyControllerTD
+PredStanleyControllerTD
 GeoPFC
+StanleyBased
+TimeIndependetPathInterpolation
 Components
 BaseClasses
