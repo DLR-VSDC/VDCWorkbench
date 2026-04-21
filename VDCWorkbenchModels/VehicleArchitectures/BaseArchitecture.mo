@@ -41,7 +41,8 @@ partial model BaseArchitecture "Basic partial architecture of a planar vehicle"
         extent={{0,0},{0,0}},
         rotation=-90,
         origin={100,80})));
-  Data.ROMOParameters data annotation (Placement(transformation(extent={{40,80},{60,100}})));
+  replaceable Data.ROMOParameters data constrainedby Data.BaseRecords.Chassis
+    annotation (choicesAllMatching=true, Placement(transformation(extent={{40,80},{60,100}})));
 protected
   VehicleInterfaces.Interfaces.ChassisControlBus chassisControlBus
     annotation (Placement(transformation(extent={{70,50},{90,70}}), iconTransformation(extent={{0,20},{20,40}})));
