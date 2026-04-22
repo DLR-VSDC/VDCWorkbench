@@ -17,28 +17,26 @@ protected
   Real vx_sens, vy_sens;
 
 public
-  Modelica.Blocks.Interfaces.RealOutput delta "Front steering angle [rad]"
+  Modelica.Blocks.Interfaces.RealOutput delta(final unit="rad") "Front steering angle"
     annotation (Placement(transformation(extent={{100,70},{120,90}})));
-  Modelica.Blocks.Interfaces.RealOutput torque "Summarized propulsion torque [Nm]"
+  Modelica.Blocks.Interfaces.RealOutput torque(final unit="N.m") "Summarized propulsion torque"
     annotation (Placement(transformation(extent={{100,30},{120,50}})));
   VDCWorkbenchModels.Utilities.Interfaces.ControlBus controlBus annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={100,0})));
-  Modelica.Blocks.Interfaces.RealInput addRL_FrontSteering_in
-    "Residual RL front steering angle correction [rad]"
+  Modelica.Blocks.Interfaces.RealInput addRL_FrontSteering_in(final unit="rad")
+    "Residual RL front steering angle correction"
     annotation (Placement(transformation(extent={{-140,40},{-100,80}}),
         iconTransformation(extent={{-140,40},{-100,80}})));
-  Modelica.Blocks.Interfaces.RealInput addRL_TotalTorque_in
-    "Residual RL total torque correction [Nm]"
+  Modelica.Blocks.Interfaces.RealInput addRL_TotalTorque_in(final unit="N.m")
+    "Residual RL total torque correction"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
         iconTransformation(extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Interfaces.RealOutput baseline_torque
-    "Torque of baseline controller [Nm]"
+  Modelica.Blocks.Interfaces.RealOutput baseline_torque(final unit="N.m") "Torque of baseline controller"
     annotation (Placement(transformation(extent={{100,-90},{120,-70}})));
-  Modelica.Blocks.Interfaces.RealOutput baseline_delta
-    "front steering angle of baseline _controller [rad]"
+  Modelica.Blocks.Interfaces.RealOutput baseline_delta(final unit="rad") "Front steering angle of baseline controller"
     annotation (Placement(transformation(extent={{100,-64},{120,-44}})));
 protected
   Modelica.Blocks.Interfaces.RealOutput kappaICR_geo
