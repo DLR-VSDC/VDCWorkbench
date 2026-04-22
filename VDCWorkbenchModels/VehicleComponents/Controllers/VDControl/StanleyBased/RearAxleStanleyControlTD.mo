@@ -103,9 +103,27 @@ equation
           fillPattern=FillPattern.Forward,
           pattern=LinePattern.DashDot),
         Text(
-          extent={{-100,80},{98,-80}},
+          extent={{-100,60},{100,0}},
           textColor={255,255,255},
-          textString="TD
-RA Stanley 
-Controller")}));
+          textString="rear axle
+Stanley"),
+        Line(
+          points={{-80,-80},{-80,-40},{-30,-40},{-30,-20},{20,-20},{20,-60},{70,-60},{70,-10}},
+          color={255,255,255},
+          pattern=LinePattern.Dot),
+        Ellipse(
+          extent={{-86,-34},{-74,-46}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-36,-14},{-24,-26}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{14,-54},{26,-66}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}));
 end RearAxleStanleyControlTD;

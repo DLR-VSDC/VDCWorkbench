@@ -91,9 +91,8 @@ equation
           fillPattern=FillPattern.Forward,
           pattern=LinePattern.DashDot),
         Text(
-          extent={{-100,80},{100,-80}},
+          extent={{-100,60},{100,0}},
           textColor={255,255,255},
-          textString="RA Stanley 
-Controller
-")}));
+          textString="rear axle
+Stanley")}));
 end RearAxleStanleyControl;
