@@ -1,9 +1,6 @@
 within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl;
 model MiniAFMGeoPFC "Geometry based path following control for the miniAFM"
-  extends VDControl.BaseClasses.BaseVDC(
-    break TV_ratio,
-    break FrontRear_ratio,
-    break v_scl,
+  extends BaseClasses.BaseSubBusses(
     m=7.151,
     lf=0.1805,
     lr=0.1805,
@@ -18,10 +15,6 @@ model MiniAFMGeoPFC "Geometry based path following control for the miniAFM"
 
   parameter Real lambda_eLat=0.1 "Max. lateral deviation for motion demand calculation" annotation(Dialog(group="Motion demand controller parameters"));
   parameter Real lambda_del_psi=0.1 "Max. yaw deviation for motion demand calculation" annotation(Dialog(group="Motion demand controller parameters"));
-
-  parameter Real vctrl_Kp = 0.5 "P-gain for v-control" annotation(Dialog(group="Velocity controller parameters"));
-  parameter Modelica.Units.SI.Torque vctrl_TorqueMax = Torque_max_frontMotor+2*Torque_max_rearMotor
-    "Maximum total torque" annotation(Dialog(group="Velocity controller parameters"));
 
   VDControl.TimeIndependetPathInterpolation.CoGTIPI tIPI_bus(
     e_long_gain=e_long_gain,
@@ -41,19 +34,9 @@ model MiniAFMGeoPFC "Geometry based path following control for the miniAFM"
     maxTau=0.5,
     Kspeedctrl=0.5)
     annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
-
   Modelica.Blocks.Sources.Constant const(k=1.0)
     annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-protected
-  Utilities.Interfaces.ElectricDriveControlBus electricMotorControlBus
-    annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
-  VehicleInterfaces.Interfaces.ChassisControlBus chassisControlBus
-    annotation (Placement(transformation(extent={{40,-20},{60,0}})));
 equation
-  connect(chassisControlBus, controlBus.chassisControlBus) annotation (Line(
-      points={{50,-10},{50,-90},{0,-90},{0,-99.9},{0.1,-99.9}},
-      color={255,204,51},
-      thickness=0.5));
   connect(tIPI_bus.controlBus, controlBus) annotation (Line(
       points={{-20,30},{0,30},{0,-100}},
       color={255,204,51},
@@ -67,30 +50,21 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(calculate_Control_Allocation.delta, chassisControlBus.steeringWheelAngle)
-    annotation (Line(points={{-19,-22},{40,-22},{40,-10},{50,-10}},
-                                                                  color={0,0,127}),
+    annotation (
+      Line(points={{-19,-22},{56,-22},{56,20},{80,20}}, color={0,0,127}),
       Text(
-      string="%second",
-      index=1,
-      extent={{2,2},{2,5}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(electricMotorControlBus, controlBus.electricMotorControlBus)
-    annotation (Line(
-      points={{50,-40},{50,-90},{0.1,-90},{0.1,-99.9}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=-1,
-      extent={{-2,2},{-2,5}},
-      horizontalAlignment=TextAlignment.Right));
+        string="%second",
+        index=1,
+        extent={{2,2},{2,5}},
+        horizontalAlignment=TextAlignment.Left));
   connect(calculate_Control_Allocation.torque, electricMotorControlBus.torque)
-    annotation (Line(points={{-19,-26},{40,-26},{40,-40},{50,-40}},
-                                                           color={0,0,127}),
+    annotation (Line(points={{-19,-26},{60,-26},{60,-20},{80,-20}},
+        color={0,0,127}),
       Text(
-      string="%second",
-      index=1,
-      extent={{2,2},{2,5}},
-      horizontalAlignment=TextAlignment.Left));
+        string="%second",
+        index=1,
+        extent={{2,2},{2,5}},
+        horizontalAlignment=TextAlignment.Left));
   connect(const.y, tIPI_bus.v_scl) annotation (Line(points={{-59,30},{-52,30},{-52,
           36},{-42,36}}, color={0,0,127}));
   annotation (
