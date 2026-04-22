@@ -1,6 +1,10 @@
 within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl;
 model PredStanleyControllerTD
-  extends VDControl.BaseClasses.BaseSubBusses;
+  extends VDControl.BaseClasses.BaseSubBusses(
+    m = 7.151,
+    lf = 0.1805,
+    lr = 0.1805);
+
   // TIPI Parameters
   parameter Real e_long_gain = 80;
   parameter Real s_start = 0;
@@ -19,11 +23,8 @@ model PredStanleyControllerTD
   parameter Real K_vctr = 0.5;
   parameter Real vctr_TorqueMax = 0.3;
 
-  parameter Real Ts = 0.05;
+  parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
-  parameter Real m = 7.151;
-  parameter Real lf = 0.1805;
-  parameter Real lr = 0.1805;
   parameter Real C_Tire = 150;
 
   VDControl.TimeIndependetPathInterpolation.FrontAxleTIPI frontAxleTIPI(

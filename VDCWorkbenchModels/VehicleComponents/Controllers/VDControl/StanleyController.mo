@@ -1,6 +1,10 @@
 within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl;
 model StanleyController
-  extends VDControl.BaseClasses.BaseSubBusses;
+  extends VDControl.BaseClasses.BaseSubBusses(
+    m = 7.151,
+    lf = 0.1805,
+    lr = 0.1805);
+
   // TIPI Parameters
   parameter Real e_long_gain = 80;
   parameter Real s_start = 0;
@@ -13,9 +17,6 @@ model StanleyController
   parameter Real K_vctrl = 0.5;
   parameter Real vctrl_TorqueMax = 0.3;
 
-  parameter Real m = 7.151;
-  parameter Real lf = 0.1805;
-  parameter Real lr = 0.1805;
   parameter Real C_Tire = 150;
 
   VDControl.TimeIndependetPathInterpolation.FrontAxleTIPI frontAxleTIPI(
