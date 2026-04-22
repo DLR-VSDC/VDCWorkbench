@@ -10,7 +10,7 @@ model StanleyControlTD "Time-discrete classic Stanley lateral control law"
   parameter Real K_vctrl = 0.5 "P gain of velocity controller";
   parameter Modelica.Units.SI.Torque vctrl_TorqueMax = 0.3;
 
-  parameter Real Ts = 0.05 "Controller sample time [s]";
+  parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
   parameter Real m = 7.151 "Vehicle mass [kg]";
   parameter Real lf = 0.1805;
