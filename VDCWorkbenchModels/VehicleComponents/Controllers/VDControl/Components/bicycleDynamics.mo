@@ -2,18 +2,18 @@ within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.Components;
 function bicycleDynamics
   extends Modelica.Icons.Function;
 
-  input Real states[6];     //[x, y, psi, vx, vy, r]
-  input Real u[2];          //[delta_f, torque]
+  input Real states[6] "Vehicle states (x, y, psi, vx, vy, r)";
+  input Real u[2] "Vehicle input signals (delta_f, torque)";
 
-  parameter Real m = 7.151;
-  parameter Real Jz = 1/12 * 7.151 * (0.265^2 + 0.361^2);
-  parameter Real lf = 0.1805;
-  parameter Real lr = 0.1805;
-  parameter Real C_Tire = 90;
-  parameter Real R0 = 0.0525;
-  parameter Real gearRatio = (48 * 43) / (16 * 11);
+  input Modelica.Units.SI.Mass m = 7.151 "Total mass of vehicle";
+  input Modelica.Units.SI.Inertia Jz = 1/12 * 7.151 * (0.265^2 + 0.361^2) "Yaw inertia of vehicle";
+  input Modelica.Units.SI.Length lf = 0.1805 "Distance of center of mass to front axle (always positive here)";
+  input Modelica.Units.SI.Length lr = 0.1805 "Distance of center of mass to rear axle (always positive here)";
+  input Real C_Tire(unit="N/rad") = 90 "Tire cornering stiffness";
+  input Modelica.Units.SI.Radius R0 = 0.0525 "Undeflected radius of wheel";
+  input Real gearRatio = (48 * 43) / (16 * 11) "Total ratio between motor and wheel";
 
-  output Real der_states[6]; //[dx, dy, dpsi, dvx, dvy, dr]
+  output Real der_states[6] "First derivative of states (dx, dy, dpsi, dvx, dvy, dr)";
 
 protected
   Real x, y, psi, vx, vy, r;
