@@ -75,10 +75,26 @@ algorithm
           fillPattern=FillPattern.Forward,
           pattern=LinePattern.DashDot),
         Text(
-          extent={{-100,80},{100,-80}},
+          extent={{-100,60},{100,30}},
           textColor={255,255,255},
-          textString="TD 
-Stanley 
-Controller
-")}));
+          textString="Stanley"),
+        Line(
+          points={{-80,-80},{-80,-40},{-30,-40},{-30,-20},{20,-20},{20,-60},{70,-60},{70,-10}},
+          color={255,255,255},
+          pattern=LinePattern.Dot),
+        Ellipse(
+          extent={{-86,-34},{-74,-46}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-36,-14},{-24,-26}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{14,-54},{26,-66}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}));
 end StanleyControlTD;
