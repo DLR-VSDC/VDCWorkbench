@@ -10,7 +10,7 @@ model PredictiveStanleyControlTD "Time-discrete predictive Stanley lateral contr
   parameter Real K_vctr = 0.5 "P gain of velocity controller";
   parameter Modelica.Units.SI.Torque vctr_TorqueMax = 0.3;
 
-  parameter Real Ts = 0.05 "Controller sample time [s]";
+  parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
   parameter Real m = 7.151 "Vehicle mass [kg]";
   parameter Real lf = 0.1805;
