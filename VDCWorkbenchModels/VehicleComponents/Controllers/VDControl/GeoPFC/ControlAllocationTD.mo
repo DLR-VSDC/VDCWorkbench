@@ -6,7 +6,7 @@ model ControlAllocationTD "Time-discrete control allocation"
   parameter Modelica.Units.SI.Length lr = 1.2 "Distance of CoG to rear axle";
   parameter Modelica.Units.SI.Torque maxTau=4*160 "Maximal torque";
   parameter Real Kspeedctrl = 4000 "P gain of velocity controller";
-  parameter Real Ts = 0.05 "Controller sample time [s]";
+  parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
 protected
   parameter Modelica.Units.SI.Torque torque_max = maxTau;

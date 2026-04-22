@@ -23,7 +23,6 @@ protected
   parameter Real lf = 0.1805;
   parameter Real lr = 0.1805;
   parameter Real Kspeedctrl = 0.5 "P gain of velocity controller";
-  parameter Real Ts = 0.05 "Controller sample time [s]";
   parameter Real C_Tire = 90 "Tire stiffnes for slip angle compensation";
   parameter Real m = 7.151 "Vehicle mass [kg]";
 
