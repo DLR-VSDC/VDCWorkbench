@@ -4,13 +4,13 @@ function referenceVelocityByTIPI "Calculate reference velocity using time-indepe
 
   input Real Path[:,6]; // [sPath, posXPath, posYPath, posPsiPath, vLongPath, kPath]
   input Real arc_length;
-  input Real vehStates[6];
+  input Real states[6] "Vehicle states (x, y, psi, vx, vy, r)";
+
+  input Real lf = 0.1805 "Distance from vehicle's CoG to front axle";
+  input Real ePathTanGain = 80;
 
   output Real arc_length_deriv;
   //output Real posPath[6];  // [sPath, posXPath, posYPath, posPsiPath, vLongPath, kPath]
-
-  parameter Real lf = 0.1805;
-  parameter Real ePathTanGain = 80;
 
 protected
   Real posX;      // in inertial frame
@@ -41,11 +41,11 @@ protected
 
 algorithm
   // define variables
-  posX   := vehStates[1];
-  posY   := vehStates[2];
-  posPsi := vehStates[3];
-  velX   := cos(posPsi) * vehStates[4] - sin(posPsi) * vehStates[5];
-  velY   := sin(posPsi) * vehStates[4] + cos(posPsi) * vehStates[5];
+  posX   := states[1];
+  posY   := states[2];
+  posPsi := states[3];
+  velX   := cos(posPsi) * states[4] - sin(posPsi) * states[5];
+  velY   := sin(posPsi) * states[4] + cos(posPsi) * states[5];
 
   // find position on path
   nPath := size(Path, 1);
