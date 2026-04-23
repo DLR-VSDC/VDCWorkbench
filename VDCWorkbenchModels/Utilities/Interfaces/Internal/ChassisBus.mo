@@ -13,7 +13,6 @@ expandable connector ChassisBus
   Modelica.Units.SI.Velocity longitudinalVelocity "Longitudinal velocity of chassis";
   Modelica.Units.SI.Velocity longitudinalVelocity_start
     "Initial longitudinal velocity of chassis";
-  Modelica.Units.SI.Velocity lateralVelocity "Lateral velocity of chassis";
 
   //Real position_0[3] "Absolute position of chassis (x, y, phi) resolved in world frame";
   Modelica.Units.SI.Position position_x "Absolute position of chassis (x) resolved in world frame";
