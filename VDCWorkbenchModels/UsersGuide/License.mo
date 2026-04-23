@@ -5,7 +5,7 @@ class License "Copyright and License"
     Documentation(info="<html>
 <h4>Copyright</h4>
 <p>
-&copy; 2022-2026:
+&copy; since 2022:
 <strong>Department of Vehicle System Dynamics and Control, DLR Institute of Vehicle Concepts</strong> and
 <strong>Dept. of Mechanical Engineering, University of California Merced</strong>
 </p>
