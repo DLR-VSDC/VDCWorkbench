@@ -27,11 +27,11 @@ expandable connector ControlBus
   ElectricDriveBus electricMotorBusFM "Bus of electric drive in front middle" annotation (Dialog(enable=false));
   ElectricDriveBus electricMotorBusRL "Bus of electric drive rear left" annotation (Dialog(enable=false));
   ElectricDriveBus electricMotorBusRR "Bus of electric drive rear right" annotation (Dialog(enable=false));
-  ElectricDriveControlBus electricMotorControlBus
+  ElectricDriveBus electricMotorControlBusFM "Control bus of electric drive in front middle" annotation (Dialog(enable=false));
+  ElectricDriveBus electricMotorControlBusRL "Control bus of electric drive rear left" annotation (Dialog(enable=false));
+  ElectricDriveBus electricMotorControlBusRR "Control bus of electric drive rear right" annotation (Dialog(enable=false));
+  VehicleInterfaces.Interfaces.ElectricMotorControlBus electricMotorControlBus
     "Electric motor control bus" annotation(Dialog(enable=false));
-  ElectricDriveControlBus electricMotorControlBusFM "Control bus of electric drive in front middle" annotation (Dialog(enable=false));
-  ElectricDriveControlBus electricMotorControlBusRL "Control bus of electric drive rear left" annotation (Dialog(enable=false));
-  ElectricDriveControlBus electricMotorControlBusRR "Control bus of electric drive rear right" annotation (Dialog(enable=false));
   VehicleInterfaces.Interfaces.EngineBus engineBus "Engine bus"
     annotation (Dialog(enable=false));
   VehicleInterfaces.Interfaces.EngineControlBus engineControlBus
