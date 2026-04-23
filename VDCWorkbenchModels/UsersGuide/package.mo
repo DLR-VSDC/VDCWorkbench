@@ -18,16 +18,11 @@ and
 </p>
 
 <p>
-The library requires the following packages.
-</p>
-<ul>
-  <li><a href=\"https://github.com/modelica/ModelicaStandardLibrary\">Modelica</a>,</li>
-  <li><a href=\"https://github.com/modelica/VehicleInterfaces\">VehicleInterfaces</a>,</li>
-  <li><a href=\"https://github.com/dzimmer/PlanarMechanics\">PlanarMechanics</a>.</li>
-  <li><a href=\"https://github.com/DLR-SR/Credibility\">Credibility</a> and</li>
-  <li><a href=\"https://github.com/xrg-simulation/SMArtIInt\">SMArtIInt</a>.</li>
-</ul>
-<p>
+The library requires packages
+<a href=\"https://github.com/modelica/ModelicaStandardLibrary\">Modelica</a>,
+<a href=\"https://github.com/modelica/VehicleInterfaces\">VehicleInterfaces</a>
+and
+<a href=\"https://github.com/dzimmer/PlanarMechanics\">PlanarMechanics</a>.
 For particular versions of the libraries, please check the
 <a href=\"modelica://VDCWorkbenchModels.UsersGuide.ReleaseNotes\">release notes</a>.
 </p>
