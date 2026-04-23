@@ -2,7 +2,6 @@ ControlBus
 ElectricDriveBus
 ElectricDriveControlBus
 EnergyLossesBus
-FmuOutputsBus
 RexBus
 EMAControls
 ScoreBus

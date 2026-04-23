@@ -48,7 +48,7 @@ expandable connector ControlBus
 
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
-        Rectangle(
+    	  Rectangle(
           extent={{-20,2},{20,-2}},
           lineColor={255,204,51},
           lineThickness=0.5)}),
