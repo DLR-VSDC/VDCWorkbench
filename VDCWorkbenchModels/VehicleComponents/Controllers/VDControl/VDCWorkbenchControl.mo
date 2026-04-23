@@ -21,7 +21,7 @@ model VDCWorkbenchControl "Geometry based path following control"
     annotation (Placement(transformation(extent={{20,-80},{40,-60}})));
   Modelica.Blocks.Nonlinear.Limiter v_scl_lim(uMax=1, uMin=0)
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
-  TimeIndependetPathInterpolation.CoGTIPI tIPI_bus(e_long_gain=e_long_gain)
+  GeoPFC.TimeIndependentPathInterpolation tIPI_bus(e_long_gain=e_long_gain)
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   GeoPFC.MotionDemand calculate_Motion_Demand(
     lambda_eLat=lambda_eLat,
