@@ -58,18 +58,33 @@ equation
         color={0,0,127}));
   connect(sensor_a_0.a[2], chassisBus.acceleration_ddy) annotation (Line(points={{-29,0},{60,0}}, color={0,0,127}));
   connect(sensor_a_0.a[3], chassisBus.acceleration_ddphi) annotation (Line(points={{-29,0.333333},{-20,0.333333},{-20,2},{50,2},{50,0},{60,0}}, color={0,0,127}));
-  connect(sensor_r_0.r[3], chassisBus.yawAngle) annotation (Line(points={{-29,60.3333},{-24,60.3333},{-24,64},{66,64},{66,2},{60,2},{60,0}}, color={0,0,127}), Text(
-      string="%second",
-      index=3,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(sensor_v_0.v[3], chassisBus.yawRate) annotation (Line(points={{-29,30.3333},{-24,30.3333},{-24,36},{58,36},{58,0},{60,0}}, color={0,0,127}), Text(
-      string="%second",
-      index=3,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(sensor_v_chassis.v[1], chassisBus.longitudinalVelocity) annotation (Line(points={{-29,-30.3333},{0,-30.3333},{0,-14},{56,-14},{56,0},{60,0}},
-        color={0,0,127}),
+  connect(sensor_r_0.r[3], chassisBus.yawAngle) annotation (Line(points={{-29,60.3333},{-24,60.3333},{-24,64},{66,64},{66,2},{60,2},{60,0}}, color={0,0,127}),
+      Text(
+        string="%second",
+        index=3,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+  connect(sensor_v_0.v[3], chassisBus.yawRate) annotation (Line(points={{-29,30.3333},{-24,30.3333},{-24,36},{58,36},{58,0},{60,0}}, color={0,0,127}),
+      Text(
+        string="%second",
+        index=3,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+  connect(sensor_v_chassis.v[1], chassisBus.longitudinalVelocity) annotation (Line(points={{-29,-30.3333},{0,-30.3333},{0,-14},{56,-14},{56,0},{60,0}}, color={0,0,127}),
+      Text(
+        string="%second",
+        index=3,
+        extent={{2,-3},{2,-3}},
+        horizontalAlignment=TextAlignment.Left));
+  connect(sensor_v_chassis.v[2], chassisBus.lateralVelocity) annotation (Line(points={{-29,-30},{-20,-30},{-20,-12},{54,-12},{54,0},{60,0}}, color={0,0,127}),
+      Text(
+        string="%second",
+        index=3,
+        extent={{2,2},{2,5}},
+        horizontalAlignment=TextAlignment.Left));
+  connect(sensor_v_chassis.v[1], calc_beta.u2) annotation (Line(points={{-29,-30.3333},{0,-30.3333},{0,-34},{8,-34}},     color={0,0,127}));
+  connect(sensor_v_chassis.v[2], calc_beta.u1) annotation (Line(points={{-29,-30},{-20,-30},{-20,-46},{8,-46}}, color={0,0,127}));
+  connect(sensor_a_chassis.a[1], chassisBus.longitudinalAcceleration) annotation (Line(points={{-29,-60.3333},{60,-60.3333},{60,0}}, color={0,0,127}),
       Text(
         string="%second",
         index=1,
