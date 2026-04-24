@@ -21,10 +21,10 @@ model DrivetrainDifferentialIdeal "Powertrain of the miniAFM"
   Modelica.Mechanics.Rotational.Components.IdealGear rearGear(
     ratio=ratioRearGear)
     annotation (Placement(transformation(extent={{-60,-50},{-80,-30}})));
-  Modelica.Mechanics.Rotational.Interfaces.Flange_a flangeDriveFront
+  Modelica.Mechanics.Rotational.Interfaces.Flange_b flangeDriveFront
     "Flange of front axle"
     annotation (Placement(transformation(extent={{-110,30},{-90,50}})));
-  Modelica.Mechanics.Rotational.Interfaces.Flange_a flangeDriveRear
+  Modelica.Mechanics.Rotational.Interfaces.Flange_b flangeDriveRear
     "Flange of rear axle"
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
   Modelica.Mechanics.Rotational.Sources.Torque torque
@@ -33,10 +33,7 @@ model DrivetrainDifferentialIdeal "Powertrain of the miniAFM"
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={100,0}), iconTransformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={100,70})));
+        origin={100,0})));
 protected
   Utilities.Interfaces.ElectricDriveControlBus electricMotorControlBus
     annotation (Placement(transformation(extent={{50,-10},{70,10}})));
@@ -69,58 +66,42 @@ equation
   annotation (
     Icon(
       graphics={
+        Rectangle(
+          extent={{-8,6},{18,-6}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={95,95,95}),
+        Rectangle(
+          extent={{18,28},{92,-26}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={0,128,255}),
+        Rectangle(
+          extent={{100,28},{92,-26}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={128,128,128}),
         Polygon(
-          points={{30,-2},{-40,-2},{-50,-4},{-56,-10},{-58,-18},{-58,-90},{-68,-90},{-50,-110},{-32,-90},{-42,-90},{-42,-20},{-40,-18},{30,-18},{30,-2}},
-          lineColor={127,0,0},
-          fillColor={127,0,0},
-          fillPattern=FillPattern.Solid,
-          visible=useHeatPort),
-      Rectangle(
-        extent={{-100,100},{100,-100}},
-        lineColor={0,0,0},
-        radius=20,
-        fillColor={255,255,255},
-        fillPattern=FillPattern.Solid),
-      Rectangle(
-        extent={{18,28},{92,-26}},
-        lineColor={0,0,0},
-        fillPattern=FillPattern.HorizontalCylinder,
-        fillColor={0,128,255}),
-      Rectangle(
-        extent={{100,28},{92,-26}},
-        lineColor={0,0,0},
-        fillPattern=FillPattern.HorizontalCylinder,
-        fillColor={128,128,128}),
-      Polygon(
-        points={{14,-42},{28,-42},{40,-8},{72,-8},{88,-42},{102,-42},{102,-50},{
-              14,-50},{14,-42}},
-        lineColor={0,0,0},
-        fillColor={0,0,0},
-        fillPattern=FillPattern.Solid),
-      Rectangle(
-        extent={{-8,6},{18,-6}},
-        lineColor={0,0,0},
-        fillPattern=FillPattern.HorizontalCylinder,
-        fillColor={95,95,95}),
-        Text(
-          extent={{-150,110},{150,70}},
-          textColor={0,0,255},
-          textString="%name"),
-      Rectangle(
-        extent={{-100,46},{-40,34}},
-        lineColor={0,0,0},
-        fillPattern=FillPattern.HorizontalCylinder,
-        fillColor={95,95,95}),
-      Rectangle(
-        extent={{-100,-34},{-40,-46}},
-        lineColor={0,0,0},
-        fillPattern=FillPattern.HorizontalCylinder,
-        fillColor={95,95,95}),
-      Rectangle(
-        extent={{-40,46},{-30,-46}},
-        lineColor={0,0,0},
-        fillPattern=FillPattern.HorizontalCylinder,
-        fillColor={95,95,95}),
+          points={{14,-42},{28,-42},{40,-8},{72,-8},{88,-42},{102,-42},{102,-50},{
+                14,-50},{14,-42}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-100,46},{-40,34}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={95,95,95}),
+        Rectangle(
+          extent={{-100,-34},{-40,-46}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={95,95,95}),
+        Rectangle(
+          extent={{-40,46},{-30,-46}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={95,95,95}),
         Ellipse(
           extent={{-46,-28},{-24,-50}},
           lineColor={0,0,0},
@@ -136,8 +117,23 @@ equation
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,
           fillColor={95,95,95},
-          radius=10)}),
-    Documentation(info="<html>
+          radius=10),
+        Polygon(
+          points={{-8,-30},{-8,-86},{-18,-86},{0,-106},{18,-86},{8,-86},{8,-30},{-8,-30}},
+          lineColor={127,0,0},
+          fillColor={127,0,0},
+          fillPattern=FillPattern.Solid,
+          visible=useHeatPort),
+        Text(
+          extent={{-150,110},{150,70}},
+          textColor={0,0,255},
+          textString="%name"),
+        Line(
+          points={{-32,0},{-70,-100},{-100,-100}},
+          color={127,0,0},
+          visible=useHeatPort)}),
+    Documentation(
+      info="<html>
 <p>
 Powertrain with three traction motors. One motor is to be connected to the drive flange
 of the front vehicle axle. The remaining two motors drive rear axle wheels, each on one side.
