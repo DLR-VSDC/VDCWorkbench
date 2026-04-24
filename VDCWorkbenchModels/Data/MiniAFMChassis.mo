@@ -1,6 +1,7 @@
 within VDCWorkbenchModels.Data;
 record MiniAFMChassis "MiniAFM's chassis parameters"
   extends BaseRecords.Chassis(
+    m_body=0.9 * (m_vehicle - 4*0.25),
     variantName="MiniAFM",
     m_vehicle=7.151,
     trackWidth=0.265,
