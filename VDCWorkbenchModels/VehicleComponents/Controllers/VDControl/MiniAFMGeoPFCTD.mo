@@ -18,49 +18,49 @@ model MiniAFMGeoPFCTD "Geometry based path following control for the miniAFM"
   parameter Real lambda_eLat=0.5 "Max. lateral deviation for motion demand calculation" annotation(Dialog(group="Motion demand controller parameters"));
   parameter Real lambda_del_psi=0.5 "Max. yaw deviation for motion demand calculation" annotation(Dialog(group="Motion demand controller parameters"));
 
-  VDControl.TimeIndependetPathInterpolation.CoGTIPI tIPI_bus(
+  VDControl.TimeIndependetPathInterpolation.CoGTIPI tIPI(
     e_long_gain=e_long_gain,
     filePath=ModelicaServices.ExternalReferences.loadResource("modelica://VDCWorkbenchModels/Resources/Maps/RacetrackMini.mat"),
     maxArcLength=22.737000000000002,
-    pathName="path")
-    annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
-  VDControl.GeoPFC.MotionDemand calculate_Motion_Demand(
+    pathName="path") "Time-independent path interpolation" annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
+  VDControl.GeoPFC.MotionDemand motionDemand(
     lambda_eLat=lambda_eLat,
     lambda_del_psi=lambda_del_psi,
-    e_y_ref=e_y_ref)
-    annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-  Modelica.Blocks.Sources.Constant const(k=1.0)
-    annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-  VDControl.GeoPFC.ControlAllocationTD tD_ControlAllocation(
+    e_y_ref=e_y_ref) "Calculate motion demand" annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+  VDControl.GeoPFC.ControlAllocationTD controlAllocation(
     lf=lf,
     lr=lr,
     maxTau=0.5,
     Kspeedctrl=0.5,
-    Ts=Ts) annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
+    Ts=Ts) "Motion control allocation" annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
+  Modelica.Blocks.Sources.Constant const(k=1.0)
+    annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
 equation
-  connect(tIPI_bus.controlBus, controlBus) annotation (Line(
+  connect(tIPI.controlBus, controlBus) annotation (Line(
       points={{-20,30},{0,30},{0,-100}},
       color={255,204,51},
       thickness=0.5));
-  connect(calculate_Motion_Demand.controlBus, controlBus) annotation (Line(
+  connect(motionDemand.controlBus, controlBus) annotation (Line(
       points={{-20,0},{0,0},{0,-100}},
       color={255,204,51},
       thickness=0.5));
-  connect(const.y, tIPI_bus.v_scl) annotation (Line(points={{-59,30},{-52,30},{-52,
-          36},{-42,36}}, color={0,0,127}));
-  connect(tD_ControlAllocation.controlBus, controlBus) annotation (Line(
+  connect(const.y, tIPI.v_scl) annotation (Line(points={{-59,30},{-52,30},{-52,36},{-42,36}}, color={0,0,127}));
+  connect(controlAllocation.controlBus, controlBus) annotation (Line(
       points={{-20,-30},{0,-30},{0,-100}},
       color={255,204,51},
       thickness=0.5));
-  connect(tD_ControlAllocation.delta, chassisControlBus.steeringWheelAngle)
-    annotation (Line(points={{-19,-22},{56,-22},{56,20},{80,20}}, color={0,0,127}),
+  connect(controlAllocation.delta, chassisControlBus.steeringWheelAngle) annotation (
+      Line(
+        points={{-19,-22},{56,-22},{56,20},{80,20}},
+        color={0,0,127}),
       Text(
         string="%second",
         index=1,
         extent={{2,2},{2,5}},
         horizontalAlignment=TextAlignment.Left));
-  connect(tD_ControlAllocation.torque, electricMotorControlBus.torque)
-    annotation (Line(points={{-19,-26},{60,-26},{60,-20},{80,-20}},
+  connect(controlAllocation.torque, electricMotorControlBus.torque) annotation (
+      Line(
+        points={{-19,-26},{60,-26},{60,-20},{80,-20}},
         color={0,0,127}),
       Text(
         string="%second",
