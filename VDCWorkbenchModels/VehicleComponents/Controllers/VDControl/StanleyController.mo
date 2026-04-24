@@ -19,10 +19,10 @@ model StanleyController
 
   parameter Real C_Tire = 150;
 
-  VDControl.TimeIndependetPathInterpolation.FrontAxleTIPI frontAxleTIPI(
+  VDControl.TimeIndependetPathInterpolation.FrontAxleTIPI tIPI(
     e_long_gain=e_long_gain,
     s_start=s_start,
-    lf=lf) annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
+    lf=lf) "Time-independent path interpolation" annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   VDControl.StanleyBased.StanleyControl stanleyControl(
     k=k,
     v_eps=v_eps,
@@ -36,9 +36,8 @@ model StanleyController
     lr=lr,
     C_Tire=C_Tire) annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
 equation
-  connect(const.y, frontAxleTIPI.v_scl) annotation (Line(points={{-59,30},{-52,30},{-52,36},{-42,36}},
-                              color={0,0,127}));
-  connect(frontAxleTIPI.controlBus, controlBus) annotation (Line(
+  connect(const.y, tIPI.v_scl) annotation (Line(points={{-59,30},{-52,30},{-52,36},{-42,36}}, color={0,0,127}));
+  connect(tIPI.controlBus, controlBus) annotation (Line(
       points={{-20,30},{0,30},{0,-100}},
       color={255,204,51},
       thickness=0.5));
