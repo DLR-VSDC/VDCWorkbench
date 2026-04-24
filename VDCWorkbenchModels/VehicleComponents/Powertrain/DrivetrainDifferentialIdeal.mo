@@ -1,6 +1,7 @@
 within VDCWorkbenchModels.VehicleComponents.Powertrain;
 model DrivetrainDifferentialIdeal "Powertrain of the miniAFM"
   extends Modelica.Thermal.HeatTransfer.Interfaces.PartialConditionalHeatPort(
+    useHeatPort=false,
     T=298.15);
 
   parameter Real ratioEngineGear=48/16 "Ratio of gear on engine";
