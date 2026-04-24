@@ -16,9 +16,5 @@ equation
   connect(powertrainMiniAFM.controlBus, controlBus) annotation (Line(
       points={{30,-23},{40,-23},{40,0},{100,0}},
       color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{2,2},{2,5}},
-      horizontalAlignment=TextAlignment.Left));
+      thickness=0.5));
 end MiniAFMMotor;
