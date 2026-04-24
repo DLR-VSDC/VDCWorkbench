@@ -7,8 +7,8 @@ model VDCWorkbenchControl_RL "Geometry based path following control for residual
   parameter Real e_long_gain=80 "TIPI controller gain to force e_long to 0" annotation(Dialog(group="TIPI controller parameters"));
   parameter Real e_y_ref=0 "TIPI eccentric parameter to distinguish road side" annotation(Dialog(group="TIPI controller parameters"));
 
-  parameter Real lambda_eLat=10 "Max. lateral deviation for motion demand calculation" annotation(Dialog(group="Motion demand controller parameters"));
-  parameter Real lambda_del_psi=20 "Max. yaw deviation for motion demand calculation" annotation(Dialog(group="Motion demand controller parameters"));
+  parameter Real lambda_eLat=10 "Maximum lateral deviation for motion demand calculation" annotation(Dialog(group="Motion demand controller parameters"));
+  parameter Real lambda_del_psi=20 "Maximum yaw deviation for motion demand calculation" annotation(Dialog(group="Motion demand controller parameters"));
 
   parameter Real vctrl_Kp = 1000 "P-gain for v-control" annotation(Dialog(group="Velocity controller parameters"));
   parameter Modelica.Units.SI.Torque vctrl_TorqueMax = Torque_max_frontMotor+2*Torque_max_rearMotor
