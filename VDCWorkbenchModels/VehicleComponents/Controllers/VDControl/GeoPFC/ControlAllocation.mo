@@ -97,7 +97,7 @@ equation
           fillColor={28,108,200},
           fillPattern=FillPattern.Forward),
         Text(
-          extent={{-100,60},{100,-60}},
+          extent={{-100,60},{100,0}},
           textColor={255,255,255},
           textString="Control
 Allocation")}));

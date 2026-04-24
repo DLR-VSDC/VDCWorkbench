@@ -406,10 +406,9 @@ connect(Path.u, sampler.y) annotation (Line(
           textColor={238,46,47},
           textString="s"),
         Text(
-          extent={{-20,-60},{100,-100}},
+          extent={{-30,-70},{90,-100}},
           textColor={0,0,0},
-          textString="RA-TIPI",
-          fontSize=36)}),
+          textString="RA-TIPI")}),
     Diagram(coordinateSystem(preserveAspectRatio=false,
         extent={{-100,-100},{100,100}}), graphics={
         Text(

@@ -155,9 +155,8 @@ equation
           fillColor={102,44,145},
           fillPattern=FillPattern.Forward),
         Text(
-          extent={{-98,60},{102,-60}},
+          extent={{-100,60},{100,0}},
           textColor={255,255,255},
           textString="Motion
-Demand
-Calculation")}));
+Demand")}));
 end MotionDemand;
