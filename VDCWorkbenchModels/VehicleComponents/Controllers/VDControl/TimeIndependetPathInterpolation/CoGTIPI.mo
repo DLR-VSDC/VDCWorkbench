@@ -252,7 +252,7 @@ equation
           textColor={238,46,47},
           textString="s"),
         Text(
-          extent={{-10,-50},{70,-80}},
+          extent={{-30,-70},{90,-100}},
           textColor={0,0,0},
           textString="TIPI")}),
     Diagram(
