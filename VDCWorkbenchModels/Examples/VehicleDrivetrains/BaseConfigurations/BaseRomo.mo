@@ -1,6 +1,7 @@
 within VDCWorkbenchModels.Examples.VehicleDrivetrains.BaseConfigurations;
 partial model BaseRomo "Basic architecture of the ROMO planar vehicle"
-  extends VehicleArchitectures.BaseArchitecture;
+  extends VehicleArchitectures.BaseArchitecture(
+    redeclare Data.ROMOParameters data);
   extends Modelica.Icons.Example;
 
   replaceable Modelica.Blocks.Interfaces.SO steeringWheelAngleDemand
