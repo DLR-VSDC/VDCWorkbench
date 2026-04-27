@@ -4,7 +4,10 @@ model ResidualDRLforPFC_Racetrack
   ExportableModels.VehicleVDCGeoPFC_RL vDCWorkbenchRacetrack(
     path_yaw_init(displayUnit="rad"),
     v_scl(value=1.0)) annotation (Placement(transformation(extent={{-20,20},{20,60}})));
-  DRLAgents.ResidualDRLgeoPFC residualDRLgeoPFC
+  DRLAgents.ResidualDRLgeoPFC residualDRLgeoPFC(
+    periodicClock(
+      useSolver=true,
+      solverMethod="ExplicitEuler"))
     annotation (Placement(transformation(extent={{10,-20},{-10,0}})));
 equation
   connect(residualDRLgeoPFC.fmuOutputsBus, vDCWorkbenchRacetrack.fmuOutputsBus) annotation (Line(
