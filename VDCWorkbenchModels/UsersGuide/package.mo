@@ -25,7 +25,12 @@ The library requires the following packages.
   <li><a href=\"https://github.com/modelica/VehicleInterfaces\">VehicleInterfaces</a>,</li>
   <li><a href=\"https://github.com/dzimmer/PlanarMechanics\">PlanarMechanics</a>.</li>
   <li><a href=\"https://github.com/DLR-SR/Credibility\">Credibility</a> and</li>
-  <li><a href=\"https://github.com/xrg-simulation/SMArtIInt\">SMArtIInt</a>.</li>
+  <li>
+    <a href=\"https://github.com/xrg-simulation/SMArtIInt\">SMArtIInt</a> &ndash;
+    <strong>OpenModelica users</strong> please note: the branch
+    <a href=\"https://github.com/DLR-VSDC/SMArtIInt/tree/fix12_multiOutputs\">fix12_multiOutputs</a>
+    must be used which fixes a&nbsp;bug when using SMArtIInt for multi-dimensional problems.
+  </li>
 </ul>
 <p>
 For particular versions of the libraries, please check the
