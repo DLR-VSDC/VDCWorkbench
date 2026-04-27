@@ -116,6 +116,7 @@ algorithm
     e_psi := Modelica.Math.atan2(Modelica.Math.sin(dpsi), Modelica.Math.cos(dpsi));
 
     // yaw rate damping
+    yaw_rate := vehStates[6];
     delta_yaw := k_d_yaw * (yawRate_path - yaw_rate);
 
     // steer response damping
