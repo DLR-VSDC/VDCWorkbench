@@ -9,11 +9,7 @@ model VelocityError
     annotation (Placement(transformation(extent={{-16,-16},{16,16}},
         rotation=90,
         origin={-100,-40})));
-  Modelica.Blocks.Interfaces.RealOutput longitudinal_velocity_error(
-    unit="m/s",
-    min=-10.0,
-    max=10.0,
-    nominal=2.0) "Velocity error"
+  Modelica.Blocks.Interfaces.RealOutput longitudinal_velocity_error "Velocity error"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealOutput vehicle_velocity_in_path_direction
     annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
