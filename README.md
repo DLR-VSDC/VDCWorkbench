@@ -8,7 +8,7 @@ and IEEE Open Journal of Vehicular Technology (OJVT)](https://events.vtsociety.o
 ## Dependencies
 In order to work properly, the library requires the following Modelica packages.
 - [Credibility](https://github.com/DLR-SR/Credibility)
-- [SMArtIInt](https://github.com/xrg-simulation/SMArtIInt)
+- [SMArtIInt](https://github.com/xrg-simulation/SMArtIInt) - *OpenModelica users* please note: the branch [fix12_multiOutputs](https://github.com/DLR-VSDC/SMArtIInt/tree/fix12_multiOutputs) must be used instead which fixes a bug when using SMArtIInt for multi-dimensional problems 
 - [VehicleInterfaces](https://github.com/modelica/VehicleInterfaces)
 - [PlanarMechanics](https://github.com/dzimmer/PlanarMechanics)
 
