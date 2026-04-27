@@ -34,6 +34,9 @@ model DrivetrainDifferentialIdeal "Powertrain of the miniAFM"
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={100,0})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixZeroHeatFlow(
+    final Q_flow=0,
+    final T_ref=T) if useHeatPort annotation (Placement(transformation(extent={{-20,-70},{-40,-50}})));
 protected
   Utilities.Interfaces.ElectricDriveControlBus electricMotorControlBus
     annotation (Placement(transformation(extent={{50,-10},{70,10}})));
@@ -63,6 +66,7 @@ equation
         index=1,
         extent={{2,2},{2,5}},
         horizontalAlignment=TextAlignment.Left));
+  connect(fixZeroHeatFlow.port, internalHeatPort) annotation (Line(points={{-40,-60},{-100,-60},{-100,-80}}, color={191,0,0}));
   annotation (
     Icon(
       graphics={
