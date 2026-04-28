@@ -5,7 +5,10 @@ model CarBody "Planar rigid body"
   parameter Modelica.Units.SI.Mass m=1 "Mass";
   parameter Modelica.Units.SI.Velocity v_long = 0 "Initial velocity in longitudinal direction";
 
+  parameter Boolean animate=true "= true, if animation shall be enabled" annotation (Dialog(group="Animation"));
+
   PlanarMechanics.Parts.Body body(
+    animate=animate,
     stateSelect=StateSelect.prefer,
     m=m,
     I=Jz,
@@ -13,10 +16,14 @@ model CarBody "Planar rigid body"
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-30,0})));
-  PlanarMechanics.Parts.FixedTranslation frontAxle(r = {wheelBase/2, 0}) annotation(
-    Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, 70})));
-  PlanarMechanics.Parts.FixedTranslation rearAxle(r = {wheelBase/2, 0}) annotation(
-    Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, -70})));
+  PlanarMechanics.Parts.FixedTranslation frontAxle(
+    animate=animate,
+    r={wheelBase/2,0}) annotation(
+      Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, 70})));
+  PlanarMechanics.Parts.FixedTranslation rearAxle(
+    animate=animate,
+    r={wheelBase/2,0}) annotation(
+      Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, -70})));
   PlanarMechanics.Interfaces.Frame_a frameAxleFront "Reference frame of front axle" annotation (Placement(transformation(
         extent={{-16,-16},{16,16}},
         rotation=90,

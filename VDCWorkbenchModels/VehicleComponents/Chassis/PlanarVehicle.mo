@@ -44,6 +44,7 @@ model PlanarVehicle "Simple planar model of vehicle"
     J_steer=J_steer,
     v_long=v_Start,
     trackWidth=trackWidth,
+    animate=carBody.animate,
     inertiaSteering(stateSelect=StateSelect.prefer))
     annotation (Placement(transformation(extent={{-10,30},{10,50}})));
   Components.SimpleAxisRear axleRear(
@@ -58,7 +59,8 @@ model PlanarVehicle "Simple planar model of vehicle"
     J_wheel=J_wheel,
     N=N,
     v_long=v_Start,
-    trackWidth=trackWidth) annotation (Placement(transformation(extent={{-10,-30},{10,-50}})));
+    trackWidth=trackWidth,
+    animate=carBody.animate) annotation (Placement(transformation(extent={{-10,-30},{10,-50}})));
   PlanarMechanics.VehicleComponents.AirResistanceLongitudinal airResistanceLongitudinal(
     c_W=c_W,
     area=area,
