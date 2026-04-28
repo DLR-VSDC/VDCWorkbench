@@ -19,21 +19,32 @@ model SimpleAxisFront "Simple steerable axle"
   parameter Modelica.Units.SI.Velocity v_long
     "Velocity in longitudinal direction";
 
+  parameter Boolean animate=true "= true, if animation shall be enabled" annotation (Dialog(group="Animation"));
+  parameter Modelica.Units.SI.Length width=1.2*R0 "Width of the wheel" annotation (Dialog(group="Animation"));
+
   PlanarMechanics.Joints.Revolute bearingLeft(
-    useFlange=true) annotation (
+    useFlange=true,
+    animate=animate,
+    cylinderLength=R0/3,
+    cylinderDiameter=R0/5) annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-34,-40})));
   PlanarMechanics.Joints.Revolute bearingRight(
-    useFlange=true) annotation (
+    useFlange=true,
+    animate=animate,
+    cylinderLength=bearingLeft.cylinderLength,
+    cylinderDiameter=bearingLeft.cylinderDiameter) annotation (
       Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=90,
         origin={34,-40})));
   PlanarMechanics.Parts.FixedTranslation fixWheelLeft(
+    animate=animate,
     r={0,-trackWidth/2}) annotation (Placement(transformation(extent={{-30,-70},{-10,-50}})));
   PlanarMechanics.Parts.FixedTranslation fixWheelRight(
+    animate=animate,
     r={0,trackWidth/2}) annotation (Placement(transformation(extent={{30,-70},{10,-50}})));
   PlanarMechanics.VehicleComponents.Wheels.DryFrictionWheelJoint wheelLeft(
     radius=R0,
@@ -46,7 +57,10 @@ model SimpleAxisFront "Simple steerable axle"
     mu_S=mu_S,
     w_roll(start=v_long/R0, fixed=true),
     v_long(start=v_long),
-    useHeatPort=useHeatPort)
+    useHeatPort=useHeatPort,
+    animate=animate,
+    diameter=1.04*width,
+    width=width)
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
@@ -61,7 +75,10 @@ model SimpleAxisFront "Simple steerable axle"
     mu_S=mu_S,
     w_roll(start=v_long/R0),
     v_long(start=v_long),
-    useHeatPort=useHeatPort)
+    useHeatPort=useHeatPort,
+    animate=animate,
+    diameter=wheelLeft.diameter,
+    width=wheelLeft.width)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,

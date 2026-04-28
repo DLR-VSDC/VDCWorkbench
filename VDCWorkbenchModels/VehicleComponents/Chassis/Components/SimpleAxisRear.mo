@@ -16,6 +16,9 @@ model SimpleAxisRear "Simple non-steerable axle"
   parameter Modelica.Units.SI.Velocity v_long
     "Velocity in longitudinal direction";
 
+  parameter Boolean animate=true "= true, if animation shall be enabled" annotation (Dialog(group="Animation"));
+  parameter Modelica.Units.SI.Length width=1.2*R0 "Width of the wheel" annotation (Dialog(group="Animation"));
+
   PlanarMechanics.VehicleComponents.Wheels.DryFrictionWheelJoint wheelLeft(
     stateSelect=StateSelect.prefer,
     r=s,
@@ -27,7 +30,10 @@ model SimpleAxisRear "Simple non-steerable axle"
     radius=R0,
     w_roll(fixed=true, start=v_long/R0),
     v_long(start=v_long),
-    useHeatPort=useHeatPort)
+    useHeatPort=useHeatPort,
+    animate=animate,
+    diameter=1.04*width,
+    width=width)
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
@@ -42,7 +48,10 @@ model SimpleAxisRear "Simple non-steerable axle"
     mu_S=mu_S,
     w_roll(start=v_long/R0),
     v_long(start=v_long),
-    useHeatPort=useHeatPort)
+    useHeatPort=useHeatPort,
+    animate=animate,
+    diameter=wheelLeft.diameter,
+    width=wheelLeft.width)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -55,9 +64,11 @@ model SimpleAxisRear "Simple non-steerable axle"
   PlanarMechanics.VehicleComponents.DifferentialGear differentialGear
     annotation (Placement(transformation(extent={{-10,40},{10,20}})));
   PlanarMechanics.Parts.FixedTranslation fixWheelLeft(
-    r={0,-trackWidth/2}) annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
+    r={0,-trackWidth/2},
+    animate=animate) annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   PlanarMechanics.Parts.FixedTranslation fixWheelRight(
-    r={0,trackWidth/2}) annotation (Placement(transformation(extent={{30,-10},{10,10}})));
+    r={0,trackWidth/2},
+    animate=animate) annotation (Placement(transformation(extent={{30,-10},{10,10}})));
   Modelica.Mechanics.Rotational.Interfaces.Flange_b flangeDifferential
     "Input flange of differential" annotation (Placement(transformation(extent={{-10,90},{10,110}}), iconTransformation(extent={{-10,90},{10,110}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor tyreLossRR
