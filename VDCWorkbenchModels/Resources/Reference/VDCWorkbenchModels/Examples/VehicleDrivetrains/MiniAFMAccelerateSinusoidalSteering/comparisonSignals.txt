@@ -1,0 +1,17 @@
+time
+vehicle.axleFront.inertiaSteering.phi
+vehicle.axleFront.inertiaSteering.w
+vehicle.axleFront.wheelInertiaR.phi
+vehicle.axleFront.wheelInertiaR.w
+vehicle.axleFront.wheelLeft.phi_roll
+vehicle.axleFront.wheelLeft.w_roll
+vehicle.axleRear.wheelInertiaR.phi
+vehicle.axleRear.wheelInertiaR.w
+vehicle.axleRear.wheelLeft.phi_roll
+vehicle.axleRear.wheelLeft.w_roll
+vehicle.carBody.body.phi
+vehicle.carBody.body.r[1]
+vehicle.carBody.body.r[2]
+vehicle.carBody.body.v[1]
+vehicle.carBody.body.v[2]
+vehicle.carBody.body.w
