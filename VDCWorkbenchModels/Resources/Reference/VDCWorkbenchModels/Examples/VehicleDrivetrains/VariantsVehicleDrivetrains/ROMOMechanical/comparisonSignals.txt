@@ -1,6 +1,8 @@
 time
 E_loss_total.y
 infinityHeatCapacitor.T
+vehicle.axleFront.inertiaSteering.phi
+vehicle.axleFront.inertiaSteering.w
 vehicle.axleFront.wheelInertiaL.phi
 vehicle.axleFront.wheelInertiaL.w
 vehicle.axleFront.wheelInertiaR.phi
@@ -10,10 +12,8 @@ vehicle.axleRear.wheelInertiaL.w
 vehicle.axleRear.wheelInertiaR.phi
 vehicle.axleRear.wheelInertiaR.w
 vehicle.carBody.body.phi
+vehicle.carBody.body.w
 vehicle.carBody.body.r[1]
 vehicle.carBody.body.r[2]
 vehicle.carBody.body.v[1]
 vehicle.carBody.body.v[2]
-vehicle.carBody.body.w
-vehicle.positionSteeringWheel.phi
-vehicle.positionSteeringWheel.w
