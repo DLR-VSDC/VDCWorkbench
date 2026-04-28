@@ -1,8 +1,8 @@
 within VDCWorkbenchModels.Utilities.Blocks;
-model AssembleRLfeatureVec
+model AssembleRLfeatureVec "Assemble RL feature vector from control bus signals"
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Real[16] featMax = {
+  parameter Real[nIn] featMax = {
     6.981317007977318,
     640.0,
     6.981317007977318,
@@ -36,7 +36,7 @@ model AssembleRLfeatureVec
     // [15] vehicle_sideSlipAngle [rad]
     // [16] vehicle_yawRate [rad/s]
 
-  parameter Real[16] featNominal = {
+  parameter Real[nIn] featNominal = {
      0.6981317007977318,
      400.0,
      0.6981317007977318,
@@ -53,6 +53,8 @@ model AssembleRLfeatureVec
      1.5,
      0.017453292519943295,
      0.15};
+protected
+  constant Integer nIn = 16 "Number of inputs";
 
 public
   Interfaces.FmuOutputsBus fmuOutputsBus annotation (Placement(transformation(
@@ -63,12 +65,11 @@ public
           extent={{-22,-22},{22,22}},
           rotation=90,
           origin={-100,0})));
-
-  Modelica.Blocks.Interfaces.RealOutput featureVec[16]
+  Modelica.Blocks.Interfaces.RealOutput featureVec[nIn]
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-//  Real[16] raw;
+//  Real[nIn] raw;
 protected
-  Modelica.Blocks.Interfaces.RealOutput[16] raw;
+  Modelica.Blocks.Interfaces.RealOutput[nIn] raw;
 
 equation
 /*
@@ -91,7 +92,7 @@ equation
 */
 
   // Clip to [min, max], then normalize by nominal
-  for i in 1:16 loop
+  for i in 1:nIn loop
     featureVec[i] = max(-featMax[i], min(featMax[i], raw[i])) / featNominal[i];
   end for;
 
@@ -177,5 +178,31 @@ equation
           color={0,0,127},
           thickness=0.5)}),
     Diagram(
-      coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
+      coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
+    Documentation(
+      info="<html>
+<p>
+The output connector is the <strong>assembly</strong> of signals from the FMU&apos;s control bus.
+Note, the number of signals is fixed and the signals are assigned to the output vector&apos;s index
+as follows:
+</p>
+<ul>
+  <li>[1]  .. baselineController_steeringWheelAngle / rad,</li>
+  <li>[2]  .. baselineController_torque / N.m,</li>
+  <li>[3]  .. combined_steeringWheelAngle / rad,</li>
+  <li>[4]  .. combined_torque / N.m,</li>
+  <li>[5]  .. lateralDisplacement_error / m,</li>
+  <li>[6]  .. longitudinalVelocity_error / m.s<sup>-1</sup>,</li>
+  <li>[7]  .. orientation_error / rad,</li>
+  <li>[8]  .. path_curvature / m<sup>-1</sup>,</li>
+  <li>[9]  .. path_velocity / m.s<sup>-1</sup>,</li>
+  <li>[10] .. residualRL_steeringWheelAngle / rad,</li>
+  <li>[11] .. residualRL_torque / N.m,</li>
+  <li>[12] .. vehicle_absoluteVelocity / m.s<sup>-1</sup>,</li>
+  <li>[13] .. vehicle_lateralAcceleration / m.s<sup>-2</sup>,</li>
+  <li>[14] .. vehicle_longitudinalAcceleration / m.s<sup>-2</sup>,</li>
+  <li>[15] .. vehicle_sideSlipAngle / rad,</li>
+  <li>[16] .. vehicle_yawRate / rad.s<sup>-1</sup>,</li>
+</ul>
+</html>"));
 end AssembleRLfeatureVec;
