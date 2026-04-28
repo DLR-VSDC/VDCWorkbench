@@ -17,7 +17,10 @@ public
     annotation (Placement(transformation(extent={{100,50},{120,70}})));
   Modelica.Blocks.Interfaces.RealOutput residualTorque "Residual torque"
     annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
-  Utilities.Blocks.AssembleRLfeatureVec featureVecRL annotation (Placement(transformation(extent={{-88,-10},{-68,10}})));
+  Utilities.Blocks.AssembleRLfeatureVec featureVecRL(
+    featMax={6.981317007977318,640.0,6.981317007977318,640.0,2.5,10.0,0.7853981633974483,0.1,50.0,1.117010721276371,150.0,50.0,10.0,4.0,0.17453292519943295,1.0},
+    featNominal={0.6981317007977318,400.0,0.6981317007977318,400.0,0.5,3.0,0.08726646259971647,0.02,20.0,1.117010721276371,150.0,20.0,3.0,1.5,0.017453292519943295,0.15})
+    annotation (Placement(transformation(extent={{-88,-10},{-68,10}})));
   Utilities.Interfaces.FmuOutputsBus fmuOutputsBus annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
