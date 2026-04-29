@@ -27,14 +27,20 @@ model PredictiveStanleyControlTD "Time-discrete predictive Stanley lateral contr
     annotation(Dialog(enable=use_prediction, group="Prediction horizon (if use_prediction = true)"));
 
   // ===================== Path data =====================
-  parameter Integer nPath = 4999 "Number of path points";
-  parameter String FilePath = ModelicaServices.ExternalReferences.loadResource(
+  parameter String filePath = ModelicaServices.ExternalReferences.loadResource(
     "modelica://VDCWorkbenchModels/Resources/Maps/RacetrackMini.mat")
-    "File where path table information is stored in table 'path'";
-  parameter String pathName = "path" "Table name in .mat file";
-  parameter Real pathData[nPath, 6] = Modelica.Utilities.Streams.readRealMatrix(
-    FilePath, pathName, nPath, 6);
-  parameter Real maxArc = pathData[nPath, 1];
+    "File where path table pathName is stored" annotation (
+      Dialog(
+        group="Path data",
+        loadSelector(
+          filter="Matlab files(*.mat)",
+          caption="Open data file")));
+  parameter String pathName = "path" "Table name in filePath" annotation (Dialog(group="Path data"));
+  final parameter Integer dim[2] = Modelica.Utilities.Streams.readMatrixSize(filePath, pathName) "Dimension of matrix";
+  final parameter Real pathData[:,:] = Modelica.Utilities.Streams.readRealMatrix(filePath, pathName, dim[1], dim[2]) "Path matrix data";
+//   parameter Real pathData[nPath, 6] = Modelica.Utilities.Streams.readRealMatrix(
+//     filePath, pathName, nPath, 6);
+  // parameter Real maxArc = pathData[nPath, 1];
 
 public
   Real x_front, y_front;
@@ -66,6 +72,10 @@ protected
         origin={30,-80})));
 
 algorithm
+  assert(
+    size(pathData,2) == 6,
+    "Number of columns of path data in " + filePath + " is <> 6.");
+
   when sample(0, Ts) then
     // set coordinates to center of front axle
     x_front :=xveh + lf*cos(psiveh);
