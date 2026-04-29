@@ -10,8 +10,8 @@ model PredictiveStanleyControlTD "Time-discrete predictive Stanley lateral contr
 
   parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
 
-  parameter Real K_vctr = 0.5 "P gain of velocity controller" annotation (Dialog(group="Torque controller"));
-  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
+  parameter Real K_vctr = 0.5 "Gain of torque control" annotation (Dialog(group="Drive torque controller"));
+  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Drive torque controller"));
 
   parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
@@ -21,7 +21,7 @@ model PredictiveStanleyControlTD "Time-discrete predictive Stanley lateral contr
   parameter Real C_Tire = 150 "Tire stiffnes for slip angle compensation" annotation(Dialog(group="Vehicle parameters"));
 
   parameter Boolean use_prediction=true "= true, if prediction shall be activated" annotation (Dialog(tab="Advanced"));
-  parameter Integer N = 4 "Number of prediction steps"
+  parameter Integer N = 4 "Size of prediction horizon"
     annotation(Dialog(enable=use_prediction, group="Prediction horizon (if use_prediction = true)"));
   parameter Modelica.Units.SI.Time dt = Ts "Predicition time step"
     annotation(Dialog(enable=use_prediction, group="Prediction horizon (if use_prediction = true)"));
@@ -173,5 +173,35 @@ Stanley"),
           extent={{14,-54},{26,-66}},
           lineColor={0,0,127},
           fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}),
+    Documentation(
+      info="<html>
+<p>
+A <em>predictive</em> path following <em>Stanley</em> controller with a&nbsp;model-based prediction
+[<a href=\"modelica://VDCWorkbenchModels.UsersGuide.References\">AbdElmoniem2020</a>]
+of future states over a&nbsp;finite horizon
+</p>
+<blockquote>
+<var>T</var><sub>pred</sub>&nbsp;= <var>N</var>&nbsp;d<var>t</var>,
+</blockquote>
+<p>
+where <var>N</var> is the size of the prediction horizon. At each prediction step
+<var>k</var>&nbsp;&isin;&nbsp;&nbsp;[0,&nbsp;<var>N</var>−1], the lateral and heading errors between
+the reference path and the actual vehicle position are computed, with the reference point projected
+onto the path at the predicted state.
+The corresponding steering angles &delta;<sub><var>k</var></sub> are then determined via the
+<a href=\"modelica://VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.StanleyBased.StanleyControl\">Stanley control law</a>,
+effectively evaluating the control action that would be required at each future time step.
+The final steering command for the current time step is then synthesized as a&nbsp;weighted sum of
+these individual predictions, using the <code>weights</code> parameter. This enables the controller
+to anticipate upcoming path curvature and dynamically adjust the steering input in advance.
+The resulting control output <code>delta</code> is bounded to [-&pi;, &pi;] and further saturated
+with respect to the actuator limits <code>deltaMax</code>.
+</p>
+<p>
+The output torque demand <code>torque</code> of propulsion is proportional to the deviation of
+vehicle&apos;s longitudinal velocity by factor <code>K_vctr</code> and limited by
+<code>tauDriveMax</code>.
+</p>
+</html>"));
 end PredictiveStanleyControlTD;
