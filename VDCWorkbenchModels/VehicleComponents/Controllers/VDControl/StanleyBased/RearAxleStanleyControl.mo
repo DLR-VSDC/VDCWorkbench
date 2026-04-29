@@ -10,8 +10,8 @@ model RearAxleStanleyControl "Rear axle Stanley lateral control law"
 
   parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
 
-  parameter Real K_vctrl = 0.5 "P gain of velocity controller" annotation (Dialog(group="Torque controller"));
-  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
+  parameter Real K_vctrl = 0.5 "Gain of torque control" annotation (Dialog(group="Drive torque controller"));
+  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Drive torque controller"));
 
   parameter Modelica.Units.SI.Mass m = 7.151 "Vehicle mass" annotation(Dialog(group="Vehicle parameters"));
   parameter Modelica.Units.SI.Length lf = 0.1805 "Distance of CoG to front axle" annotation(Dialog(group="Vehicle parameters"));
@@ -58,7 +58,7 @@ equation
 
   e_lat = -(xf_ref - x_front)*sin(psi_f_ref) + (yf_ref - y_front)*cos(psi_f_ref);
 
-  theta_r_star = atan2( sin(psi_path + theta_ss_r - psiveh), cos(psi_path + theta_ss_r - psiveh) );
+  theta_r_star = atan2(sin(psi_path + theta_ss_r - psiveh), cos(psi_path + theta_ss_r - psiveh));
 
   // feed forward control
   delta_ff = atan((wheelbase*kappa_ff - sin(theta_ss_r)) / cos(theta_ss_r));
@@ -96,5 +96,35 @@ equation
           extent={{-100,60},{100,0}},
           textColor={255,255,255},
           textString="rear axle
-Stanley")}));
+Stanley")}),
+    Documentation(
+      info="<html>
+<p>
+Path following <em>Stanley</em> controller which uses the <em>rear axle</em> as the reference
+point for path tracking. To compute the lateral and the heading errors defined at the front axle,
+required for the
+<a href=\"modelica://VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.StanleyBased.StanleyControl\">Stanley control law</a>,
+a&nbsp;dynamic single-track reference model is employed which projects the rear axle reference
+state onto the path while accounting for vehicle geometry and rear axle slip angle.
+The full derivation and implementation details are described in
+[<a href=\"modelica://VDCWorkbenchModels.UsersGuide.References\">Seiffer2023</a>].
+</p>
+<p>
+The control law, including the defined tracking errors, can be reformulated as the sum of the
+reference model&apos;s steering angle &delta;<sub>ref</sub> and additional feedback terms.
+Since &delta;<sub>ref</sub> depends solely on the reference path and the vehicle&apos;s kinematic
+model, it acts as a&nbsp;feedforward component of the control law. This feedforward term can
+be leveraged to compensate for system delays (if they exist) by shifting the reference model
+along the path by a&nbsp;distance <var>s</var> = <var>v<sub>x</sub></var> <var>T</var><sub>ff</sub>,
+where <var>v<sub>x</sub></var> denotes the vehicle&apos;s longitudinal velocity and
+<var>T</var><sub>ff</sub> represents the system delay.
+The resulting control output <code>delta</code> is bounded to [-&pi;, &pi;] and further saturated
+with respect to the actuator limits <code>deltaMax</code>.
+</p>
+<p>
+The output torque demand <code>torque</code> of propulsion is proportional to the deviation of
+vehicle&apos;s longitudinal velocity by factor <code>K_vctrl</code> and limited by
+<code>tauDriveMax</code>.
+</p>
+</html>"));
 end RearAxleStanleyControl;
