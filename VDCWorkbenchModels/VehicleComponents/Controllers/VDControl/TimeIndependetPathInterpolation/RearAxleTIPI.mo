@@ -1,14 +1,14 @@
 within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.TimeIndependetPathInterpolation;
 model RearAxleTIPI "Rear axle time independent path interpolation"
   parameter Real e_long_gain=80 "TIPI Controller gain to force e_long to 0";
-  parameter Real s_start=0 "Arc length value at start position";
+  parameter Modelica.Units.SI.Position s_start=0 "Arc length value at start position";
   parameter String FilePath = ModelicaServices.ExternalReferences.loadResource(
     "modelica://VDCWorkbenchModels/Resources/Maps/RacetrackMini.mat")
     "File where path table information is stored in table 'path'";
-  parameter Real maxArcLength = 22.737000000000002 "Maximum arc length value on path file";
+  parameter Modelica.Units.SI.Position maxArcLength = 22.737000000000002 "Maximum arc length value on path file";
 
   parameter Real t_ff = 0.0;
-  parameter Real lr = 0.1805;
+  parameter Modelica.Units.SI.Length lr = 0.1805 "Distance of CoG to rear axle";
 
   Modelica.Blocks.Tables.CombiTable1Ds Path(
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
