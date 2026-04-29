@@ -6,18 +6,19 @@ model StanleyController
     lr = 0.1805);
 
   // TIPI Parameters
-  parameter Real e_long_gain = 80;
-  parameter Real s_start = 0;
+  parameter Real e_long_gain = 80 "TIPI Controller gain to force e_long to 0";
+  parameter Modelica.Units.SI.Position s_start = 0 "Arc length value at vehicle start position";
 
-  parameter Real k = 5;
-  parameter Real v_eps = 0.1;
-  parameter Real k_d_yaw = 0.14;
-  parameter Real k_d_steer = 0.0;
-  parameter Real deltaMax = 0.3;
-  parameter Real K_vctrl = 0.5;
-  parameter Real vctrl_TorqueMax = 0.3;
+  parameter Real k = 5 "Stanley gain";
+  parameter Modelica.Units.SI.Velocity v_eps = 0.1  "Small velocity to avoid division by zero";
+  parameter Real k_d_yaw = 0.14 "Factor for yaw rate related damping";
+  parameter Real k_d_steer = 0.0 "Factor penalizing rate of steering angle change";
+  parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
+  parameter Real K_vctrl = 0.5 "Gain of torque control" annotation (Dialog(group="Torque controller"));
+  parameter Modelica.Units.SI.Torque vctrl_TorqueMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
 
-  parameter Real C_Tire = 150;
+  parameter Real C_Tire = 150 "Tire stiffnes for slip angle compensation"
+    annotation(Dialog(tab="Vehicle parameters"));
 
   VDControl.TimeIndependetPathInterpolation.FrontAxleTIPI tIPI(
     e_long_gain=e_long_gain,

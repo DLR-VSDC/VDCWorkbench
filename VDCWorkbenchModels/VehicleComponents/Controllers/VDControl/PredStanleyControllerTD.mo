@@ -6,26 +6,30 @@ model PredStanleyControllerTD
     lr = 0.1805);
 
   // TIPI Parameters
-  parameter Real e_long_gain = 80;
-  parameter Real s_start = 0;
+  parameter Real e_long_gain = 80 "TIPI Controller gain to force e_long to 0";
+  parameter Modelica.Units.SI.Position s_start = 0 "Arc length value at vehicle start position";
   parameter Real t_ff = 0.0;
 
-  parameter Real k = 5;
-  parameter Real v_eps = 0.1;
-  parameter Real k_d_yaw = 0.14;
-  parameter Real k_d_steer = 0.0;
-  parameter Real deltaMax = 0.3;
-  parameter Boolean use_prediction = true;
-  parameter Real weights[5] = {0.4, 0.2, 0.2, 0.1, 0.1};
-  parameter Integer N = 4;
-  parameter Real dt = Ts;
+  parameter Real k = 5 "Stanley gain";
+  parameter Modelica.Units.SI.Velocity v_eps = 0.1  "Small velocity to avoid division by zero";
+  parameter Real k_d_yaw = 0.14 "Factor for yaw rate related damping";
+  parameter Real k_d_steer = 0.0 "Factor penalizing rate of steering angle change";
+  parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
 
-  parameter Real K_vctr = 0.5;
-  parameter Real vctr_TorqueMax = 0.3;
+  parameter Boolean use_prediction = true "= true, if prediction shall be activated" annotation (Dialog(tab="Advanced"));
+  parameter Integer N = 4 "Number of prediction steps"
+    annotation(Dialog(enable=use_prediction, group="Prediction horizon (if use_prediction = true)"));
+  parameter Modelica.Units.SI.Time dt = Ts "Predicition time step"
+    annotation(Dialog(enable=use_prediction, group="Prediction horizon (if use_prediction = true)"));
+  parameter Real weights[N+1] = {0.4, 0.2, 0.2, 0.1, 0.1} "Weighting of predicted steering command"
+    annotation(Dialog(enable=use_prediction, group="Prediction horizon (if use_prediction = true)"));
 
+  parameter Real K_vctr = 0.5 "Gain of torque control" annotation (Dialog(group="Torque controller"));
+  parameter Modelica.Units.SI.Torque vctr_TorqueMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
   parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
-  parameter Real C_Tire = 150;
+  parameter Real C_Tire = 150 "Tire stiffnes for slip angle compensation"
+    annotation(Dialog(tab="Vehicle parameters"));
 
   VDControl.TimeIndependetPathInterpolation.FrontAxleTIPI tIPI(
     e_long_gain=e_long_gain,
@@ -44,10 +48,10 @@ model PredStanleyControllerTD
     lf=lf,
     lr=lr,
     C_Tire=C_Tire,
-    use_prediction=use_prediction,
-    weights=weights,
-    N=N,
-    dt=dt) annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
+    final use_prediction=use_prediction,
+    final weights=weights,
+    final N=N,
+    final dt=dt) annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
 equation
   connect(const.y, tIPI.v_scl) annotation (Line(points={{-59,30},{-52,30},{-52,36},{-42,36}}, color={0,0,127}));
   connect(tIPI.controlBus, controlBus) annotation (Line(
