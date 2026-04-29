@@ -2,21 +2,21 @@ within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.StanleyBased;
 model StanleyControlTD "Time-discrete classic Stanley lateral control law"
   extends BaseClasses.BaseStanley;
   parameter Real k = 5 "Stanley gain";
-  parameter Real v_eps = 0.1  "Small speed to avoid div by zero";
-  parameter Real k_d_yaw = 0.14;
-  parameter Real k_d_steer = 0.0;
+  parameter Modelica.Units.SI.Velocity v_eps = 0.1  "Small velocity to avoid division by zero";
+  parameter Real k_d_yaw = 0.14 "Factor for yaw rate related damping";
+  parameter Real k_d_steer = 0.0 "Factor penalizing rate of steering angle change";
 
-  parameter Real deltaMax = 0.3 "Steering saturation [rad]";
+  parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
 
-  parameter Real K_vctrl = 0.5 "P gain of velocity controller";
-  parameter Modelica.Units.SI.Torque vctrl_TorqueMax = 0.3;
+  parameter Real K_vctrl = 0.5 "Gain of torque control" annotation (Dialog(group="Torque controller"));
+  parameter Modelica.Units.SI.Torque vctrl_TorqueMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
 
   parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
-  parameter Real m = 7.151 "Vehicle mass [kg]";
-  parameter Real lf = 0.1805;
-  parameter Real lr = 0.1805;
-  parameter Real C_Tire = 150 "Tire stiffnes for slip angle compensation";
+  parameter Modelica.Units.SI.Mass m = 7.151 "Vehicle mass" annotation(Dialog(group="Vehicle parameters"));
+  parameter Modelica.Units.SI.Length lf = 0.1805 "Distance of CoG to front axle" annotation(Dialog(group="Vehicle parameters"));
+  parameter Modelica.Units.SI.Length lr = 0.1805 "Distance of CoG to rear axle" annotation(Dialog(group="Vehicle parameters"));
+  parameter Real C_Tire = 150 "Tire stiffnes for slip angle compensation" annotation(Dialog(group="Vehicle parameters"));
 
 public
   Real e_lat;
@@ -54,7 +54,7 @@ algorithm
     // steer response damping
     delta_steer := k_d_steer * (delta_km1 - delta_km2);
 
-    // Stanley Controll Law
+    // Stanley control law
     delta_raw :=e_psi + Modelica.Math.atan(k*e_lat/(vveh_long + v_eps)) + delta_yaw + delta_steer;
     delta :=min(max(delta_raw, -deltaMax), deltaMax);
 
