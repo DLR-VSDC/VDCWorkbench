@@ -10,8 +10,8 @@ model StanleyControlTD "Time-discrete classic Stanley lateral control law"
 
   parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
 
-  parameter Real K_vctrl = 0.5 "Gain of torque control" annotation (Dialog(group="Torque controller"));
-  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
+  parameter Real K_vctrl = 0.5 "Gain of torque control" annotation (Dialog(group="Drive torque controller"));
+  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Drive torque controller"));
 
   parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
@@ -97,5 +97,13 @@ algorithm
           extent={{14,-54},{26,-66}},
           lineColor={0,0,127},
           fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}),
+    Documentation(
+      info="<html>
+<p>
+Path following <em>time-discrete Stanley</em> controller. Refer to
+<a href=\"modelica://VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.StanleyBased.StanleyControl\">StanleyControl</a>
+for controller description.
+</p>
+</html>"));
 end StanleyControlTD;

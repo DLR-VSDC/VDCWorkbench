@@ -1,5 +1,5 @@
 within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl;
-model PredStanleyControllerTD
+model PredStanleyControllerTD "Predictive Stanley-based path following control"
   extends VDControl.BaseClasses.BaseSubBusses(
     m = 7.151,
     lf = 0.1805,
@@ -17,15 +17,15 @@ model PredStanleyControllerTD
   parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
 
   parameter Boolean use_prediction = true "= true, if prediction shall be activated" annotation (Dialog(tab="Advanced"));
-  parameter Integer N = 4 "Number of prediction steps"
+  parameter Integer N = 4 "Size of prediction horizon"
     annotation(Dialog(enable=use_prediction, group="Prediction horizon (if use_prediction = true)"));
   parameter Modelica.Units.SI.Time dt = Ts "Predicition time step"
     annotation(Dialog(enable=use_prediction, group="Prediction horizon (if use_prediction = true)"));
   parameter Real weights[N+1] = {0.4, 0.2, 0.2, 0.1, 0.1} "Weighting of predicted steering command"
     annotation(Dialog(enable=use_prediction, group="Prediction horizon (if use_prediction = true)"));
 
-  parameter Real K_vctr = 0.5 "Gain of torque control" annotation (Dialog(group="Torque controller"));
-  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
+  parameter Real K_vctr = 0.5 "Gain of torque control" annotation (Dialog(group="Drive torque controller"));
+  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Drive torque controller"));
   parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
   parameter Real C_Tire = 150 "Tire stiffnes for slip angle compensation"

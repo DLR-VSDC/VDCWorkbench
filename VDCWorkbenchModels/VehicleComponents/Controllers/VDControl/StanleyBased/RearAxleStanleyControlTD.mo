@@ -10,8 +10,8 @@ model RearAxleStanleyControlTD "Time-discrete rear axle Stanley lateral control 
 
   parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
 
-  parameter Real K_vctrl = 0.5 "P gain of velocity controller" annotation (Dialog(group="Torque controller"));
-  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
+  parameter Real K_vctrl = 0.5 "Gain of torque control" annotation (Dialog(group="Drive torque controller"));
+  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Drive torque controller"));
 
   parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
@@ -127,5 +127,14 @@ Stanley"),
           extent={{14,-54},{26,-66}},
           lineColor={0,0,127},
           fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}),
+    Documentation(
+      info="<html>
+<p>
+Path following <em>time-discrete Stanley</em> controller which uses the <em>rear axle</em> as the reference
+point for path tracking. Refer to
+<a href=\"modelica://VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.StanleyBased.RearAxleStanleyControl\">RearAxleStanleyControl</a>
+for controller description.
+</p>
+</html>"));
 end RearAxleStanleyControlTD;
