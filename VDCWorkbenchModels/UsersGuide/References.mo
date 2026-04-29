@@ -9,9 +9,18 @@ The following references (sorted alphabetically) were used to create the library
 
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
+    <td>[AbdElmoniem2020]</td>
+    <td>
+      A. AbdElmoniem, A. Osama, M. Abdelaziz, and S. A Maged,
+      &quot;A path-tracking algorithm using predictive Stanley lateral controller&quot;,
+      International Journal of Advanced Robotic Systems, vol. 17, no. 6, 2020,
+      <a href=\"http://dx.doi.org/10.1177/1729881420974852\">doi: 10.1177/1729881420974852</a>.
+    </td>
+  </tr>
+  <tr>
     <td>[Ackermann2002]</td>
     <td>
-      J. Ackermann, P. Blue, T. Bünte, L. Guvenc, D. Kaesbauer, M. Kordt, M. Muhler und D. Odenthal,
+      J. Ackermann, P. Blue, T. Bünte, L. Guvenc, D. Kaesbauer, M. Kordt, M. Muhler and D. Odenthal,
       &quot;Robust Control: The Parameter Space Approach&quot;,
       Springer-Verlag, 2002.
     </td>
@@ -47,11 +56,29 @@ The following references (sorted alphabetically) were used to create the library
     </td>
   </tr>
   <tr>
+    <td>[Hoffmann2007]</td>
+    <td>
+      G. M. Hoffmann, C. J. Tomlin, M. Montemerlo, and S. Thrun,
+      &quot;Autonomous automobile trajectory tracking for off-road driving: Controller design, experimental validation and racing&quot;,
+      American control conference, IEEE, 2007, pp. 2296&ndash;2301,
+      <a href=\"https://doi.org/10.1109/ACC.2007.4282788\">doi: 10.1109/ACC.2007.4282788</a>.
+    </td>
+  </tr>
+  <tr>
+    <td>[Seiffer2023]</td>
+    <td>
+      A. Seiffer, M. Frey, F. Gauterin,
+      &quot;Pragmatic and Effective Enhancements for Stanley Path-Tracking Controller by Considering System Delay&quot;,
+      Vehicles 2023, 5, 615&ndash;636,
+      <a href=\"https://doi.org/10.3390/vehicles5020034\">doi: 10.3390/vehicles5020034</a>.
+    </td>
+  </tr>
+  <tr>
     <td>[Schr&ouml;der2009]</td>
     <td>
       Dierk Schr&ouml;der,
-      &quot;Elektrische Antriebe - Regelung von Antriebssystemen&quot;,
-      Springer Heidelberg, 3rd ed., 2009
+      &quot;Elektrische Antriebe &ndash; Regelung von Antriebssystemen&quot;,
+      Springer Heidelberg, 3rd ed., 2009,
       <a href=\"https://doi.org/10.1109/TCST.2021.3103483\">doi: 10.1109/TCST.2021.3103483</a>.
     </td>
   </tr>
