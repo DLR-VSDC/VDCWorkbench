@@ -2,8 +2,8 @@ within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.Components;
 function referenceVelocityByTIPI "Calculate reference velocity using time-independet path interpolation"
   extends Modelica.Icons.Function;
 
-  input Real Path[:,6]; // [sPath, posXPath, posYPath, posPsiPath, vLongPath, kPath]
-  input Real arc_length;
+  input Real Path[:,6] "Path data table (sPath, posXPath, posYPath, posPsiPath, vLongPath, kPath)";
+  input Real arc_length "Current arc length";
   input Real states[6] "Vehicle states (x, y, psi, vx, vy, r)";
 
   input Real lf = 0.1805 "Distance from vehicle's CoG to front axle";

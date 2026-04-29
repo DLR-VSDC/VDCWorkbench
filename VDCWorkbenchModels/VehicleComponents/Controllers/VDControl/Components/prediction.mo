@@ -2,12 +2,12 @@ within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.Components;
 function prediction
   extends Modelica.Icons.Function;
 
-  input Real input_vehStates[6];
-  input Real input_tipiState;
-  input Real input_inputs[2];   // {delta, torque}
-  input Real dt;
-  input Integer N;
-  input Real Path[:,6];         // [sPath, posXPath, posYPath, posPsiPath, vLongPath, kPath]
+  input Real input_vehStates[6] "Vehicle states (x, y, psi, vx, vy, r)";
+  input Real input_tipiState "Current arc length";
+  input Real input_inputs[2] "Vehicle input signals (delta_f, torque)";
+  input Real dt "Prediction time step";
+  input Integer N "Number of prediction steps";
+  input Real Path[:,6] "Path data table (sPath, posXPath, posYPath, posPsiPath, vLongPath, kPath)";
   input Real input_delta_k0;
   input Real input_delta_meas;
   output Real deltaPred[N];
