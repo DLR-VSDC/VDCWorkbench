@@ -2,7 +2,7 @@ within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.GeoPFC;
 block TimeIndependentPathInterpolation "Time independent path interpolation"
   parameter Real e_long_gain=80 "TIPI Controller gain to force e_long to 0";
   parameter Real s_start=0 "Arc length value at start position";
-  parameter String FilePath = ModelicaServices.ExternalReferences.loadResource(
+  parameter String filePath = ModelicaServices.ExternalReferences.loadResource(
     "modelica://VDCWorkbenchModels/Resources/Maps/Techlab2SBahn-NonOpt_TIPI.mat")
     "File where path table information is stored in table 'path_TIPI'";
   parameter Real maxArcLength = 2.312560625428274e+03 "Maximum arc length value on path file";
@@ -11,7 +11,7 @@ block TimeIndependentPathInterpolation "Time independent path interpolation"
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
     columns={2,3,4,5,6},
     tableOnFile=true,
-    fileName=FilePath,
+    fileName=filePath,
     tableName="path_TIPI",
     table=[0,0.846749729869016,4.10764354034983,0.433956908644525,13.3059227591937,0.0252120852893905,-0.414642942073828,6.82957089558341,2.10814240181186,1.38571618511625;
 3.65235398017224,4.08775672912079,5.78899878915736,0.522124956194843,12.4552581006634,0.0235328839332705,2.59158745197394,8.38928290711868,5.58392600626763,3.18871467119604;
