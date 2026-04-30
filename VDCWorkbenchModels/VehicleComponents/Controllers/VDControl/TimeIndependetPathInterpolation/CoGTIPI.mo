@@ -1,7 +1,7 @@
 within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.TimeIndependetPathInterpolation;
 block CoGTIPI "Time-independent path interpolation"
   parameter Real e_long_gain=80 "TIPI Controller gain to force e_long to 0";
-  parameter Real s_start=0 "Arc length value at start position";
+  parameter Modelica.Units.SI.Position s_start=0 "Arc length value at start position";
   parameter String filePath = ModelicaServices.ExternalReferences.loadResource(
     "modelica://VDCWorkbenchModels/Resources/Maps/Techlab2SBahn-NonOpt_TIPI.mat")
     "File where path table pathName is stored" annotation (
@@ -11,7 +11,7 @@ block CoGTIPI "Time-independent path interpolation"
           filter="Matlab files(*.mat)",
           caption="Open data file")));
   parameter String pathName = "path_TIPI" "Table name in filePath" annotation (Dialog(group="Path data"));
-  parameter Real maxArcLength = 2.312560625428274e+03 "Maximum arc length value on path file" annotation (Dialog(group="Path data"));
+  parameter Modelica.Units.SI.Position maxArcLength = 2.312560625428274e+03 "Maximum arc length value on path file" annotation (Dialog(group="Path data"));
   //Can be improved in final version (store in MAT file)
 
   Real sDot "Time derivative of arc length";
