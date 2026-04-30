@@ -1,7 +1,10 @@
 within VDCWorkbenchModels.Examples.VDCWorkbenches;
 model MiniAFMStanleyTD_Racetrack
   extends VehicleDrivetrains.VariantsVehicleDrivetrains.MiniAFMMotor;
-  VehicleComponents.Controllers.VDControl.StanleyControllerTD stanleyController_TD
+  VehicleComponents.Controllers.VDControl.StanleyControllerTD stanleyController_TD(
+    filePath=ModelicaServices.ExternalReferences.loadResource(
+      "modelica://VDCWorkbenchModels/Resources/Maps/RacetrackMini.mat"),
+    pathName="path")
     annotation (Placement(transformation(extent={{20,40},{40,60}})));
 equation
   connect(stanleyController_TD.controlBus, controlBus) annotation (Line(

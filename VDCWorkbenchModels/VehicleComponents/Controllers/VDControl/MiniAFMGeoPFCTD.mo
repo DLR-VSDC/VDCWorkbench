@@ -20,9 +20,9 @@ model MiniAFMGeoPFCTD "Geometry based path following control for the miniAFM"
 
   VDControl.TimeIndependetPathInterpolation.CoGTIPI tIPI(
     e_long_gain=e_long_gain,
-    filePath=ModelicaServices.ExternalReferences.loadResource("modelica://VDCWorkbenchModels/Resources/Maps/RacetrackMini.mat"),
-    maxArcLength=22.737000000000002,
-    pathName="path") "Time-independent path interpolation" annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
+    filePath=filePath,
+    pathName=pathName,
+    maxArcLength=22.737000000000002) "Time-independent path interpolation" annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   VDControl.GeoPFC.MotionDemand motionDemand(
     lambda_eLat=lambda_eLat,
     lambda_del_psi=lambda_del_psi,
