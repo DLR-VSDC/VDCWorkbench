@@ -2,6 +2,16 @@ within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.BaseClasses;
 model BaseVDC "Interface definition for vehicle dynamics controllers"
   extends VehicleInterfaces.Icons.Controller;
 
+  parameter String filePath = ModelicaServices.ExternalReferences.loadResource(
+    "modelica://VDCWorkbenchModels/Resources/Maps/Techlab2SBahn-NonOpt_TIPI.mat")
+    "File where path table pathName is stored" annotation (
+      Dialog(
+        group="Path data",
+        loadSelector(
+          filter="Matlab files(*.mat)",
+          caption="Open path data file")));
+  parameter String pathName = "path_TIPI" "Table name in filePath" annotation (Dialog(group="Path data"));
+
   parameter Modelica.Units.SI.Mass m=1000 "Mass of vehicle"
     annotation(Dialog(group="Vehicle parameters"));
   parameter Modelica.Units.SI.Length lf=1.2 "Distance of CoG to front axle"
