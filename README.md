@@ -17,7 +17,7 @@ Consult the library user's guide for particular versions of the abovementioned p
 ## Tool compatibility 
 The current branch release was developed/tested using following tools.
 - [Dymola 2026x Refresh 1](https://www.3ds.com/products-services/catia/products/dymola/): The library has been developed using Dymola.
-- In progress: to be tested in [Open Modelica v1.26.x](https://www.openmodelica.org/)
+- [OpenModelica v1.26.3 (64-bit)](https://www.openmodelica.org/): The library was tested and is fully compatible to Open Modelica.
 
 ## Bibliography    
 - J. Brembeck, R. de Castro, J. Tobol&aacute;&rcaron; and I. Ebrahimi:
