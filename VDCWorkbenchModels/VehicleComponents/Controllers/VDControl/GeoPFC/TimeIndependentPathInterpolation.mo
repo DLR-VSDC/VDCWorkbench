@@ -55,15 +55,15 @@ block TimeIndependentPathInterpolation "Time independent path interpolation"
 142.441805226717,-6.19265786007913,2.22388688264913,-6.11292011575957,9.86756522245305,0.0134208596442860,-6.70098899529557,5.18050648228814,-5.68432672486269,-0.732732716989888;
 146.094159206890,-2.61549803880688,2.95718950707975,-6.03958878804881,8.72442242775189,0.0293656312921322,-3.33908159031924,5.86861988474307,-1.89191448729452,0.0457591294164352;
 149.746513187062,0.845408269454243,4.10750510596319,-5.84922839853506,7.36354978700530,0.0918326005587445,-0.415984402488600,6.82943246119678,2.10680094139709,1.38557775072961])
-    annotation (Placement(transformation(extent={{30,30},{50,50}})));
+    annotation (Placement(transformation(extent={{40,30},{60,50}})));
 
 protected
   Modelica.Blocks.Interfaces.RealOutput sI_C[3] "Vehicle Position in inertial frame of reference"
     annotation (Placement(
-      transformation(extent={{-10,-70},{-50,-30}})));
+      transformation(extent={{0,-70},{-20,-50}})));
   Modelica.Blocks.Interfaces.RealOutput vI_C[2] "Vehicle speed in inertial frame I"
     annotation (Placement(
-      transformation(extent={{-10,-110},{-50,-70}})));
+      transformation(extent={{0,-100},{-20,-80}})));
 public
   Real sDot "Time derivative of arc length";
   Real tvI_P[2] "Tangent of desired path in inertial frame I (normalized)";
@@ -79,26 +79,23 @@ public
   Modelica.Blocks.Sources.RealExpression realExpression_sDot(y=sDot)
     annotation (Placement(transformation(extent={{-100,30},{-80,50}})));
   Modelica.Blocks.Routing.RealPassThrough sampler
-    annotation (Placement(transformation(extent={{-10,30},{10,50}})));
+    annotation (Placement(transformation(extent={{0,30},{20,50}})));
   Modelica.Blocks.Continuous.Integrator sIntegrator(y_start=s_start)
-    annotation (Placement(transformation(extent={{-66,30},{-46,50}})));
-protected
-  VDCWorkbenchModels.Utilities.Interfaces.MotionDemandBus motionDemandBus
-    annotation (Placement(transformation(extent={{70,-10},{90,10}})));
-public
+    annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
   Modelica.Blocks.Sources.RealExpression realExpression_e_long(y=e_long)
-    annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
+    annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
   Modelica.Blocks.Sources.RealExpression realExpression_e_lat(y=e_lat)
-    annotation (Placement(transformation(extent={{40,-72},{60,-52}})));
-  Utilities.Blocks.Modulo modulo(k=maxArcLength) annotation (Placement(transformation(extent={{-38,30},{-18,50}})));
+    annotation (Placement(transformation(extent={{40,-62},{60,-42}})));
+  Utilities.Blocks.Modulo modulo(k=maxArcLength) annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
   VDCWorkbenchModels.Utilities.Interfaces.ControlBus controlBus annotation (
       Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={100,0})));
   Modelica.Blocks.Interfaces.RealInput v_scl "Down scale vector for velocity "
-    annotation (Placement(transformation(extent={{-140,40},{-100,80}}),
-        iconTransformation(extent={{-140,40},{-100,80}})));
+    annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
 protected
+  VDCWorkbenchModels.Utilities.Interfaces.MotionDemandBus motionDemandBus
+    annotation (Placement(transformation(extent={{70,-10},{90,10}})));
   VehicleInterfaces.Interfaces.ChassisBus chassisBus
     annotation (Placement(transformation(extent={{10,-90},{30,-70}})));
 initial equation
@@ -125,39 +122,39 @@ equation
     terminate("Vehicle reached end of path");
   end if;
 
-connect(Path.u, sampler.y) annotation (Line(
-    points={{28,40},{11,40}},
+  connect(Path.u, sampler.y) annotation (Line(
+    points={{38,40},{21,40}},
     color={0,0,127},
     smooth=Smooth.None));
-  connect(modulo.y, sampler.u) annotation (Line(points={{-17,40},{-12,40}},
+  connect(modulo.y, sampler.u) annotation (Line(points={{-9,40},{-2,40}},
         color={0,0,127}));
-  connect(realExpression_sDot.y, sIntegrator.u) annotation (Line(points={{-79,40},{-68,40}},
+  connect(realExpression_sDot.y, sIntegrator.u) annotation (Line(points={{-79,40},{-62,40}},
         color={0,0,127}));
-  connect(sIntegrator.y, modulo.u) annotation (Line(points={{-45,40},{-40,40}},
+  connect(sIntegrator.y, modulo.u) annotation (Line(points={{-39,40},{-32,40}},
         color={0,0,127}));
-  connect(realExpression_sDot.y, motionDemandBus.s_dot) annotation (Line(points={{-79,40},{-74,40},{-74,-2},{78,-2},{78,0},{80,0}},
+  connect(realExpression_sDot.y, motionDemandBus.s_dot) annotation (Line(points={{-79,40},{-70,40},{-70,-2},{80,-2},{80,0}},
         color={0,0,127}),
       Text(
         string="%second",
-        index=1,
+        index=3,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-  connect(sampler.y, motionDemandBus.arc_length) annotation (Line(points={{11,40},{20,40},{20,0},{80,0}},
+  connect(sampler.y, motionDemandBus.arc_length) annotation (Line(points={{21,40},{30,40},{30,0},{80,0}},
         color={0,0,127}),
       Text(
         string="%second",
-        index=1,
+        index=3,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
   connect(realExpression_e_long.y, motionDemandBus.e_long) annotation (Line(
-        points={{61,-40},{80,-40},{80,0}}, color={0,0,127}),
+        points={{61,-30},{80,-30},{80,0}}, color={0,0,127}),
       Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
   connect(realExpression_e_lat.y, motionDemandBus.e_lat) annotation (Line(
-        points={{61,-62},{82,-62},{82,0},{80,0}}, color={0,0,127}),
+        points={{61,-52},{82,-52},{82,0},{80,0}}, color={0,0,127}),
       Text(
         string="%second",
         index=1,
@@ -167,57 +164,56 @@ connect(Path.u, sampler.y) annotation (Line(
         points={{80,0},{80,-0.1},{100.1,-0.1}},
         color={255,204,51},
         thickness=0.5));
-  connect(Path.y[2], motionDemandBus.y_path) annotation (Line(points={{51,40},{80,40},{80,0}},
+  connect(Path.y[2], motionDemandBus.y_path) annotation (Line(points={{61,40},{80,40},{80,0}},
         color={0,0,127}),
       Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-  connect(Path.y[1], motionDemandBus.x_path) annotation (Line(points={{51,40},{54,40},{54,42},{82,42},{82,0},{80,0}},
+  connect(Path.y[1], motionDemandBus.x_path) annotation (Line(points={{61,40},{64,40},{64,42},{82,42},{82,0},{80,0}},
         color={0,0,127}),
       Text(
         string="%second",
-        index=1,
-        extent={{6,3},{6,3}},
+        index=3,
+        extent={{6,2},{6,2}},
         horizontalAlignment=TextAlignment.Left));
-  connect(Path.y[3], motionDemandBus.psi_path) annotation (Line(points={{51,40},{51,38},{54,38},{54,34},{74,34},{74,0},{80,0}},
+  connect(Path.y[3], motionDemandBus.psi_path) annotation (Line(points={{61,40},{64,40},{64,34},{74,34},{74,0},{80,0}},
         color={0,0,127}),
       Text(
         string="%second",
-        index=1,
-        extent={{6,3},{6,3}},
+        index=3,
+        extent={{6,2},{6,2}},
         horizontalAlignment=TextAlignment.Left));
-  connect(Path.y[4], motionDemandBus.v_path) annotation (Line(points={{51,40},{54,40},{54,36},{76,36},{76,0},{80,0}},
+  connect(Path.y[4], motionDemandBus.v_path) annotation (Line(points={{61,40},{66,40},{66,36},{76,36},{76,0},{80,0}},
         color={0,0,127}),
       Text(
         string="%second",
-        index=1,
-        extent={{6,3},{6,3}},
+        index=3,
+        extent={{6,2},{6,2}},
         horizontalAlignment=TextAlignment.Left));
-  connect(Path.y[5], motionDemandBus.kappa_path) annotation (Line(points={{51,40},{51,38},{78,38},{78,0},{80,0}},
+  connect(Path.y[5], motionDemandBus.kappa_path) annotation (Line(points={{61,40},{68,40},{68,38},{78,38},{78,0},{80,0}},
         color={0,0,127}),
       Text(
         string="%second",
-        index=1,
-        extent={{6,3},{6,3}},
+        index=3,
+        extent={{6,2},{6,2}},
         horizontalAlignment=TextAlignment.Left));
   connect(chassisBus, controlBus.chassisBus) annotation (Line(
       points={{20,-80},{100.1,-80},{100.1,-0.1}},
       color={255,204,51},
       thickness=0.5));
-  connect(sI_C[1], chassisBus.position_x) annotation (Line(points={{-30,-56.6667},{18,-56.6667},{18,-80},{20,-80}},
+  connect(sI_C[1], chassisBus.position_x) annotation (Line(points={{-10,-63.3333},{18,-63.3333},{18,-80},{20,-80}},
         color={0,0,127}));
-  connect(sI_C[2], chassisBus.position_y) annotation (Line(points={{-30,-50},{20,-50},{20,-80}},
+  connect(sI_C[2], chassisBus.position_y) annotation (Line(points={{-10,-60},{20,-60},{20,-80}},
         color={0,0,127}));
-  connect(sI_C[3], chassisBus.yawAngle) annotation (Line(points={{-30,-43.3333},{22,-43.3333},{22,-80},{20,-80}},
+  connect(sI_C[3], chassisBus.yawAngle) annotation (Line(points={{-10,-56.6667},{22,-56.6667},{22,-80},{20,-80}},
         color={0,0,127}));
-  connect(vI_C[1], chassisBus.velocity_dx) annotation (Line(points={{-30,-95},{-30,-94},{20,-94},{20,-80}},
-        color={0,0,127}));
-  connect(vI_C[2], chassisBus.velocity_dy) annotation (Line(points={{-30,-85},{-30,-84},{18,-84},{18,-80},{20,-80}},
-        color={0,0,127}));
+  connect(vI_C[1], chassisBus.velocity_dx) annotation (Line(points={{-10,-92.5},{20,-92.5},{20,-80}}, color={0,0,127}));
+  connect(vI_C[2], chassisBus.velocity_dy) annotation (Line(points={{-10,-87.5},{18,-87.5},{18,-80},{20,-80}}, color={0,0,127}));
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+    Icon(
+      coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
       graphics={
         Polygon(
           points={{0,100},{100,-100},{-100,-100},{0,100}},
@@ -253,10 +249,11 @@ connect(Path.u, sampler.y) annotation (Line(
           extent={{-10,-50},{70,-80}},
           textColor={0,0,0},
           textString="TIPI")}),
-    Diagram(coordinateSystem(preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}}), graphics={
+    Diagram(
+      coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,100}}),
+      graphics={
         Text(
-          extent={{0,100},{80,50}},
+          extent={{10,100},{90,50}},
           textColor={28,108,200},
           textString="Input arc length
 'X-Position        '
