@@ -7,7 +7,7 @@ block TimeIndependentPathInterpolation "Time independent path interpolation"
     "File where path table information is stored in table 'path_TIPI'";
   parameter Real maxArcLength = 2.312560625428274e+03 "Maximum arc length value on path file";
   //Can be improved in final version (store in MAT file)
-  Modelica.Blocks.Tables.CombiTable1Ds Path(
+  Modelica.Blocks.Tables.CombiTable1Ds combiTablePath(
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
     columns={2,3,4,5,6},
     tableOnFile=true,
@@ -111,21 +111,21 @@ equation
   // Calculate reference velocity
   //sDot=(cos(lambda[3]-sI_C[3])*vC_C[1]+sin(lambda[3]-sI_C[3])*vC_C[2])/(1-e_lat*kappa)+e_long_gain*e_long;
   sDot=(cos(lambda[3])*vI_C[1]+sin(lambda[3])*vI_C[2])/(1-e_lat*kappa)+e_long_gain*e_long;
-  //lambda[:] = Path.y[:];
-  lambda[1] = Path.y[1] "x-position";
-  lambda[2] = Path.y[2] "y-position";
-  lambda[3] = Path.y[3] "psi orientation";
-  lambda[4] = Path.y[4]*v_scl "scaled long speed";
-  lambda[5] = Path.y[5] "curvature";
-  kappa =Path.y[5];
+  //lambda[:] = combiTablePath.y[:];
+  lambda[1] = combiTablePath.y[1] "x-position";
+  lambda[2] = combiTablePath.y[2] "y-position";
+  lambda[3] = combiTablePath.y[3] "psi orientation";
+  lambda[4] = combiTablePath.y[4]*v_scl "scaled long speed";
+  lambda[5] = combiTablePath.y[5] "curvature";
+  kappa = combiTablePath.y[5];
   if sIntegrator.y > (maxArcLength-1.0) then
     terminate("Vehicle reached end of path");
   end if;
 
-  connect(Path.u, sampler.y) annotation (Line(
-    points={{38,40},{21,40}},
-    color={0,0,127},
-    smooth=Smooth.None));
+  connect(combiTablePath.u, sampler.y) annotation (Line(
+      points={{38,40},{21,40}},
+      color={0,0,127},
+      smooth=Smooth.None));
   connect(modulo.y, sampler.u) annotation (Line(points={{-9,40},{-2,40}},
         color={0,0,127}));
   connect(realExpression_sDot.y, sIntegrator.u) annotation (Line(points={{-79,40},{-62,40}},
@@ -164,35 +164,35 @@ equation
         points={{80,0},{80,-0.1},{100.1,-0.1}},
         color={255,204,51},
         thickness=0.5));
-  connect(Path.y[2], motionDemandBus.y_path) annotation (Line(points={{61,40},{80,40},{80,0}},
+  connect(combiTablePath.y[2], motionDemandBus.y_path) annotation (Line(points={{61,40},{80,40},{80,0}},
         color={0,0,127}),
       Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-  connect(Path.y[1], motionDemandBus.x_path) annotation (Line(points={{61,40},{64,40},{64,42},{82,42},{82,0},{80,0}},
+  connect(combiTablePath.y[1], motionDemandBus.x_path) annotation (Line(points={{61,40},{64,40},{64,42},{82,42},{82,0},{80,0}},
         color={0,0,127}),
       Text(
         string="%second",
         index=3,
         extent={{6,2},{6,2}},
         horizontalAlignment=TextAlignment.Left));
-  connect(Path.y[3], motionDemandBus.psi_path) annotation (Line(points={{61,40},{64,40},{64,34},{74,34},{74,0},{80,0}},
+  connect(combiTablePath.y[3], motionDemandBus.psi_path) annotation (Line(points={{61,40},{64,40},{64,34},{74,34},{74,0},{80,0}},
         color={0,0,127}),
       Text(
         string="%second",
         index=3,
         extent={{6,2},{6,2}},
         horizontalAlignment=TextAlignment.Left));
-  connect(Path.y[4], motionDemandBus.v_path) annotation (Line(points={{61,40},{66,40},{66,36},{76,36},{76,0},{80,0}},
+  connect(combiTablePath.y[4], motionDemandBus.v_path) annotation (Line(points={{61,40},{66,40},{66,36},{76,36},{76,0},{80,0}},
         color={0,0,127}),
       Text(
         string="%second",
         index=3,
         extent={{6,2},{6,2}},
         horizontalAlignment=TextAlignment.Left));
-  connect(Path.y[5], motionDemandBus.kappa_path) annotation (Line(points={{61,40},{68,40},{68,38},{78,38},{78,0},{80,0}},
+  connect(combiTablePath.y[5], motionDemandBus.kappa_path) annotation (Line(points={{61,40},{68,40},{68,38},{78,38},{78,0},{80,0}},
         color={0,0,127}),
       Text(
         string="%second",
