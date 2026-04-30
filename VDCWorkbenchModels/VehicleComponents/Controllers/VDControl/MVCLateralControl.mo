@@ -1,6 +1,8 @@
 within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl;
 model MVCLateralControl "Inversion based vehicle dynamics control"
-  extends BaseClasses.BaseVDC;
+  extends BaseClasses.BaseVDC(
+    filePath=ModelicaServices.ExternalReferences.loadResource("modelica://VDCWorkbenchModels/Resources/Maps/Techlab2SBahn-NonOpt.mat"),
+    pathName="path");
 
   parameter Modelica.Units.SI.AngularVelocity omega_n = 2*3.14*0.5 "Desired bandwidth of v-controller" annotation(Dialog(group="Velocity controller parameters"));
   parameter Real vctrl_Kp = 2*0.7*omega_n*m*car_r "P-gain for v-control" annotation(Dialog(group="Velocity controller parameters"));
@@ -35,9 +37,8 @@ model MVCLateralControl "Inversion based vehicle dynamics control"
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
   Modelica.Blocks.Sources.CombiTimeTable parametricPath(
     tableOnFile=true,
-    tableName="path",
-    fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://VDCWorkbenchModels/Resources/Maps/Techlab2SBahn-NonOpt.mat"),
+    tableName=pathName,
+    fileName=filePath,
     verboseRead=true,
     columns={1,2,3,4,5,6,7})
     "Parametric path description with extra time calculated from reference velocity in first column"
@@ -55,7 +56,6 @@ protected
   VDCWorkbenchModels.Utilities.Interfaces.ElectricDriveControlBus electricMotorControlBusRR
     annotation (Placement(transformation(extent={{70,-70},{90,-50}}),
         iconTransformation(extent={{-130,-30},{-110,-10}})));
-protected
   Utilities.Interfaces.MotionDemandBus motionDemandBus
     annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=0,
         origin={-58,90}),
