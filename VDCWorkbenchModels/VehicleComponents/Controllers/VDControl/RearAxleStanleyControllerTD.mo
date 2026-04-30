@@ -27,7 +27,9 @@ model RearAxleStanleyControllerTD
     e_long_gain=e_long_gain,
     s_start=s_start,
     t_ff=t_ff,
-    lr=lr) "Time-independent path interpolation" annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
+    lr=lr,
+    filePath=filePath,
+    pathName=pathName) "Time-independent path interpolation" annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   VDControl.StanleyBased.RearAxleStanleyControlTD stanleyControl(
     K=k,
     v_eps=v_eps,
