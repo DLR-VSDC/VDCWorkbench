@@ -2,6 +2,16 @@ within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.BaseClasses;
 model BaseSubBusses "Base class for controllers with sub-busses"
   extends VehicleInterfaces.Icons.Controller;
 
+  parameter String filePath = ModelicaServices.ExternalReferences.loadResource(
+    "modelica://VDCWorkbenchModels/Resources/Maps/RacetrackMini.mat")
+    "File where path table pathName is stored" annotation (
+      Dialog(
+        group="Path data",
+        loadSelector(
+          filter="Matlab files(*.mat)",
+          caption="Open path data file")));
+  parameter String pathName = "path" "Table name in filePath" annotation (Dialog(group="Path data"));
+
   parameter Modelica.Units.SI.Mass m=1000 "Mass of vehicle"
     annotation(Dialog(tab="Vehicle parameters"));
   parameter Modelica.Units.SI.Length lf=1.2 "Distance of CoG to front axle"

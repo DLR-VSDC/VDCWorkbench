@@ -1,7 +1,10 @@
 within VDCWorkbenchModels.Examples.VDCWorkbenches;
 model Techlab2TrainStationWessling_MVCLateral "Vehicle architecture for Motor Vehicles Challenge with vehicle dynamics control based on model inversion"
   extends VehicleArchitectures.VDCWorkbench2025(
-    redeclare VehicleComponents.Controllers.VDControl.MVCLateralControl controller);
+    redeclare VehicleComponents.Controllers.VDControl.MVCLateralControl controller(
+      filePath=ModelicaServices.ExternalReferences.loadResource(
+        "modelica://VDCWorkbenchModels/Resources/Maps/Techlab2SBahn-NonOpt.mat"),
+      pathName="path"));
   annotation (
     experiment(
       StopTime=136,

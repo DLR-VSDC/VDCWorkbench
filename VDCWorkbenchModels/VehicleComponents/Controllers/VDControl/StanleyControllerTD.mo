@@ -25,7 +25,9 @@ model StanleyControllerTD
   VDControl.TimeIndependetPathInterpolation.FrontAxleTIPI tIPI(
     e_long_gain=e_long_gain,
     s_start=s_start,
-    lf=lf) "Time-independent path interpolation" annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
+    lf=lf,
+    filePath=filePath,
+    pathName=pathName) "Time-independent path interpolation" annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   VDControl.StanleyBased.StanleyControlTD stanleyControl(
     k=k,
     v_eps=v_eps,
