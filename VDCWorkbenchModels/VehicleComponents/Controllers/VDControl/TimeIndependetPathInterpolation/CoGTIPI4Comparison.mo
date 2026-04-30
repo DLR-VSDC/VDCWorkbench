@@ -1,18 +1,38 @@
 within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.TimeIndependetPathInterpolation;
 block CoGTIPI4Comparison "Time independent path interpolation"
   parameter Real e_long_gain=80 "TIPI Controller gain to force e_long to 0";
-  parameter Real s_start=0 "Arc length value at start position";
-  parameter String FilePath = ModelicaServices.ExternalReferences.loadResource(
+  parameter Modelica.Units.SI.Position s_start=0 "Arc length value at start position";
+  parameter String filePath = ModelicaServices.ExternalReferences.loadResource(
     "modelica://VDCWorkbenchModels/Resources/Maps/RacetrackMini.mat")
-    "File where path table information is stored in table 'path'";
-  parameter Real maxArcLength = 22.737000000000002 "Maximum arc length value on path file";
+    "File where path table pathName is stored" annotation (
+      Dialog(
+        group="Path data",
+        loadSelector(
+          filter="Matlab files(*.mat)",
+          caption="Open data file")));
+  parameter String pathName = "path" "Table name in filePath" annotation (Dialog(group="Path data"));
+  parameter Modelica.Units.SI.Position maxArcLength = 22.737000000000002 "Maximum arc length value on path file" annotation (Dialog(group="Path data"));
   //Can be improved in final version (store in MAT file)
+
+  Real sDot "Time derivative of arc length";
+  Real tvI_P[2] "Tangent of desired path in inertial frame I (normalized)";
+  Real nvI_P[2]
+    "Vector normal to tvI_P; rotated tvI_P +90° in inertial frame I (normalized)";
+  //Real vI_C[2] "Vehicle speed in inertial frame of reference"; // -> Not considered since this value is a direct input
+  Real e[2] "Distance vector from path reference to vehicle position in inertial frame I";
+  Real e_lat "Distance of vehicle to path in direction of nvI_P";
+  Real e_long "Distance of vehicle to path in direction of nvI_P";
+  Real e_psi "Orientation error of the vehicle";
+  Real kappa
+    "Curvature of path, derivative of psi_ref with respect to parameter s";
+  Real lambda[5];
+
   Modelica.Blocks.Tables.CombiTable1Ds Path(
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
     columns={2,3,4,5,6},
     tableOnFile=true,
-    fileName=FilePath,
-    tableName="path",
+    fileName=filePath,
+    tableName=pathName,
     table=[0,0.846749729869016,4.10764354034983,0.433956908644525,13.3059227591937,0.0252120852893905,-0.414642942073828,6.82957089558341,2.10814240181186,1.38571618511625;
 3.65235398017224,4.08775672912079,5.78899878915736,0.522124956194843,12.4552581006634,0.0235328839332705,2.59158745197394,8.38928290711868,5.58392600626763,3.18871467119604;
 7.30470796034448,7.17055071659482,7.74541529641686,0.609854249113591,11.5420679254073,0.0252248416014213,5.45230674782195,10.2046098116547,8.88879468536769,5.28622078117906;
@@ -65,18 +85,6 @@ protected
     annotation (Placement(
       transformation(extent={{-10,-110},{-50,-70}})));
 public
-  Real sDot "Time derivative of arc length";
-  Real tvI_P[2] "Tangent of desired path in inertial frame I (normalized)";
-  Real nvI_P[2]
-    "Vector normal to tvI_P; rotated tvI_P +90° in inertial frame I (normalized)";
-  //Real vI_C[2] "Vehicle speed in inertial frame of reference"; // -> Not considered since this value is a direct input
-  Real e[2] "Distance vector from path reference to vehicle position in inertial frame I";
-  Real e_lat "Distance of vehicle to path in direction of nvI_P";
-  Real e_long "Distance of vehicle to path in direction of nvI_P";
-  Real e_psi "Orientation error of the vehicle";
-  Real kappa
-    "Curvature of path, derivative of psi_ref with respect to parameter s";
-  Real lambda[5];
   Modelica.Blocks.Sources.RealExpression realExpression_sDot(y=sDot)
     annotation (Placement(transformation(extent={{-100,30},{-80,50}})));
   Modelica.Blocks.Routing.RealPassThrough sampler

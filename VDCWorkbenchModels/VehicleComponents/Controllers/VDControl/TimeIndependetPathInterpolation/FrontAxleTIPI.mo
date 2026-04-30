@@ -2,29 +2,19 @@ within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.TimeIndependet
 model FrontAxleTIPI "Front axle time independent path interpolation"
   parameter Real e_long_gain=80 "TIPI Controller gain to force e_long to 0";
   parameter Modelica.Units.SI.Position s_start=0 "Arc length value at start position";
-  parameter String FilePath = ModelicaServices.ExternalReferences.loadResource(
+  parameter String filePath = ModelicaServices.ExternalReferences.loadResource(
     "modelica://VDCWorkbenchModels/Resources/Maps/RacetrackMini.mat")
-    "File where path table information is stored in table 'path'";
+    "File where path table pathName is stored" annotation (
+      Dialog(
+        group="Path data",
+        loadSelector(
+          filter="Matlab files(*.mat)",
+          caption="Open data file")));
+  parameter String pathName = "path" "Table name in filePath" annotation (Dialog(group="Path data"));
+  parameter Modelica.Units.SI.Position maxArcLength = 22.737000000000002 "Maximum arc length value on path file" annotation (Dialog(group="Path data"));
+
   parameter Modelica.Units.SI.Length lf =0.1805 "Distance of CoG to front axle";
 
-  parameter Modelica.Units.SI.Position maxArcLength = 22.737000000000002 "Maximum arc length value on path file";
-
-  Modelica.Blocks.Tables.CombiTable1Ds Path(
-    smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
-    columns={2,3,4,5,6},
-    tableOnFile=true,
-    fileName=FilePath,
-    tableName="path")
-    annotation (Placement(transformation(extent={{30,30},{50,50}})));
-
-protected
-  Modelica.Blocks.Interfaces.RealOutput sI_C[3] "Vehicle Position in inertial frame of reference"
-    annotation (Placement(
-      transformation(extent={{-10,-70},{-50,-30}})));
-  Modelica.Blocks.Interfaces.RealOutput vI_C[2] "Vehicle speed in inertial frame I"
-    annotation (Placement(
-      transformation(extent={{-10,-110},{-50,-70}})));
-public
   Real sDot "Time derivative of arc length";
   Real tvI_P[2] "Tangent of desired path in inertial frame I (normalized)";
   Real nvI_P[2]
@@ -37,6 +27,23 @@ public
     "Curvature of path, derivative of psi_ref with respect to parameter s";
   Real lambda[5];
   Real sI_front[2] "Front axle position in inertial frame";
+
+  Modelica.Blocks.Tables.CombiTable1Ds Path(
+    smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
+    columns={2,3,4,5,6},
+    tableOnFile=true,
+    fileName=filePath,
+    tableName=pathName)
+    annotation (Placement(transformation(extent={{30,30},{50,50}})));
+
+protected
+  Modelica.Blocks.Interfaces.RealOutput sI_C[3] "Vehicle Position in inertial frame of reference"
+    annotation (Placement(
+      transformation(extent={{-10,-70},{-50,-30}})));
+  Modelica.Blocks.Interfaces.RealOutput vI_C[2] "Vehicle speed in inertial frame I"
+    annotation (Placement(
+      transformation(extent={{-10,-110},{-50,-70}})));
+public
   Modelica.Blocks.Sources.RealExpression realExpression_sDot(y=sDot)
     annotation (Placement(transformation(extent={{-100,30},{-80,50}})));
   Modelica.Blocks.Routing.RealPassThrough sampler
