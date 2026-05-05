@@ -8,7 +8,7 @@ protected
 public
   SMArtInt.Blocks.EvaluateSimpleFeedForwardNeuralNetwork
     evaluateSimpleFeedForwardNeuralNetwork(
-    pathToTfLiteFile=ModelicaServices.ExternalReferences.loadResource(
+    pathToAIModel=ModelicaServices.ExternalReferences.loadResource(
       "modelica://VDCWorkbenchModels/Resources/DRL_Agents/residualDRLgeoPFC.onnx"),
     numberOfInputs=32,
     numberOfOutputs=2)
