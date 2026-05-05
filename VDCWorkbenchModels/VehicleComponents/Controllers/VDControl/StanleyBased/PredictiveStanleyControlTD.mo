@@ -1,6 +1,8 @@
 within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.StanleyBased;
 model PredictiveStanleyControlTD "Time-discrete predictive Stanley lateral control law"
   extends BaseClasses.BaseStanley;
+  import Modelica.Math.{cos,sin,atan,atan2};
+
   parameter Real k = 5 "Stanley gain";
   parameter Modelica.Units.SI.Velocity v_eps = 0.1  "Small velocity to avoid division by zero";
   parameter Real k_d_yaw = 0.14 "Factor for yaw rate related damping";
@@ -43,12 +45,12 @@ model PredictiveStanleyControlTD "Time-discrete predictive Stanley lateral contr
   // parameter Real maxArc = pathData[nPath, 1];
 
 public
-  Real x_front, y_front;
   Real e_lat;
+  Real x_front, y_front;
+  Modelica.Units.SI.Angle e_psi;
   Real yawRate_path;
   Real delta_k0;
   Real delta_raw;
-  Modelica.Units.SI.Angle e_psi;
   Modelica.Units.SI.Angle delta_yaw;
   Modelica.Units.SI.Angle delta_steer;
   Modelica.Units.SI.Angle dpsi;
@@ -78,28 +80,27 @@ algorithm
 
   when sample(0, Ts) then
     // set coordinates to center of front axle
-    x_front :=xveh + lf*cos(psiveh);
-    y_front :=yveh + lf*sin(psiveh);
+    x_front := xveh + lf*cos(psiveh);
+    y_front := yveh + lf*sin(psiveh);
 
     // calc errors
-    e_lat :=-Modelica.Math.sin(psi_path)*(x_path - x_front) + Modelica.Math.cos(
-       psi_path)*(y_path - y_front);
+    e_lat := -(x_path - x_front)*sin(psi_path) + (y_path - y_front)*cos(psi_path);
 
     // Slip angle compensation
-    yawRate_path := vveh_long*kappa_path;
-    psi_ss := (m/(C_Tire*(1 + lf/lr)))*vveh_long*yawRate_path;
+    yawRate_path := vveh_long * kappa_path;
+    psi_ss := m / (C_Tire * (1 + lf/lr)) * vveh_long * yawRate_path;
     dpsi := psi_path - psiveh - psi_ss;
-    e_psi := Modelica.Math.atan2(Modelica.Math.sin(dpsi), Modelica.Math.cos(dpsi));
+    e_psi := atan2(sin(dpsi), cos(dpsi));
 
     // yaw rate damping
-    delta_yaw := k_d_yaw*(yawRate_path - yaw_rate);
+    delta_yaw := k_d_yaw * (yawRate_path - yaw_rate);
 
     // steer response damping
     delta_steer := k_d_steer * (delta_km1 - delta_km2);
 
     // Stanley control law
-    delta_k0 := e_psi + Modelica.Math.atan(k*e_lat/(vveh_long + v_eps)) + delta_yaw + delta_steer;
-    delta_k0 := min(max(delta_k0, -deltaMax), deltaMax);
+    delta_k0 := e_psi + atan(k * e_lat/(vveh_long + v_eps)) + delta_yaw + delta_steer;
+    delta_k0 := min(deltaMax, max(-deltaMax, delta_k0));
 
     torque := min(vctr_TorqueMax, max(-vctr_TorqueMax, K_vctr*(v_path - vveh_long)));
 
@@ -108,9 +109,10 @@ algorithm
 
     // prediction part of model
     if use_prediction then
-      vehStates := {xveh,yveh,psiveh,vveh_long,vveh_lat,yaw_rate};
-      inputs :={delta_k0, torque};
-      delta_raw :=weights[1]*delta_k0 + weights[2:(N + 1)]*Components.prediction(
+      vehStates := {xveh, yveh, psiveh, vveh_long, vveh_lat, yaw_rate};
+      inputs := {delta_k0, torque};
+
+      delta_raw := weights[1]*delta_k0 + weights[2:(N + 1)]*Components.prediction(
         vehStates,
         arcLength,
         inputs,
@@ -123,7 +125,7 @@ algorithm
       delta_raw := delta_k0;
     end if;
 
-    delta :=min(max(delta_raw, -deltaMax), deltaMax);
+    delta := min(deltaMax, max(-deltaMax, delta_raw));
 
   end when;
 

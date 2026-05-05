@@ -1,6 +1,8 @@
 within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.StanleyBased;
 model StanleyControlTD "Time-discrete classic Stanley lateral control law"
   extends BaseClasses.BaseStanley;
+  import Modelica.Math.{cos,sin,atan,atan2};
+
   parameter Real k = 5 "Stanley gain";
   parameter Modelica.Units.SI.Velocity v_eps = 0.1  "Small velocity to avoid division by zero";
   parameter Real k_d_yaw = 0.14 "Factor for yaw rate related damping";
@@ -20,10 +22,10 @@ model StanleyControlTD "Time-discrete classic Stanley lateral control law"
 
 public
   Real e_lat;
-  Real delta_raw;
-  Real x_front,y_front;
   Real e_psi;
+  Real x_front, y_front;
   Real yawRate_path;
+  Real delta_raw;
   Real delta_yaw;
   Real delta_steer;
   Real dpsi;
@@ -39,14 +41,13 @@ algorithm
     y_front :=yveh + lf*sin(psiveh);
 
     // calc errors
-    e_lat :=-Modelica.Math.sin(psi_path)*(x_path - x_front) + Modelica.Math.cos(
-       psi_path)*(y_path - y_front);
+    e_lat := -(x_path - x_front)*sin(psi_path) + (y_path - y_front)*cos(psi_path);
 
     // Slip angle compensation
     yawRate_path := vveh_long * kappa_path;
-    psi_ss := (m / (C_Tire * (1 + lf / lr))) * vveh_long * yawRate_path;
+    psi_ss := m / (C_Tire * (1 + lf/lr)) * vveh_long * yawRate_path;
     dpsi := psi_path - psiveh - psi_ss;
-    e_psi := Modelica.Math.atan2(Modelica.Math.sin(dpsi), Modelica.Math.cos(dpsi));
+    e_psi := atan2(sin(dpsi), cos(dpsi));
 
     // yaw rate damping
     delta_yaw := k_d_yaw * (yawRate_path - yaw_rate);
@@ -55,10 +56,10 @@ algorithm
     delta_steer := k_d_steer * (delta_km1 - delta_km2);
 
     // Stanley control law
-    delta_raw :=e_psi + Modelica.Math.atan(k*e_lat/(vveh_long + v_eps)) + delta_yaw + delta_steer;
-    delta :=min(max(delta_raw, -deltaMax), deltaMax);
+    delta_raw := e_psi + atan(k*e_lat/(vveh_long + v_eps)) + delta_yaw + delta_steer;
+    delta := min(deltaMax, max(-deltaMax, delta_raw));
 
-    torque :=max(- vctrl_TorqueMax, min(vctrl_TorqueMax, K_vctrl*(v_path - vveh_long)));
+    torque := min(vctrl_TorqueMax, max(-vctrl_TorqueMax, K_vctrl*(v_path - vveh_long)));
 
     delta_km2 := delta_km1;
     delta_km1 := delta;
