@@ -11,7 +11,7 @@ model StanleyControl "Classic Stanley lateral control law"
   parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
 
   parameter Real K_vctrl = 0.5 "Gain of torque control" annotation (Dialog(group="Torque controller"));
-  parameter Modelica.Units.SI.Torque vctrl_TorqueMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
+  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
 
   parameter Modelica.Units.SI.Mass m = 7.151 "Vehicle mass" annotation(Dialog(group="Vehicle parameters"));
   parameter Modelica.Units.SI.Length lf = 0.1805 "Distance of CoG to front axle" annotation(Dialog(group="Vehicle parameters"));
@@ -52,7 +52,7 @@ equation
   delta_raw = e_psi + atan(k * e_lat/(vveh_long + v_eps)) + delta_yaw; // + delta_steer;
   delta = min(deltaMax, max(-deltaMax, delta_raw));
 
-  torque = min(vctrl_TorqueMax, max(-vctrl_TorqueMax, K_vctrl*(v_path - vveh_long)));
+  torque = min(tauDriveMax, max(-tauDriveMax, K_vctrl*(v_path - vveh_long)));
 
   annotation (
     Icon(

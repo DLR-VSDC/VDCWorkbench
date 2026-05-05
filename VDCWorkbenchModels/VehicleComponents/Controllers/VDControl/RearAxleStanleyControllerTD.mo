@@ -16,7 +16,7 @@ model RearAxleStanleyControllerTD
   parameter Real k_d_steer = 0.0 "Factor penalizing rate of steering angle change";
   parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
   parameter Real K_vctrl = 0.5 "Gain of torque control" annotation (Dialog(group="Torque controller"));
-  parameter Modelica.Units.SI.Torque vctrl_TorqueMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
+  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
 
   parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
@@ -37,7 +37,7 @@ model RearAxleStanleyControllerTD
     k_d_steer=k_d_steer,
     deltaMax=deltaMax,
     K_vctrl=K_vctrl,
-    vctrl_TorqueMax=vctrl_TorqueMax,
+    tauDriveMax=tauDriveMax,
     Ts=Ts,
     m=m,
     lf=lf,
