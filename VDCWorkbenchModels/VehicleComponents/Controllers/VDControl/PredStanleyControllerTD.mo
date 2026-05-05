@@ -25,7 +25,7 @@ model PredStanleyControllerTD
     annotation(Dialog(enable=use_prediction, group="Prediction horizon (if use_prediction = true)"));
 
   parameter Real K_vctr = 0.5 "Gain of torque control" annotation (Dialog(group="Torque controller"));
-  parameter Modelica.Units.SI.Torque vctr_TorqueMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
+  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
   parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
   parameter Real C_Tire = 150 "Tire stiffnes for slip angle compensation"
@@ -44,7 +44,7 @@ model PredStanleyControllerTD
     k_d_steer=k_d_steer,
     deltaMax=deltaMax,
     K_vctr=K_vctr,
-    vctr_TorqueMax=vctr_TorqueMax,
+    tauDriveMax=tauDriveMax,
     Ts=Ts,
     m=m,
     lf=lf,
