@@ -11,7 +11,7 @@ model RearAxleStanleyControl "Rear axle Stanley lateral control law"
   parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
 
   parameter Real K_vctrl = 0.5 "P gain of velocity controller" annotation (Dialog(group="Torque controller"));
-  parameter Modelica.Units.SI.Torque vctrl_TorqueMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
+  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
 
   parameter Modelica.Units.SI.Mass m = 7.151 "Vehicle mass" annotation(Dialog(group="Vehicle parameters"));
   parameter Modelica.Units.SI.Length lf = 0.1805 "Distance of CoG to front axle" annotation(Dialog(group="Vehicle parameters"));
@@ -61,7 +61,7 @@ equation
   theta_r_star = atan2( sin(psi_path + theta_ss_r - psiveh), cos(psi_path + theta_ss_r - psiveh) );
 
   // feed forward control
-  delta_ff = atan( (wheelbase*kappa_ff - sin(theta_ss_r)) / cos(theta_ss_r) );
+  delta_ff = atan((wheelbase*kappa_ff - sin(theta_ss_r)) / cos(theta_ss_r));
 
   // yaw rate damping
   delta_yaw = k_d_yaw * (yawRate_path - yaw_rate) + theta_ss_f;
@@ -73,7 +73,7 @@ equation
   delta_raw = delta_ff + theta_r_star + atan(k * e_lat/(vveh_long + v_eps)) + delta_yaw; // + delta_steer
   delta = min(deltaMax, max(-deltaMax, delta_raw));
 
-  torque = min(vctrl_TorqueMax, max(-vctrl_TorqueMax, K_vctrl*(v_path - vveh_long)));
+  torque = min(tauDriveMax, max(-tauDriveMax, K_vctrl*(v_path - vveh_long)));
 
   connect(kappa_ff, motionDemandBus.kappa_ff) annotation (Line(points={{-30,-80},{10,-80},{10,30}},
         color={0,0,127}),

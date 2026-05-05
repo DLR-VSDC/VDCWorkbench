@@ -11,7 +11,7 @@ model StanleyControlTD "Time-discrete classic Stanley lateral control law"
   parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
 
   parameter Real K_vctrl = 0.5 "Gain of torque control" annotation (Dialog(group="Torque controller"));
-  parameter Modelica.Units.SI.Torque vctrl_TorqueMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
+  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
 
   parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
@@ -59,7 +59,7 @@ algorithm
     delta_raw := e_psi + atan(k*e_lat/(vveh_long + v_eps)) + delta_yaw + delta_steer;
     delta := min(deltaMax, max(-deltaMax, delta_raw));
 
-    torque := min(vctrl_TorqueMax, max(-vctrl_TorqueMax, K_vctrl*(v_path - vveh_long)));
+    torque := min(tauDriveMax, max(-tauDriveMax, K_vctrl*(v_path - vveh_long)));
 
     delta_km2 := delta_km1;
     delta_km1 := delta;

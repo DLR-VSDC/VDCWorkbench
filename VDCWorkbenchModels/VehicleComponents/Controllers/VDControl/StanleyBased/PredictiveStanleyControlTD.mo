@@ -11,7 +11,7 @@ model PredictiveStanleyControlTD "Time-discrete predictive Stanley lateral contr
   parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
 
   parameter Real K_vctr = 0.5 "P gain of velocity controller" annotation (Dialog(group="Torque controller"));
-  parameter Modelica.Units.SI.Torque vctr_TorqueMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
+  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
 
   parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
@@ -102,7 +102,7 @@ algorithm
     delta_k0 := e_psi + atan(k * e_lat/(vveh_long + v_eps)) + delta_yaw + delta_steer;
     delta_k0 := min(deltaMax, max(-deltaMax, delta_k0));
 
-    torque := min(vctr_TorqueMax, max(-vctr_TorqueMax, K_vctr*(v_path - vveh_long)));
+    torque := min(tauDriveMax, max(-tauDriveMax, K_vctr*(v_path - vveh_long)));
 
     delta_km2 := delta_km1;
     delta_km1 := delta;
