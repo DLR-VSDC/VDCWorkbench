@@ -11,7 +11,7 @@ model RearAxleStanleyControlTD "Time-discrete rear axle Stanley lateral control 
   parameter Modelica.Units.SI.Angle deltaMax = 0.3 "Steering saturation";
 
   parameter Real K_vctrl = 0.5 "P gain of velocity controller" annotation (Dialog(group="Torque controller"));
-  parameter Modelica.Units.SI.Torque vctrl_TorqueMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
+  parameter Modelica.Units.SI.Torque tauDriveMax = 0.3 "Torque limit" annotation (Dialog(group="Torque controller"));
 
   parameter Modelica.Units.SI.Time Ts = 0.05 "Controller sample time";
 
@@ -65,10 +65,10 @@ algorithm
 
     e_lat := -(xf_ref - x_front)*sin(psi_f_ref) + (yf_ref - y_front)*cos(psi_f_ref);
 
-    theta_r_star := atan2( sin(psi_path + theta_ss_r - psiveh), cos(psi_path + theta_ss_r - psiveh) );
+    theta_r_star := atan2(sin(psi_path + theta_ss_r - psiveh), cos(psi_path + theta_ss_r - psiveh));
 
     // feed forward control
-    delta_ff := atan( (wheelbase*kappa_ff - sin(theta_ss_r)) / cos(theta_ss_r) );
+    delta_ff := atan((wheelbase*kappa_ff - sin(theta_ss_r)) / cos(theta_ss_r));
 
     // yaw rate damping
     delta_yaw := k_d_yaw * (yawrate_ref - yaw_rate) + theta_ss_f;
@@ -80,7 +80,7 @@ algorithm
     delta_raw := delta_ff + theta_r_star + atan(k * e_lat/(vveh_long + v_eps)) + delta_yaw + delta_steer;
     delta := min(deltaMax, max(-deltaMax, delta_raw));
 
-    torque := min(vctrl_TorqueMax, max(-vctrl_TorqueMax, K_vctrl*(v_path - vveh_long)));
+    torque := min(tauDriveMax, max(-tauDriveMax, K_vctrl*(v_path - vveh_long)));
 
     delta_km2 := delta_km1;
     delta_km1 := delta;
