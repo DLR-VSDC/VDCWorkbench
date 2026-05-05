@@ -3,7 +3,7 @@ model RearAxleStanleyControlTD "Time-discrete rear axle Stanley lateral control 
   extends BaseClasses.BaseStanley;
   import Modelica.Math.{cos,sin,atan,atan2};
 
-  parameter Real K = 1 "Stanley gain";
+  parameter Real k = 1 "Stanley gain";
   parameter Modelica.Units.SI.Velocity v_eps = 0.1  "Small velocity to avoid division by zero";
   parameter Real k_d_yaw = 0.14 "Factor for yaw rate related damping";
   parameter Real k_d_steer = 0.0 "Factor penalizing rate of steering angle change";
@@ -77,7 +77,7 @@ algorithm
     delta_steer := k_d_steer * (delta_km1 - delta_km2);
 
     // Rear axle Stanley control law
-    delta_raw := delta_ff + theta_r_star + atan(K * e_lat/(vveh_long + v_eps)) + delta_yaw + delta_steer;
+    delta_raw := delta_ff + theta_r_star + atan(k * e_lat/(vveh_long + v_eps)) + delta_yaw + delta_steer;
     delta := min(deltaMax, max(-deltaMax, delta_raw));
 
     torque := min(vctrl_TorqueMax, max(-vctrl_TorqueMax, K_vctrl*(v_path - vveh_long)));
