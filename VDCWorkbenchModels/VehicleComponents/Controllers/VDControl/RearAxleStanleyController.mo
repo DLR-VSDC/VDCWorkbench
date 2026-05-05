@@ -29,7 +29,7 @@ model RearAxleStanleyController
     filePath=filePath,
     pathName=pathName) "Time-independent path interpolation" annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   VDControl.StanleyBased.RearAxleStanleyControl stanleyControl(
-    K=k,
+    k=k,
     v_eps=v_eps,
     k_d_yaw=k_d_yaw,
     k_d_steer=k_d_steer,
