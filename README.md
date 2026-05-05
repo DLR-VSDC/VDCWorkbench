@@ -8,26 +8,26 @@ and IEEE Open Journal of Vehicular Technology (OJVT)](https://events.vtsociety.o
 ## Dependencies
 In order to work properly, the library requires the following Modelica packages.
 - [Credibility](https://github.com/DLR-SR/Credibility)
-- [SMArtIInt](https://github.com/xrg-simulation/SMArtIInt) - *OpenModelica users* please note: the branch [fix12_multiOutputs](https://github.com/DLR-VSDC/SMArtIInt/tree/fix12_multiOutputs) must be used instead which fixes a bug when using SMArtIInt for multi-dimensional problems 
-- [VehicleInterfaces](https://github.com/modelica/VehicleInterfaces)
 - [PlanarMechanics](https://github.com/dzimmer/PlanarMechanics)
+- [SMArtInt](https://github.com/xrg-simulation/SMArtInt) - *OpenModelica users*: please use the branch [dev](https://github.com/xrg-simulation/SMArtInt/tree/dev) as long as there is no SMArtInt release later then v0.5.2 since there is a bug when using SMArtInt for multi-dimensional problems
+- [VehicleInterfaces](https://github.com/modelica/VehicleInterfaces)
 
 Consult the library user's guide for particular versions of the abovementioned packages which are needed.
 
-## Tool compatibility 
+## Tool compatibility
 The current branch release was developed/tested using following tools.
 - [Dymola 2026x Refresh 1](https://www.3ds.com/products-services/catia/products/dymola/): The library has been developed using Dymola.
 - [OpenModelica v1.26.3 (64-bit)](https://www.openmodelica.org/): The library was tested and is fully compatible to Open Modelica.
 
-## Bibliography    
+## Bibliography
 - J. Brembeck, R. de Castro, J. Tobol&aacute;&rcaron; and I. Ebrahimi:
-IEEE VTS Motor Vehicles Challenge 2023: A Multi-physical Benchmark Problem for Next Generation Energy Management Algorithms, 
+IEEE VTS Motor Vehicles Challenge 2023: A Multi-physical Benchmark Problem for Next Generation Energy Management Algorithms,
 *19th IEEE Vehicle Power and Propulsion Conference (VPPC)*, 2022
 - J. Brembeck, R. de Castro, J. Ultsch, J. Tobolar, Ch. Winter and K. Ahmic:
 VDCWorkbench: A Vehicle Dynamics Control Test &amp; Evaluation Library for Model and AI-based Control Approaches,
 accepted for the *16th International Modelica and FMI Conference*, Lucerne, Switzerland, 2025
 
 ## License
-Copyright &copy; 2022-2026 DLR & UCM. 
+Copyright &copy; 2022-2026 DLR & UCM.
 The code is released under the [CC BY-NC-ND 4.0 license](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode).
 Link to [short summary of CC BY-NC-ND 4.0 license](https://creativecommons.org/licenses/by-nc-nd/4.0/). For attribution see also [license file](LICENSE.md).
