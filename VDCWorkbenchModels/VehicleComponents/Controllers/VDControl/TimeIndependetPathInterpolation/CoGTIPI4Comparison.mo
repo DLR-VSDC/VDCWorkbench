@@ -27,7 +27,7 @@ block CoGTIPI4Comparison "Time independent path interpolation"
     "Curvature of path, derivative of psi_ref with respect to parameter s";
   Real lambda[5];
 
-  Modelica.Blocks.Tables.CombiTable1Ds Path(
+  Modelica.Blocks.Tables.CombiTable1Ds combiTablePath(
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
     columns={2,3,4,5,6},
     tableOnFile=true,
@@ -75,41 +75,38 @@ block CoGTIPI4Comparison "Time independent path interpolation"
 142.441805226717,-6.19265786007913,2.22388688264913,-6.11292011575957,9.86756522245305,0.0134208596442860,-6.70098899529557,5.18050648228814,-5.68432672486269,-0.732732716989888;
 146.094159206890,-2.61549803880688,2.95718950707975,-6.03958878804881,8.72442242775189,0.0293656312921322,-3.33908159031924,5.86861988474307,-1.89191448729452,0.0457591294164352;
 149.746513187062,0.845408269454243,4.10750510596319,-5.84922839853506,7.36354978700530,0.0918326005587445,-0.415984402488600,6.82943246119678,2.10680094139709,1.38557775072961])
-    annotation (Placement(transformation(extent={{30,30},{50,50}})));
+    annotation (Placement(transformation(extent={{40,30},{60,50}})));
 
 protected
   Modelica.Blocks.Interfaces.RealOutput sI_C[3] "Vehicle Position in inertial frame of reference"
     annotation (Placement(
-      transformation(extent={{-10,-70},{-50,-30}})));
+      transformation(extent={{0,-70},{-20,-50}})));
   Modelica.Blocks.Interfaces.RealOutput vI_C[2] "Vehicle speed in inertial frame I"
     annotation (Placement(
-      transformation(extent={{-10,-110},{-50,-70}})));
+      transformation(extent={{0,-100},{-20,-80}})));
 public
   Modelica.Blocks.Sources.RealExpression realExpression_sDot(y=sDot)
     annotation (Placement(transformation(extent={{-100,30},{-80,50}})));
   Modelica.Blocks.Routing.RealPassThrough sampler
-    annotation (Placement(transformation(extent={{-10,30},{10,50}})));
+    annotation (Placement(transformation(extent={{0,30},{20,50}})));
   Modelica.Blocks.Continuous.Integrator sIntegrator(y_start=s_start)
-    annotation (Placement(transformation(extent={{-66,30},{-46,50}})));
-protected
-  VDCWorkbenchModels.Utilities.Interfaces.MotionDemandBus motionDemandBus
-    annotation (Placement(transformation(extent={{70,-10},{90,10}})));
-public
+    annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
   Modelica.Blocks.Sources.RealExpression realExpression_s(y=sIntegrator.y)
-    annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
+    annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
   Modelica.Blocks.Sources.RealExpression realExpression_e_lat(y=e_lat)
-    annotation (Placement(transformation(extent={{40,-72},{60,-52}})));
-  Utilities.Blocks.Modulo modulo(k=maxArcLength) annotation (Placement(transformation(extent={{-38,30},{-18,50}})));
+    annotation (Placement(transformation(extent={{40,-62},{60,-42}})));
+  Modelica.Blocks.Sources.RealExpression realExpression_e_psi(y=e_psi)
+    annotation (Placement(transformation(extent={{40,-20},{60,0}})));
+  Utilities.Blocks.Modulo modulo(k=maxArcLength) annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
   VDCWorkbenchModels.Utilities.Interfaces.ControlBus controlBus annotation (
       Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={100,0})));
   Modelica.Blocks.Interfaces.RealInput v_scl "Down scale vector for velocity "
-    annotation (Placement(transformation(extent={{-140,40},{-100,80}}),
-        iconTransformation(extent={{-140,40},{-100,80}})));
-  Modelica.Blocks.Sources.RealExpression realExpression_e_psi(y=e_psi)
-    annotation (Placement(transformation(extent={{40,-20},{60,0}})));
+    annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
 protected
+  VDCWorkbenchModels.Utilities.Interfaces.MotionDemandBus motionDemandBus
+    annotation (Placement(transformation(extent={{70,-10},{90,10}})));
   VehicleInterfaces.Interfaces.ChassisBus chassisBus
     annotation (Placement(transformation(extent={{10,-90},{30,-70}})));
 initial equation
@@ -125,28 +122,28 @@ equation
   // Calculate reference velocity
   //sDot=(cos(lambda[3]-sI_C[3])*vC_C[1]+sin(lambda[3]-sI_C[3])*vC_C[2])/(1-e_lat*kappa)+e_long_gain*e_long;
   sDot=(cos(lambda[3])*vI_C[1]+sin(lambda[3])*vI_C[2])/(1-e_lat*kappa)+e_long_gain*e_long;
-  //lambda[:] = Path.y[:];
-  lambda[1] = Path.y[1] "x-position";
-  lambda[2] = Path.y[2] "y-position";
-  lambda[3] = Path.y[3] "psi orientation";
-  lambda[4] = Path.y[4]*v_scl "scaled long speed";
-  lambda[5] = Path.y[5] "curvature";
-  kappa =Path.y[5];
+  //lambda[:] = combiTablePath.y[:];
+  lambda[1] = combiTablePath.y[1] "x-position";
+  lambda[2] = combiTablePath.y[2] "y-position";
+  lambda[3] = combiTablePath.y[3] "psi orientation";
+  lambda[4] = combiTablePath.y[4]*v_scl "scaled long speed";
+  lambda[5] = combiTablePath.y[5] "curvature";
+  kappa = combiTablePath.y[5];
   //if sIntegrator.y > (maxArcLength-1.0) then
   //  terminate("Vehicle reached end of path");
   //end if;
 
-  e_psi = Path.y[3] - sI_C[3];
+  e_psi = combiTablePath.y[3] - sI_C[3];
 
-  connect(Path.u, sampler.y) annotation (Line(
-    points={{28,40},{11,40}},
-    color={0,0,127},
-    smooth=Smooth.None));
-  connect(modulo.y, sampler.u) annotation (Line(points={{-17,40},{-12,40}},
+  connect(combiTablePath.u, sampler.y) annotation (Line(
+      points={{38,40},{21,40}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(modulo.y, sampler.u) annotation (Line(points={{-9,40},{-2,40}},
         color={0,0,127}));
-  connect(realExpression_sDot.y, sIntegrator.u) annotation (Line(points={{-79,40},{-68,40}},
+  connect(realExpression_sDot.y, sIntegrator.u) annotation (Line(points={{-79,40},{-62,40}},
         color={0,0,127}));
-  connect(sIntegrator.y, modulo.u) annotation (Line(points={{-45,40},{-40,40}},
+  connect(sIntegrator.y, modulo.u) annotation (Line(points={{-39,40},{-32,40}},
         color={0,0,127}));
   connect(motionDemandBus, controlBus.motionDemandBus) annotation (Line(
         points={{80,0},{80,-0.1},{100.1,-0.1}},
@@ -156,39 +153,42 @@ equation
       points={{20,-80},{100.1,-80},{100.1,-0.1}},
       color={255,204,51},
       thickness=0.5));
-  connect(sI_C[1], chassisBus.position_x) annotation (Line(points={{-30,
-          -56.6667},{18,-56.6667},{18,-80},{20,-80}},
+  connect(sI_C[1], chassisBus.position_x) annotation (Line(points={{-10,-63.3333},{18,-63.3333},{18,-80},{20,-80}},
         color={0,0,127}));
-  connect(sI_C[2], chassisBus.position_y) annotation (Line(points={{-30,-50},{20,-50},{20,-80}},
+  connect(sI_C[2], chassisBus.position_y) annotation (Line(points={{-10,-60},{20,-60},{20,-80}},
         color={0,0,127}));
-  connect(sI_C[3], chassisBus.yawAngle) annotation (Line(points={{-30,-43.3333},
-          {22,-43.3333},{22,-80},{20,-80}},
+  connect(sI_C[3], chassisBus.yawAngle) annotation (Line(points={{-10,-56.6667},{22,-56.6667},{22,-80},{20,-80}},
         color={0,0,127}));
-  connect(vI_C[1], chassisBus.velocity_dx) annotation (Line(points={{-30,-95},{-30,-94},{20,-94},{20,-80}},
-        color={0,0,127}));
-  connect(vI_C[2], chassisBus.velocity_dy) annotation (Line(points={{-30,-85},{-30,-84},{18,-84},{18,-80},{20,-80}},
-        color={0,0,127}));
-  connect(realExpression_s.y, motionDemandBus.CoG_path_s) annotation (Line(points={{
-          61,-40},{78,-40},{78,-24},{80,-24},{80,0}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(realExpression_e_lat.y, motionDemandBus.COG_e_lat) annotation (Line(
-        points={{61,-62},{82,-62},{82,-22},{80,-22},{80,0}}, color={0,0,127}),
+  connect(vI_C[1], chassisBus.velocity_dx) annotation (Line(points={{-10,-92.5},{20,-92.5},{20,-80}}, color={0,0,127}));
+  connect(vI_C[2], chassisBus.velocity_dy) annotation (Line(points={{-10,-87.5},{18,-87.5},{18,-80},{20,-80}}, color={0,0,127}));
+  connect(realExpression_s.y, motionDemandBus.CoG_path_s) annotation (Line(points={{61,-30},{80,-30},{80,0}},
+        color={0,0,127}),
       Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(realExpression_e_psi.y, motionDemandBus.COG_e_psi) annotation (Line(
-        points={{61,-10},{66,-10},{66,0},{80,0}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+  connect(realExpression_e_lat.y, motionDemandBus.COG_e_lat) annotation (
+      Line(
+        points={{61,-52},{82,-52},{82,0},{80,0}},
+        color={0,0,127}),
+      Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+  connect(realExpression_e_psi.y, motionDemandBus.COG_e_psi) annotation (
+      Line(
+        points={{61,-10},{78,-10},{78,0},{80,0}},
+        color={0,0,127}),
+      Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+    Icon(
+      coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
       graphics={
         Polygon(
           points={{0,100},{100,-100},{-100,-100},{0,100}},
@@ -216,10 +216,11 @@ equation
           extent={{-28,2},{0,-12}},
           textColor={238,46,47},
           textString="s")}),
-    Diagram(coordinateSystem(preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}}), graphics={
+    Diagram(
+      coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+      graphics={
         Text(
-          extent={{0,100},{80,50}},
+          extent={{10,100},{90,50}},
           textColor={28,108,200},
           textString="Input arc length
 'X-Position        '
