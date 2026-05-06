@@ -15,10 +15,10 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(residualDRLgeoPFC.residualDelta, vDCWorkbenchRacetrack.residualRL_steeringWheelAngle_in)
-    annotation (Line(points={{-11,-4},{-40,-4},{-40,51.6},{-24.4,51.6}},
+    annotation (Line(points={{-11,-4},{-40,-4},{-40,52},{-24,52}},
         color={0,0,127}));
   connect(residualDRLgeoPFC.residualTorque, vDCWorkbenchRacetrack.residualRL_torque_in)
-    annotation (Line(points={{-11,-16},{-30,-16},{-30,42},{-24,42}}, color={0,
+    annotation (Line(points={{-11,-16},{-30,-16},{-30,44},{-24,44}}, color={0,
           0,127}));
   annotation (
     experiment(
