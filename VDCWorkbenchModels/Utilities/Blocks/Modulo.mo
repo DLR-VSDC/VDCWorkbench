@@ -1,6 +1,6 @@
 within VDCWorkbenchModels.Utilities.Blocks;
 block Modulo "Modulo"
-  parameter Real k(start=1, unit="1") "Modulo value";
+  parameter Real k(start=1) "Modulo value";
 
   Modelica.Blocks.Interfaces.RealInput u "Input signal connector" annotation (
       Placement(transformation(extent={{-140,-20},{-100,20}}, rotation=0)));
@@ -34,6 +34,10 @@ This block computes output <em>y</em> as
           extent={{-150,-140},{150,-100}},
           textColor={0,0,0},
           textString="k=%k"),
+        Text(
+          extent={{-80,20},{40,-20}},
+          textColor={192,192,192},
+          textString="mod"),
         Text(
           extent={{-150,140},{150,100}},
           textString="%name",
