@@ -35,6 +35,10 @@ This block computes output <em>y</em> as
           textColor={0,0,0},
           textString="k=%k"),
         Text(
+          extent={{-80,20},{40,-20}},
+          textColor={192,192,192},
+          textString="mod"),
+        Text(
           extent={{-150,140},{150,100}},
           textString="%name",
           textColor={0,0,255})}),
