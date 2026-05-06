@@ -3,16 +3,14 @@ model ResidualDRLgeoPFC
   extends Modelica.Blocks.Icons.Block;
 
 protected
-  constant Integer nIn = 16 "Number of inputs";
+  constant Integer nSignal = 16 "Number of signals to be evaluated";
 
 public
-  SMArtInt.Blocks.EvaluateSimpleFeedForwardNeuralNetwork
-    evaluateSimpleFeedForwardNeuralNetwork(
+  SMArtInt.Blocks.EvaluateSimpleFeedForwardNeuralNetwork evaluateNeuralNetwork(
     pathToAIModel=ModelicaServices.ExternalReferences.loadResource(
       "modelica://VDCWorkbenchModels/Resources/DRL_Agents/residualDRLgeoPFC.onnx"),
-    numberOfInputs=32,
-    numberOfOutputs=2)
-    annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+    numberOfInputs=2*nSignal,
+    numberOfOutputs=2) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Modelica.Blocks.Interfaces.RealOutput residualDelta "Residual steering action"
     annotation (Placement(transformation(extent={{100,50},{120,70}})));
   Modelica.Blocks.Interfaces.RealOutput residualTorque "Residual torque"
@@ -25,112 +23,45 @@ public
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-100,0})));
-  Modelica.Clocked.RealSignals.Sampler.SampleClocked sample1[nIn]
-    annotation (Placement(transformation(extent={{-54,-6},{-42,6}})));
+  Modelica.Clocked.RealSignals.Sampler.SampleClocked sample1[nSignal]
+    annotation (Placement(transformation(extent={{-56,-6},{-44,6}})));
   Modelica.Clocked.ClockSignals.Clocks.PeriodicRealClock periodicClock(
     period=0.05,
     useSolver=false)
-    annotation (Placement(transformation(extent={{-84,-46},{-72,-34}})));
+    annotation (Placement(transformation(extent={{-76,-86},{-64,-74}})));
   Modelica.Clocked.RealSignals.Sampler.Hold hold1[2]
     annotation (Placement(transformation(extent={{50,-6},{62,6}})));
-  Modelica.Clocked.RealSignals.NonPeriodic.UnitDelay unitDelay1[nIn]
-    annotation (Placement(transformation(extent={{-26,-26},{-14,-14}})));
+  Modelica.Clocked.RealSignals.NonPeriodic.UnitDelay unitDelay[nSignal] annotation (Placement(transformation(extent={{-26,-26},{-14,-14}})));
   Modelica.Blocks.Math.Gain denormalize_steering(k=1.117010721276371)
     annotation (Placement(transformation(extent={{76,52},{92,68}})));
   Modelica.Blocks.Math.Gain denormalize_torque(k=150.0)
     annotation (Placement(transformation(extent={{78,-68},{94,-52}})));
-  Modelica.Blocks.Routing.Multiplex2 multiplex2(n1=nIn, n2=nIn) annotation (Placement(transformation(extent={{0,-6},{12,6}})));
+protected
+  Modelica.Blocks.Routing.Multiplex2 multiplex2(
+    final n1=nSignal,
+    final n2=nSignal) annotation (Placement(transformation(extent={{0,-6},{12,6}})));
+  Utilities.Clocked.Replicator replicator(
+    final nout=nSignal) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-50,-50})));
 equation
   connect(featureVecRL.fmuOutputsBus, fmuOutputsBus) annotation (Line(
       points={{-88,0},{-100,0}},
       color={255,204,51},
       thickness=0.5));
   connect(featureVecRL.featureVec, sample1.u) annotation (
-      Line(points={{-67,0},{-55.2,0}}, color={0,0,127}));
-  connect(periodicClock.y, sample1[1].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
+      Line(points={{-67,0},{-57.2,0}}, color={0,0,127}));
+  connect(periodicClock.y, replicator.u) annotation (Line(
+      points={{-63.4,-80},{-50,-80},{-50,-62}},
       color={175,175,175},
-      pattern=LinePattern.Dot,
       thickness=0.5));
-  connect(periodicClock.y, sample1[2].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
+  connect(replicator.y, sample1.clock) annotation (Line(
+      points={{-50,-39},{-50,-7.2}},
       color={175,175,175},
-      pattern=LinePattern.Dot,
       thickness=0.5));
-  connect(periodicClock.y, sample1[3].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(periodicClock.y, sample1[4].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(periodicClock.y, sample1[5].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(periodicClock.y, sample1[6].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(periodicClock.y, sample1[7].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(periodicClock.y, sample1[8].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(periodicClock.y, sample1[9].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(periodicClock.y, sample1[10].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(periodicClock.y, sample1[11].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(periodicClock.y, sample1[12].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(periodicClock.y, sample1[13].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(periodicClock.y, sample1[14].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(periodicClock.y, sample1[15].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(periodicClock.y, sample1[16].clock) annotation (Line(
-      points={{-71.4,-40},{-48,-40},{-48,-7.2}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
-      thickness=0.5));
-  connect(sample1.y, unitDelay1.u) annotation (Line(points={{-41.4,0},{-32,0},{-32,-20},{-27.2,-20}},
-        color={0,0,127}));
-  connect(evaluateSimpleFeedForwardNeuralNetwork.arrayOut[1, :], hold1.u)
-    annotation (Line(points={{40,0},{48.8,0}}, color={0,0,127}));
+  connect(sample1.y, unitDelay.u) annotation (Line(points={{-43.4,0},{-32,0},{-32,-20},{-27.2,-20}}, color={0,0,127}));
+  connect(evaluateNeuralNetwork.arrayOut[1, :], hold1.u) annotation (Line(points={{40,0},{48.8,0}}, color={0,0,127}));
   connect(hold1[1].y, denormalize_steering.u) annotation (Line(points={{62.6,0},{70,0},{70,60},{74.4,60}},
         color={0,0,127}));
   connect(hold1[2].y, denormalize_torque.u) annotation (Line(points={{62.6,0},{70,0},{70,-60},{76.4,-60}},
@@ -139,11 +70,10 @@ equation
     annotation (Line(points={{92.8,60},{110,60}}, color={0,0,127}));
   connect(denormalize_torque.y, residualTorque)
     annotation (Line(points={{94.8,-60},{110,-60}}, color={0,0,127}));
-  connect(sample1.y, multiplex2.u1) annotation (Line(points={{-41.4,0},{-32,0},{-32,3.6},{-1.2,3.6}},
+  connect(sample1.y, multiplex2.u1) annotation (Line(points={{-43.4,0},{-32,0},{-32,3.6},{-1.2,3.6}},
         color={0,0,127}));
-  connect(unitDelay1.y, multiplex2.u2) annotation (Line(points={{-13.4,-20},{-10,-20},{-10,-3.6},{-1.2,-3.6}},
-        color={0,0,127}));
-  connect(multiplex2.y, evaluateSimpleFeedForwardNeuralNetwork.arrayIn[1, :]) annotation (Line(points={{12.6,0},{20.2,0}},         color={0,0,127}));
+  connect(unitDelay.y, multiplex2.u2) annotation (Line(points={{-13.4,-20},{-10,-20},{-10,-3.6},{-1.2,-3.6}}, color={0,0,127}));
+  connect(multiplex2.y, evaluateNeuralNetwork.arrayIn[1, :]) annotation (Line(points={{12.6,0},{20,0}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false),
       graphics={
