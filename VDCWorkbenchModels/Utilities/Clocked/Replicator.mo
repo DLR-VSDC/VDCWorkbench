@@ -25,7 +25,7 @@ equation
           color={95,95,95}),
         Ellipse(
           extent={{-15,15},{15,-15}},
-          color={95,95,95},
+          lineColor={95,95,95},
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
