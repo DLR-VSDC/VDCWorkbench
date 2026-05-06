@@ -70,57 +70,55 @@ model VehicleVDCGeoPFC_RL
       source=Credibility.Types.SourceType.Provided,
       reference="Uniform scaling is defined by the user."));
 
+protected
+  parameter Modelica.Units.SI.Position x_start = path_x_init - sin(path_yaw_init)*initial_lateral_offset.value
+    "Start value for the x position of the vehicle, which is assembled out of the initial value and the randomized  initial_lateral_offset";
+  parameter Modelica.Units.SI.Position y_start = path_y_init + cos(path_yaw_init)*initial_lateral_offset.value
+    "Start value for the y position of the vehicle, which is assembled out of the initial value and the randomized  initial_lateral_offset";
+  parameter Modelica.Units.SI.Angle yaw_start = path_yaw_init + initial_yaw_offset.value
+    "Start value for the yaw angle of the vehicle, which is assembled out of the initial yaw value and the randomized initial_yaw_offset";
+
+public
   Modelica.Blocks.Interfaces.RealInput residualRL_steeringWheelAngle_in(
     unit="rad",
     min=-from_deg(4)*data.steeringRatio,
     max=from_deg(4)*data.steeringRatio,
     nominal=from_deg(4)*data.steeringRatio)
     "Steering wheel angle commanded by the DRL controller, which is added to the steeringWheelAngle of the baseline controller"
-    annotation (Placement(transformation(extent={{-142,38},{-102,78}})));
+    annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Interfaces.RealInput residualRL_torque_in(
     unit="N.m",
     min=-150,
     max=150,
     nominal=150)
     "Torque commanded by the DRL controller, which is added to the torque of the baseliJa. ne controller"
-    annotation (Placement(transformation(extent={{-140,-10},{-100,30}})));
-  Utilities.Blocks.MapFmuOutputsBusSignals calcRLoutputs(
-    steeringRatio=data.steeringRatio) annotation (Placement(transformation(extent={{60,-30},{80,-10}})));
-
-protected
-  parameter Modelica.Units.SI.Position x_start = path_x_init - sin(path_yaw_init)*initial_lateral_offset.value "Start value for the x position of the vehicle, which is assembled out of the initial value and the randomized  initial_lateral_offset";
-  parameter Modelica.Units.SI.Position y_start = path_y_init + cos(path_yaw_init)*initial_lateral_offset.value "Start value for the y position of the vehicle, which is assembled out of the initial value and the randomized  initial_lateral_offset";
-  parameter Modelica.Units.SI.Angle yaw_start = path_yaw_init + initial_yaw_offset.value "Start value for the yaw angle of the vehicle, which is assembled out of the initial yaw value and the randomized initial_yaw_offset";
-
-public
+    annotation (Placement(transformation(extent={{-140,0},{-100,40}})));
   Utilities.Interfaces.FmuOutputsBus fmuOutputsBus annotation (Placement(
         transformation(
           extent={{-16,-16},{16,16}},
           rotation=-90,
           origin={100,-20})));
+  Utilities.Blocks.MapFmuOutputsBusSignals calcRLoutputs(
+    steeringRatio=data.steeringRatio) annotation (Placement(transformation(extent={{60,-30},{80,-10}})));
 equation
   connect(controller.addRL_FrontSteering_in, residualRL_steeringWheelAngle_in)
-    annotation (Line(points={{-42,58},{-42,58},{-122,58}}, color={0,0,127}));
-  connect(controller.addRL_TotalTorque_in, residualRL_torque_in)  annotation (
-      Line(points={{-42,54},{-90,54},{-90,10},{-120,10}}, color={0,0,127}));
+    annotation (Line(points={{-42,58},{-60,58},{-60,60},{-120,60}},
+        color={0,0,127}));
+  connect(controller.addRL_TotalTorque_in, residualRL_torque_in) annotation (
+      Line(points={{-42,54},{-90,54},{-90,20},{-120,20}}, color={0,0,127}));
   connect(calcRLoutputs.controlBus, controlBus) annotation (
       Line(
         points={{60,-20},{52,-20},{52,0},{100,0}},
         color={255,204,51},
-        thickness=0.5),
-      Text(
-        string="%second",
-        index=1,
-        extent={{-2,2},{-2,5}},
-        horizontalAlignment=TextAlignment.Right));
+        thickness=0.5));
   connect(calcRLoutputs.fmuOutputsBus, fmuOutputsBus) annotation (Line(
-      points={{80,-20},{100,-20}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(calcRLoutputs.residualRL_steeringWheelAngle_in, residualRL_steeringWheelAngle_in) annotation (Line(points={{58.6667,-24},{40,-24},{40,66},{-60,66},{-60,58},{-122,58}},
+        points={{80,-20},{100,-20}},
+        color={255,204,51},
+        thickness=0.5));
+  connect(calcRLoutputs.residualRL_steeringWheelAngle_in, residualRL_steeringWheelAngle_in) annotation (Line(points={{58,-24},{40,-24},{40,68},{-60,68},{-60,60},{-120,60}},
         color={0,0,127}));
   connect(calcRLoutputs.residualRL_torque_in, residualRL_torque_in)
-    annotation (Line(points={{58.6667,-28.2},{42,-28.2},{42,-28},{36,-28},{36,20},{-90,20},{-90,10},{-120,10}},
+    annotation (Line(points={{58,-28},{36,-28},{36,20},{-120,20}},
         color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}})),
