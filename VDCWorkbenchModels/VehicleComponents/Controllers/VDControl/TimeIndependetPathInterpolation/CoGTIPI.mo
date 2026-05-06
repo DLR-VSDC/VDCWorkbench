@@ -16,12 +16,14 @@ block CoGTIPI "Time-independent path interpolation"
 
   Real sDot "Time derivative of arc length";
   Real tvI_P[2] "Tangent of desired path in inertial frame I (normalized)";
-  Real nvI_P[2] "Vector normal to tvI_P; rotated tvI_P +90° in inertial frame I (normalized)";
+  Real nvI_P[2]
+    "Vector normal to tvI_P; rotated tvI_P +90° in inertial frame I (normalized)";
   //Real vI_C[2] "Vehicle speed in inertial frame of reference"; // -> Not considered since this value is a direct input
   Real e[2] "Distance vector from path reference to vehicle position in inertial frame I";
   Real e_lat "Distance of vehicle to path in direction of nvI_P";
   Real e_long "Distance of vehicle to path in direction of nvI_P";
-  Real kappa "Curvature of path, derivative of psi_ref with respect to parameter s";
+  Real kappa
+    "Curvature of path, derivative of psi_ref with respect to parameter s";
   Real lambda[5];
 
   Modelica.Blocks.Tables.CombiTable1Ds combiTablePath(
@@ -170,19 +172,19 @@ equation
         points={{80,0},{80,-0.1},{100.1,-0.1}},
         color={255,204,51},
         thickness=0.5));
-  connect(combiTablePath.y[2], motionDemandBus.y_path) annotation (Line(points={{61,40},{80,40},{80,0}},
-        color={0,0,127}),
-      Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}},
-        horizontalAlignment=TextAlignment.Left));
   connect(combiTablePath.y[1], motionDemandBus.x_path) annotation (Line(points={{61,40},{64,40},{64,42},{82,42},{82,0},{80,0}},
         color={0,0,127}),
       Text(
         string="%second",
         index=3,
         extent={{6,2},{6,2}},
+        horizontalAlignment=TextAlignment.Left));
+  connect(combiTablePath.y[2], motionDemandBus.y_path) annotation (Line(points={{61,40},{80,40},{80,0}},
+        color={0,0,127}),
+      Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
   connect(combiTablePath.y[3], motionDemandBus.psi_path) annotation (Line(points={{61,40},{64,40},{64,34},{74,34},{74,0},{80,0}},
         color={0,0,127}),
@@ -226,10 +228,6 @@ equation
           lineColor={28,108,200},
           fillColor={255,255,0},
           fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-212,108},{202,78}},
-          textColor={0,0,255},
-          textString=""),
         Line(
           points={{-92,-86},{-68,-20},{-24,30},{64,98}},
           color={238,46,47},
@@ -256,7 +254,7 @@ equation
           textColor={0,0,0},
           textString="TIPI")}),
     Diagram(
-      coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,100}}),
+      coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
       graphics={
         Text(
           extent={{10,100},{90,50}},
