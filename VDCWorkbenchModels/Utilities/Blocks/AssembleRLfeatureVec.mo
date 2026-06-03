@@ -124,8 +124,8 @@ equation
           fillPattern=FillPattern.Solid,
           lineThickness=0.5),
         Line(
-          points={{-20,0},{-90,0}},
-          color={255,204,51},
+          points={{-20,0},{-98,0}},
+          color={215,136,255},
           thickness=0.5),
         Polygon(
           points={{-16,54},{2,44},{-16,34},{-16,54}},
