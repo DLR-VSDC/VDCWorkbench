@@ -599,7 +599,7 @@ equation
           thickness=0.5),
         Line(
           points={{100,0},{50,42}},
-          color={255,204,51},
+          color={215,136,255},
           thickness=0.5),
         Polygon(
           points={{-48,86},{-30,76},{-48,66},{-48,86}},

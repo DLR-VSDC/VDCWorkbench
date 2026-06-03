@@ -95,7 +95,7 @@ public
     annotation (Placement(transformation(extent={{-140,0},{-100,40}})));
   Utilities.Interfaces.FmuOutputsBus fmuOutputsBus annotation (Placement(
         transformation(
-          extent={{-16,-16},{16,16}},
+          extent={{-20,-20},{20,20}},
           rotation=-90,
           origin={100,-20})));
   Utilities.Blocks.MapFmuOutputsBusSignals calcRLoutputs(
@@ -113,7 +113,7 @@ equation
         thickness=0.5));
   connect(calcRLoutputs.fmuOutputsBus, fmuOutputsBus) annotation (Line(
         points={{80,-20},{100,-20}},
-        color={255,204,51},
+        color={215,136,255},
         thickness=0.5));
   connect(calcRLoutputs.residualRL_steeringWheelAngle_in, residualRL_steeringWheelAngle_in) annotation (Line(points={{58,-24},{40,-24},{40,68},{-60,68},{-60,60},{-120,60}},
         color={0,0,127}));

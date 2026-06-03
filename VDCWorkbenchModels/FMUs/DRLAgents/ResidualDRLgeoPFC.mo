@@ -20,7 +20,7 @@ public
     featNominal={0.6981317007977318,400.0,0.6981317007977318,400.0,0.5,3.0,0.08726646259971647,0.02,20.0,1.117010721276371,150.0,20.0,3.0,1.5,0.017453292519943295,0.15})
     annotation (Placement(transformation(extent={{-88,-10},{-68,10}})));
   Utilities.Interfaces.FmuOutputsBus fmuOutputsBus annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-100,0})));
   Modelica.Clocked.RealSignals.Sampler.SampleClocked sample1[nSignal]
@@ -48,7 +48,7 @@ protected
 equation
   connect(featureVecRL.fmuOutputsBus, fmuOutputsBus) annotation (Line(
       points={{-88,0},{-100,0}},
-      color={255,204,51},
+      color={215,136,255},
       thickness=0.5));
   connect(featureVecRL.featureVec, sample1.u) annotation (
       Line(points={{-67,0},{-57.2,0}}, color={0,0,127}));
