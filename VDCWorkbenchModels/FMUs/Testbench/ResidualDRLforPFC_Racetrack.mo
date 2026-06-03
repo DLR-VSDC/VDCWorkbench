@@ -12,7 +12,7 @@ model ResidualDRLforPFC_Racetrack
 equation
   connect(residualDRLgeoPFC.fmuOutputsBus, vDCWorkbenchRacetrack.fmuOutputsBus) annotation (Line(
       points={{10,-10},{30,-10},{30,36},{20,36}},
-      color={255,204,51},
+      color={215,136,255},
       thickness=0.5));
   connect(residualDRLgeoPFC.residualDelta, vDCWorkbenchRacetrack.residualRL_steeringWheelAngle_in)
     annotation (Line(points={{-11,-4},{-40,-4},{-40,52},{-24,52}},
