@@ -32,8 +32,8 @@ Copyright &copy; 2022-2026 DLR & UCM.
 The code is released under the [CC BY-NC-ND 4.0 license](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode).
 Link to [short summary of CC BY-NC-ND 4.0 license](https://creativecommons.org/licenses/by-nc-nd/4.0/). For attribution see also [license file](LICENSE.md).
 
-## Appendix: Nomeclature
-Download as pdf: [ovjt4-Nomeclature.pdf](https://github.com/user-attachments/files/28633609/ovjt4-Nomeclature.pdf)
+## Appendix: Nomenclature
+Download as pdf: [ovjt4-Nomenclature.pdf](https://github.com/user-attachments/files/28633609/ovjt4-Nomeclature.pdf)
 
 <img width="4961" height="6111" alt="ovjt4-Nomeclature" src="https://github.com/user-attachments/assets/c6dc5d56-9c16-457a-a735-146531e405b1" />
 
