@@ -37,7 +37,3 @@ Download as pdf: [ovjt4-Nomeclature.pdf](https://github.com/user-attachments/fil
 
 <img width="4961" height="6111" alt="ovjt4-Nomeclature" src="https://github.com/user-attachments/assets/c6dc5d56-9c16-457a-a735-146531e405b1" />
 
-
-
-
-<img width="901" height="982" alt="image" src="https://github.com/user-attachments/files/28633336/ovjt4-Nomeclature.pdf" />
