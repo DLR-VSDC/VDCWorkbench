@@ -50,7 +50,7 @@ front/rear and right/left ratios. In the bottom diagram, the torque vectoring on
 rear drives is shown.
 </p>
 <div>
-  <img src=\"modelica://VDCWorkbenchModels/Resources/Images/VehicleComponents/Controllers/ExampleTorqueVectoring_plot.png\" alt=\"Plot of simulation results\"/>
+  <img src=\"modelica://VDCWorkbenchModels/Resources/Images/VehicleComponents/Controllers/Examples/DrivingTorquesAllocation_plot.png\" alt=\"Plot of simulation results\"/>
 </div>
 </html>",
       figures = {
