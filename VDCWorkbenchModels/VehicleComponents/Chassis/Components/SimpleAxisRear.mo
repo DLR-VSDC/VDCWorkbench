@@ -32,7 +32,7 @@ model SimpleAxisRear "Simple non-steerable axle"
     v_long(start=v_long),
     useHeatPort=useHeatPort,
     animate=animate,
-    diameter=1.04*width,
+    rRim=0.7*R0,
     width=width)
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
@@ -50,8 +50,8 @@ model SimpleAxisRear "Simple non-steerable axle"
     v_long(start=v_long),
     useHeatPort=useHeatPort,
     animate=animate,
-    diameter=wheelLeft.diameter,
-    width=wheelLeft.width)
+    rRim=wheelLeft.rRim,
+    width=width)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
