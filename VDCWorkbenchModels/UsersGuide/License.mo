@@ -3,11 +3,22 @@ class License "Copyright and License"
 
   annotation (
     Documentation(info="<html>
+<p>
+All files in this directory (<em>VDCWorkbenchModels</em>) and in all
+subdirectories, especially all files that build package \"VDCWorkbenchModels\"
+and all files in \"VDCWorkbenchModels/Resources/\" and \"VDCWorkbenchModels/help/\"
+are licensed by <strong>DLR</strong> and <strong>UCM</strong>.
+</p>
+
 <h4>Copyright</h4>
 <p>
-&copy; 2022-2026:
-<strong>Department of Vehicle System Dynamics and Control, DLR Institute of Vehicle Concepts</strong> and
-<strong>Dept. of Mechanical Engineering, University of California Merced</strong>
+&copy; 2022-2024,
+<em>DLR Institut of System Dynamics and Control</em> and
+<em>Dept. of Mechanical Engineering, University of California Merced (UCM)</em>
+<br>
+&copy; 2025-2026,
+<em>Department of Vehicle System Dynamics and Control, DLR Institute of Vehicle Concepts</em> and
+<em>Dept. of Mechanical Engineering, University of California Merced (UCM)</em>
 </p>
 
 <h4>License</h4>
@@ -17,7 +28,8 @@ see also
 <a href=\"https://creativecommons.org/licenses/by-nc-nd/4.0/\">creativecommons.org/licenses/by-nc-nd/4.0/</a>.
 </p>
 </html>"),
-    Icon(graphics={
+    Icon(
+      graphics={
         Ellipse(
           extent={{-100,100},{100,-100}},
           lineColor={0,0,0},
