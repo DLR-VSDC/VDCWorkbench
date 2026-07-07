@@ -1,0 +1,9 @@
+Copyright (c) 2022-2024, DLR Institut of System Dynamics and Control and Dept. of Mechanical Engineering, University of California Merced
+Copyright (c) 2025-2026, Department of Vehicle System Dynamics and Control, DLR Institute of Vehicle Concepts and Dept. of Mechanical Engineering, University of California Merced
+All rights reserved.
+
+License type
+Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) license: https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+The code is released under the CC BY-NC-ND 4.0 license, see https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.
+Link to short summary of CC BY-NC-ND 4.0 license: https://creativecommons.org/licenses/by-nc-nd/4.0/.
