@@ -20,12 +20,9 @@ The current branch release was developed/tested using following tools.
 - [OpenModelica v1.26.3 (64-bit)](https://www.openmodelica.org/): The library was tested and is fully compatible to Open Modelica.
 
 ## Bibliography
-- J. Brembeck, R. de Castro, J. Tobol&aacute;&rcaron; and I. Ebrahimi:
-IEEE VTS Motor Vehicles Challenge 2023: A Multi-physical Benchmark Problem for Next Generation Energy Management Algorithms,
-*19th IEEE Vehicle Power and Propulsion Conference (VPPC)*, 2022
-- J. Brembeck, R. de Castro, J. Ultsch, J. Tobolar, Ch. Winter and K. Ahmic:
-VDCWorkbench: A Vehicle Dynamics Control Test &amp; Evaluation Library for Model and AI-based Control Approaches,
-accepted for the *16th International Modelica and FMI Conference*, Lucerne, Switzerland, 2025
+- J. Brembeck, R. de Castro, J. Tobol&aacute;&rcaron; and I. Ebrahimi: IEEE VTS Motor Vehicles Challenge 2023: A Multi-physical Benchmark Problem for Next Generation Energy Management Algorithms, *19th IEEE Vehicle Power and Propulsion Conference (VPPC)*, 2022
+- J. Brembeck, R. de Castro, J. Ultsch, J. Tobolar, Ch. Winter and K. Ahmic: VDCWorkbench: A Vehicle Dynamics Control Test &amp; Evaluation Library for Model and AI-based Control Approaches, *16th International Modelica and FMI Conference*, Lucerne, Switzerland, doi: [10.3384/ecp218585](https://doi.org/10.3384/ecp218585), 2025
+- J. Brembeck et al.: VDCWorkbench: A Source-Available Modelica Toolbox for Research and Education on Vehicle Dynamics and Control, in *IEEE Open Journal of Vehicular Technology*, doi: [10.1109/OJVT.2026.3705616](https://doi.org/10.1109/OJVT.2026.3705616), 2026
 
 ## License
 Copyright &copy; 2022-2026 DLR & UCM.
