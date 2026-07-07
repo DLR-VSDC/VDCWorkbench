@@ -8,6 +8,7 @@ package VDCWorkbenchModels
     version = "0.2.0",
     versionDate = "2025-08-31",
     dateModified = "2025-08-31",
+    License="modelica://VDCWorkbenchModels/Resources/Licenses/LICENSE_VDCWorkbenchModels.txt",
     uses(
       Modelica(version="4.0.0"),
       ModelicaServices(version="4.0.0"),
