@@ -8,7 +8,7 @@ package Clocked
       info="<html>
 <p>
 Collection of models to synchronize sampled data systems with different sampling rates which are yet
-not contained in <a href=\"Modelica.Clocked\">Modelica.Clocked</a>.
+not contained in <a href=\"modelica://Modelica.Clocked\">Modelica.Clocked</a>.
 </p>
 </html>"),
     Icon(
