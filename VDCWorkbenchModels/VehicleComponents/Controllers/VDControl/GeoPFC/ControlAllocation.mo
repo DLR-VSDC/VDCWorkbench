@@ -14,9 +14,9 @@ protected
   Real vx_sens, vy_sens;
 
 public
-  Modelica.Blocks.Interfaces.RealOutput delta "Front steering angle [rad]"
+  Modelica.Blocks.Interfaces.RealOutput delta(final unit="rad") "Front steering angle"
     annotation (Placement(transformation(extent={{100,70},{120,90}})));
-  Modelica.Blocks.Interfaces.RealOutput torque "Summarized propulsion torque [Nm]"
+  Modelica.Blocks.Interfaces.RealOutput torque(final unit="N.m") "Summarized propulsion torque"
     annotation (Placement(transformation(extent={{100,30},{120,50}})));
   VDCWorkbenchModels.Utilities.Interfaces.ControlBus controlBus annotation (Placement(
         transformation(

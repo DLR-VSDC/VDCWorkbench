@@ -7,21 +7,21 @@ model TorqueVectoring "Allocate driving torque to front central drive and left/r
   parameter Modelica.Units.SI.Torque Torque_max_frontMotor=320 "Maximum torque front motor";
   parameter Modelica.Units.SI.Torque Torque_max_rearMotor=160 "Maximum torque rear motor";
 
-  Modelica.Blocks.Interfaces.RealInput Torque(unit="N.m") "Total torque applied to motors"
+  Modelica.Blocks.Interfaces.RealInput Torque(final unit="N.m") "Total torque applied to motors"
     annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Interfaces.RealInput alpha_TV
     "Torque vectoring ratio (=1 all torque applied to right wheel)"
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
   Modelica.Blocks.Interfaces.RealInput alpha_FrontRear "Front/rear allocation ratio (=1: all torque applied to front drive)"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Interfaces.RealOutput torque_dem_front(unit="N.m")
+  Modelica.Blocks.Interfaces.RealOutput torque_dem_front(final unit="N.m")
     "Torque demand to electric machine (Front)"
     annotation (Placement(transformation(extent={{100,50},{120,70}})));
-  Modelica.Blocks.Interfaces.RealOutput torque_dem_rearLeft(unit="N.m") "Torque demand to electric machine rear left"
+  Modelica.Blocks.Interfaces.RealOutput torque_dem_rearLeft(final unit="N.m") "Torque demand to electric machine rear left"
     annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
-  Modelica.Blocks.Interfaces.RealOutput torque_dem_rearRight(unit="N.m") "Torque demand to electric machine rear right"
+  Modelica.Blocks.Interfaces.RealOutput torque_dem_rearRight(final unit="N.m") "Torque demand to electric machine rear right"
     annotation (Placement(transformation(extent={{100,-70},{120,-50}})));
-  Modelica.Blocks.Interfaces.RealOutput Mz_TorqueVectoring(unit="N.m")
+  Modelica.Blocks.Interfaces.RealOutput Mz_TorqueVectoring(final unit="N.m")
     "Yaw moment due to torque vectoring" annotation (Placement(
         transformation(
         extent={{100,10},{120,30}})));
