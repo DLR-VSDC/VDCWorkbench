@@ -24,7 +24,7 @@ The following references (sorted alphabetically) were used to create the library
       for Next Generation Energy Management Algorithms&quot;,
       <em>IEEE Vehicle Power and Propulsion Conference (VPPC)</em>,
       Merced, CA, USA, 2022,
-      <a href=\"http://dx.doi.org/10.1109/VPPC55846.2022.10003375\">doi: 10.1109/VPPC55846.2022.10003375</a>.
+      <a href=\"https://doi.org/10.1109/VPPC55846.2022.10003375\">doi: 10.1109/VPPC55846.2022.10003375</a>.
     </td>
   </tr>
   <tr>
