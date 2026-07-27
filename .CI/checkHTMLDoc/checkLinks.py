@@ -19,8 +19,11 @@ import ssl
 from concurrent.futures import ProcessPoolExecutor as PoolExecutor
 
 # See https://haacked.com/archive/2004/10/25/usingregularexpressionstomatchhtml.aspx/
-PATTERN = re.compile(r'</?\w+((\s+\w+(\s*=\s*(?:\\"(.|\n)*?\\"|\'(.|\n)*?\'|[^\'">\s]+))?)+\s*|\s*)/?>',
+PATTERN = re.compile(
+    r'</?\w+((\s+\w+(\s*=\s*(?:\\"(.|\n)*?\\"|\'(.|\n)*?\'|[^\'">\s]+))?)+\s*|\s*)/?>',
     re.IGNORECASE)
+# DOI-Regex: http(s)://doi.org/... (incl. possible suffixes such as #, ?, etc.)
+DOI_PATTERN = re.compile(r'^https?:[a-z.-]*//doi\.org/', re.IGNORECASE)
 
 def _getFileURLs(file_name):
     urls = []
@@ -56,7 +59,9 @@ def _checkURL(url):
         rc = urllib2.urlopen(url).getcode()
         return (url, rc)
     except:
-        pass
+        if DOI_PATTERN.match(url):
+            print("WARNING: Skip DOI-Link (per design, because of persistency): {url}")
+            return (url, 200)
     try:
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)'}
         rc = urllib2.urlopen(urllib2.Request(url, None, headers), context=ssl._create_unverified_context()).getcode()
