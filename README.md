@@ -1,9 +1,14 @@
-# VDC Workbench: Open-Source Modelica Library for Vehicle Dynamics and Control - VPPC OJVT 2026
+# VDCWorkbench: A Source-Available Modelica Toolbox for Research and Education on Vehicle Dynamics and Control
 ## Introduction
-VDCWorkbench is an open-source Modelica library for modeling, simulation, and control of electric and software-defined vehicles (SDVs). It provides a unified framework to integrate mechanical, electrical, thermal, and control domains, enabling the development of advanced vehicle architectures from battery-electric and hybrid powertrains to over-actuated by-wire systems. The library supports modular customization of components (tires, actuators, energy storage) and includes state-of-the-art controllers for path following, energy management, and AI-driven control.
+VDCWorkbench is a source-available Modelica library for modeling, simulation, and control of electric and software-defined vehicles (SDVs). It provides a unified framework to integrate mechanical, electrical, thermal, and control domains, enabling the development of advanced vehicle architectures from battery-electric and hybrid powertrains to over-actuated by-wire systems. The library supports modular customization of components (tires, actuators, energy storage) and includes state-of-the-art controllers for path following, energy management, and AI-driven control.
+<img width="2830" height="4014" alt="Library_Overview_OJVT2026_v2" src="https://github.com/user-attachments/assets/2a0fcb52-f89f-4456-9c08-32b41a7c35a6" />
+*Map based on BayernAtlas (© Bayerische Vermessungsverwaltung 2026)*
 
-The library in this branch was submitted as suplementary for the sumbission to the [2026 Joint Submission of papers to Vehicle Power Propulsion Conference (VPPC)
+The library was submitted as suplementary for the sumbission to the [2026 Joint Submission of papers to Vehicle Power Propulsion Conference (VPPC)
 and IEEE Open Journal of Vehicular Technology (OJVT)](https://events.vtsociety.org/vppc2026/authors/joint-submission-for-ieee-vppc-2026-and-ieee-ojvt/).
+
+The full article is available here as open access: [VDCWorkbench: A Source-Available Modelica Toolbox for Research and Education on Vehicle Dynamics and Control](https://ieeexplore.ieee.org/document/11573019).
+
 
 ## Dependencies
 In order to work properly, the library requires the following Modelica packages.
