@@ -22,7 +22,7 @@ Consult the library user's guide for particular versions of the abovementioned p
 ## Tool compatibility
 The current branch release was developed/tested using following tools.
 - [Dymola 2026x Refresh 1](https://www.3ds.com/products-services/catia/products/dymola/): The library has been developed using Dymola.
-- [OpenModelica v1.26.3 (64-bit)](https://www.openmodelica.org/): The library was tested and is fully compatible to Open Modelica.
+- [OpenModelica v1.27.0 (64-bit)](https://www.openmodelica.org/): The library was tested and is fully compatible to Open Modelica.
 
 ## Bibliography
 - J. Brembeck, R. de Castro, J. Tobol&aacute;&rcaron; and I. Ebrahimi: IEEE VTS Motor Vehicles Challenge 2023: A Multi-physical Benchmark Problem for Next Generation Energy Management Algorithms, *19th IEEE Vehicle Power and Propulsion Conference (VPPC)*, 2022
