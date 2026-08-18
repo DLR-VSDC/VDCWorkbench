@@ -5,9 +5,9 @@ package VDCWorkbenchModels
 
   annotation (
     preferredView = "info",
-    version = "0.2.0",
-    versionDate = "2025-08-31",
-    dateModified = "2025-08-31",
+    version = "0.3.0",
+    versionDate = "2026-08-21",
+    dateModified = "2026-08-18",
     License="modelica://VDCWorkbenchModels/Resources/Licenses/LICENSE_VDCWorkbenchModels.txt",
     uses(
       Modelica(version="4.0.0"),
