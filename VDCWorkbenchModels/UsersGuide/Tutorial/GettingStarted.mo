@@ -12,7 +12,6 @@ work with the library.
 
 <p>
 This tutorial will be prepared for the first official release of the library.
-This is planned for the beginning of September 2025.
 </p>
 </html>"));
 end GettingStarted;
