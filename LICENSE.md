@@ -13,6 +13,8 @@ VDCWorkbench: A Vehicle Dynamics Control Test &amp; Evaluation Library for Model
 accepted for the *16th International Modelica and FMI Conference*, Lucerne, Switzerland, 2025
 - Modelica Library's [repository](https://github.com/DLR-VSDC/VDCWorkbench).
 
-Copyright © 2022-2026 DLR & UCM. 
+### Copyright
+&copy; 2022-2026 DLR &amp; UCM. 
+
 The code is released under the [CC BY-NC-ND 4.0 license](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode).
 Link to [short summary of CC BY-NC-ND 4.0 license](https://creativecommons.org/licenses/by-nc-nd/4.0/).
