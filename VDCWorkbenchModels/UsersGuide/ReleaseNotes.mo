@@ -21,7 +21,7 @@ This version requires:
     <a href=\"https://github.com/DLR-SR/Credibility\">Credibility 0.2.0</a> Library,
   </li>
   <li>
-    <a href=\"https://https://github.com/dzimmer/PlanarMechanics\">PlanarMechanics 1.6.0</a> Library,
+    <a href=\"https://github.com/dzimmer/PlanarMechanics\">PlanarMechanics 1.6.0</a> Library,
   </li>
   <li>
     <a href=\"https://github.com/xrg-simulation/SMArtInt\">SMArtInt</a> Library.
