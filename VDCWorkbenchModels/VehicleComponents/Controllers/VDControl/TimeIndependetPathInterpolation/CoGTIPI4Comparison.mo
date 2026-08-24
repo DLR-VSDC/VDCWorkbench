@@ -196,24 +196,25 @@ equation
           fillColor={255,255,0},
           fillPattern=FillPattern.CrossDiag),
         Line(
-          points={{-92,-86},{-68,-20},{-24,30},{64,98}},
-          color={238,46,47},
-          thickness=0.5),
+          points={{-90,-26},{-24,-16},{10,74},{70,92}},
+          color={0,0,0},
+          smooth=Smooth.Bezier),
         Line(
-          points={{-74,-96},{-46,-28},{-2,16},{96,90}},
-          color={28,108,200},
-          pattern=LinePattern.Dash,
-          thickness=0.5),
+          points={{-90,-40},{-6,-26},{20,60},{80,80}},
+          color={0,0,0},
+          thickness=0.5,
+          smooth=Smooth.Bezier,
+          pattern=LinePattern.Dash),
         Line(
-          points={{-38,-98},{0,-28},{98,54}},
-          color={238,46,47},
-          thickness=0.5),
+          points={{-88,-54},{4,-40},{36,50},{86,68}},
+          color={0,0,0},
+          smooth=Smooth.Bezier),
         Line(
-          points={{-14,30},{-14,4},{10,4}},
+          points={{0,26},{0,0},{24,0}},
           color={238,46,47},
           thickness=0.5),
         Text(
-          extent={{-28,2},{0,-12}},
+          extent={{0,-2},{28,-16}},
           textColor={238,46,47},
           textString="s")}),
     Diagram(
