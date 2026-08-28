@@ -26,8 +26,10 @@ model RearAxleStanleyController "Rear axle Stanley-based path following control"
     s_start=s_start,
     t_ff=t_ff,
     lr=lr,
-    filePath=filePath,
-    pathName=pathName) "Time-independent path interpolation" annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
+    final track=track,
+    final maxArcLength,
+    final filePath,
+    final pathName) "Time-independent path interpolation" annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   VDControl.StanleyBased.RearAxleStanleyControl stanleyControl(
     k=k,
     v_eps=v_eps,

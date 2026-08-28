@@ -2,6 +2,7 @@ within VDCWorkbenchModels.FMUs.Testbench;
 model ResidualDRLforPFC_Racetrack
   extends Modelica.Icons.Example;
   ExportableModels.VehicleVDCGeoPFC_RL vDCWorkbenchRacetrack(
+    redeclare VDCWorkbenchModels.Data.Tracks.Racetrack track,
     path_yaw_init(displayUnit="rad"),
     v_scl(value=1.0)) annotation (Placement(transformation(extent={{-20,20},{20,60}})));
   DRLAgents.ResidualDRLgeoPFC residualDRLgeoPFC(
@@ -11,15 +12,15 @@ model ResidualDRLforPFC_Racetrack
     annotation (Placement(transformation(extent={{10,-20},{-10,0}})));
 equation
   connect(residualDRLgeoPFC.fmuOutputsBus, vDCWorkbenchRacetrack.fmuOutputsBus) annotation (Line(
-      points={{10,-10},{30,-10},{30,36},{20,36}},
-      color={215,136,255},
-      thickness=0.5));
+        points={{10,-10},{30,-10},{30,36},{20,36}},
+        color={215,136,255},
+        thickness=0.5));
   connect(residualDRLgeoPFC.residualDelta, vDCWorkbenchRacetrack.residualRL_steeringWheelAngle_in)
     annotation (Line(points={{-11,-4},{-40,-4},{-40,52},{-24,52}},
         color={0,0,127}));
   connect(residualDRLgeoPFC.residualTorque, vDCWorkbenchRacetrack.residualRL_torque_in)
-    annotation (Line(points={{-11,-16},{-30,-16},{-30,44},{-24,44}}, color={0,
-          0,127}));
+    annotation (Line(points={{-11,-16},{-30,-16},{-30,44},{-24,44}},
+        color={0,0,127}));
   annotation (
     experiment(
       StopTime=17.7,

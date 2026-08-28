@@ -4,11 +4,8 @@ model VehicleVDCGeoPFC_RL
     redeclare VDCWorkbenchModels.Data.ROMOParametersResidualRL data,
     v_Start=max(path_v_init + initial_velocity_offset.value, 1.0),
     redeclare VehicleComponents.Controllers.VDControl.VDCWorkbenchControl_RL controller(
-      filePath=ModelicaServices.ExternalReferences.loadResource("modelica://VDCWorkbenchModels/Resources/Maps/") + pathName,
-      pathName="path",
-      v_scale=v_scl.value,
-      tIPI_bus(
-        maxArcLength=maxArcLength)),
+      final track = track,
+      v_scale=v_scl.value),
     vehicle(
       carBody(
         body(
@@ -18,8 +15,9 @@ model VehicleVDCGeoPFC_RL
 
   import Modelica.Units.Conversions.from_deg;
 
-  parameter String pathName = "Racetrack.mat" "File name of the path definition #RL";
-  parameter Modelica.Units.SI.Distance maxArcLength = 151.0 "Max arc length of the path #RL" annotation(Evaluate=false);
+  replaceable parameter Data.Tracks.Racetrack track constrainedby VDCWorkbenchModels.Data.Tracks.BaseTrack
+    "Path to be evaluated"
+    annotation(choicesAllMatching=true);
   parameter Modelica.Units.SI.Position path_x_init = 0.0 "Initial x position of CoG #RL";
   parameter Modelica.Units.SI.Position path_y_init = 0.0 "Initial x position of CoG #RL";
   parameter Modelica.Units.SI.Angle path_yaw_init = from_deg(0) "Initial yaw angle of CoG #RL";

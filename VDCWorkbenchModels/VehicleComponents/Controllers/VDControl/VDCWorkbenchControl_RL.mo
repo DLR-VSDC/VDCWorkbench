@@ -1,8 +1,6 @@
 within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl;
 model VDCWorkbenchControl_RL "Geometry based path following control for residual reinforcement learning"
-  extends BaseClasses.BaseVDC(
-    filePath=ModelicaServices.ExternalReferences.loadResource("modelica://VDCWorkbenchModels/Resources/Maps/Techlab2SBahn-NonOpt_TIPI.mat"),
-    pathName="path_TIPI");
+  extends BaseClasses.BaseVDC;
 
   parameter Real e_long_gain=80 "TIPI controller gain to force e_long to 0" annotation(Dialog(group="TIPI controller parameters"));
   parameter Real e_y_ref=0 "TIPI eccentric parameter to distinguish road side" annotation(Dialog(group="TIPI controller parameters"));
@@ -30,8 +28,10 @@ model VDCWorkbenchControl_RL "Geometry based path following control for residual
 
   TimeIndependetPathInterpolation.CoGTIPI tIPI_bus(
     e_long_gain=e_long_gain,
-    filePath=filePath,
-    pathName=pathName)
+    final track=track,
+    final maxArcLength,
+    final filePath,
+    final pathName)
     annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
   GeoPFC.MotionDemand calculate_Motion_Demand(
     lambda_eLat=lambda_eLat,
