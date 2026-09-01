@@ -35,8 +35,10 @@ model PredStanleyControllerTD "Predictive Stanley-based path following control"
     e_long_gain=e_long_gain,
     s_start=s_start,
     lf=lf,
-    filePath=filePath,
-    pathName=pathName) "Time-independent path interpolation" annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
+    final track=track,
+    final maxArcLength,
+    final filePath,
+    final pathName) "Time-independent path interpolation" annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   VDControl.StanleyBased.PredictiveStanleyControlTD stanleyControl(
     k=k,
     v_eps=v_eps,
@@ -54,8 +56,8 @@ model PredStanleyControllerTD "Predictive Stanley-based path following control"
     final weights=weights,
     final N=N,
     final dt=dt,
-    filePath=filePath,
-    pathName=pathName) annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
+    final filePath=track.filePath,
+    final pathName=track.pathName) annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
 equation
   connect(const.y, tIPI.v_scl) annotation (Line(points={{-59,30},{-52,30},{-52,36},{-42,36}}, color={0,0,127}));
   connect(tIPI.controlBus, controlBus) annotation (Line(
