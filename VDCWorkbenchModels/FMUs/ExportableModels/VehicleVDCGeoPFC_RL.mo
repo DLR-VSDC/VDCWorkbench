@@ -19,7 +19,7 @@ model VehicleVDCGeoPFC_RL
   import Modelica.Units.Conversions.from_deg;
 
   parameter String pathName = "Racetrack.mat" "File name of the path definition #RL";
-  parameter Modelica.Units.SI.Distance maxArcLength = 155.0 "Max arc length of the path #RL" annotation(Evaluate=false);
+  parameter Modelica.Units.SI.Distance maxArcLength = 151.0 "Max arc length of the path #RL" annotation(Evaluate=false);
   parameter Modelica.Units.SI.Position path_x_init = 0.0 "Initial x position of CoG #RL";
   parameter Modelica.Units.SI.Position path_y_init = 0.0 "Initial x position of CoG #RL";
   parameter Modelica.Units.SI.Angle path_yaw_init = from_deg(0) "Initial yaw angle of CoG #RL";
