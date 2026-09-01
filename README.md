@@ -14,10 +14,10 @@ The full article is available here as open access: [VDCWorkbench: A Source-Avail
 In order to work properly, the library requires the following Modelica packages.
 - [Credibility](https://github.com/DLR-SR/Credibility)
 - [PlanarMechanics](https://github.com/dzimmer/PlanarMechanics)
-- [SMArtInt](https://github.com/xrg-simulation/SMArtInt) - *OpenModelica users*: please use the branch [dev](https://github.com/xrg-simulation/SMArtInt/tree/dev) as long as there is no SMArtInt release later then v0.5.2 since there is a bug when using SMArtInt for multi-dimensional problems
+- [SMArtInt](https://github.com/xrg-simulation/SMArtInt)
 - [VehicleInterfaces](https://github.com/modelica/VehicleInterfaces)
 
-Consult the library user's guide for particular versions of the abovementioned packages which are needed.
+Consult the VDCWorkbenchModels Library user's guide for particular versions of the abovementioned packages which are needed.
 
 ## Tool compatibility
 The current branch release was developed/tested using following tools.
