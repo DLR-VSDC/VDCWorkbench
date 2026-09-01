@@ -9,6 +9,36 @@ This section summarizes the changes that have been performed
 on the library.
 </p>
 
+<h4>Version 0.3.1 (2026-09-04)</h4>
+<p>
+This version requires:
+</p>
+<ul>
+  <li>
+    Modelica 4.1.0 Library,
+  </li>
+  <li>
+    <a href=\"https://github.com/DLR-SR/Credibility\">Credibility 0.3.0</a> Library,
+  </li>
+  <li>
+    <a href=\"https://github.com/dzimmer/PlanarMechanics\">PlanarMechanics 1.7.0</a> Library,
+  </li>
+  <li>
+    <a href=\"https://github.com/xrg-simulation/SMArtInt\">SMArtInt 1.0.0</a> Library.
+  </li>
+  <li>
+    <a href=\"https://github.com/modelica/VehicleInterfaces\">VehicleInterfaces 2.0.2</a> Library,
+  </li>
+</ul>
+
+<p>Improvements:</p>
+<ul>
+  <li>
+    Fix false version of some mat-files of track (directory <em>VDCWorkbenchModels/Resources/Maps</em>).
+  </li>
+</ul>
+
+
 <h4>Version 0.3.0 (2026-08-21)</h4>
 <p>
 This version requires:
