@@ -5,17 +5,17 @@ package VDCWorkbenchModels
 
   annotation (
     preferredView = "info",
-    version = "0.3.0",
+    version="0.3.1",
     versionDate = "2026-08-21",
     dateModified = "2026-08-18",
     License="modelica://VDCWorkbenchModels/Resources/Licenses/LICENSE_VDCWorkbenchModels.txt",
     uses(
-      Modelica(version="4.0.0"),
-      ModelicaServices(version="4.0.0"),
-      PlanarMechanics(version="1.6.0"),
-      VehicleInterfaces(version="2.0.1"),
+      Modelica(version="4.1.0"),
+      ModelicaServices(version="4.1.0"),
+      PlanarMechanics(version="1.7.0"),
+      VehicleInterfaces(version="2.0.2"),
       SMArtInt(version="1.0.0"),
-      Credibility(version="0.2.0")),
+      Credibility(version="0.3.0")),
     Documentation(
       revisions="<html>
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
