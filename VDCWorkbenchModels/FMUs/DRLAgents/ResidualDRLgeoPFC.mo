@@ -61,7 +61,7 @@ equation
       color={175,175,175},
       thickness=0.5));
   connect(sample1.y, unitDelay.u) annotation (Line(points={{-43.4,0},{-32,0},{-32,-20},{-27.2,-20}}, color={0,0,127}));
-  connect(evaluateNeuralNetwork.arrayOut[1, :], hold1.u) annotation (Line(points={{40,0},{48.8,0}}, color={0,0,127}));
+  connect(evaluateNeuralNetwork.y[1, :], hold1.u) annotation (Line(points={{41,0},{48.8,0}}, color={0,0,127}));
   connect(hold1[1].y, denormalize_steering.u) annotation (Line(points={{62.6,0},{70,0},{70,60},{74.4,60}},
         color={0,0,127}));
   connect(hold1[2].y, denormalize_torque.u) annotation (Line(points={{62.6,0},{70,0},{70,-60},{76.4,-60}},
@@ -73,7 +73,7 @@ equation
   connect(sample1.y, multiplex2.u1) annotation (Line(points={{-43.4,0},{-32,0},{-32,3.6},{-1.2,3.6}},
         color={0,0,127}));
   connect(unitDelay.y, multiplex2.u2) annotation (Line(points={{-13.4,-20},{-10,-20},{-10,-3.6},{-1.2,-3.6}}, color={0,0,127}));
-  connect(multiplex2.y, evaluateNeuralNetwork.arrayIn[1, :]) annotation (Line(points={{12.6,0},{20,0}}, color={0,0,127}));
+  connect(multiplex2.y, evaluateNeuralNetwork.u[1, :]) annotation (Line(points={{12.6,0},{18,0}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false),
       graphics={

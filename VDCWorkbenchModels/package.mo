@@ -14,7 +14,7 @@ package VDCWorkbenchModels
       ModelicaServices(version="4.0.0"),
       PlanarMechanics(version="1.6.0"),
       VehicleInterfaces(version="2.0.1"),
-      SMArtInt(version="0.5.2"),
+      SMArtInt(version="1.0.0"),
       Credibility(version="0.2.0")),
     Documentation(
       revisions="<html>
