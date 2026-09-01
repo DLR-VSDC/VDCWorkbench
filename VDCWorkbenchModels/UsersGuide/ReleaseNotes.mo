@@ -55,7 +55,8 @@ This version requires:
   </li>
   <li>
     <a href=\"https://github.com/xrg-simulation/SMArtInt\">SMArtInt</a> Library.
-    <em>OpenModelica users</em>, please use the branch <a href=\"https://github.com/xrg-simulation/SMArtInt/tree/dev\">dev</a>
+    <em>OpenModelica users</em>, please use the commit
+    <a href=\"https://github.com/xrg-simulation/SMArtInt/commit/0f9c8056fdf8be59bb0f5f7f878151d79f4b231b\">0f9c8056fdf8be59bb0f5f7f878151d79f4b231b</a>
     as long as there is no SMArtInt release later then v0.5.2 since there is a&nbsp;bug when using SMArtInt for
     multi-dimensional problems as in <a href=\"modelica://VDCWorkbenchModels.FMUs.DRLAgents.ResidualDRLgeoPFC\">ResidualDRLgeoPFC</a>.
   </li>
