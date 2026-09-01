@@ -22,7 +22,7 @@ equation
           0,127}));
   annotation (
     experiment(
-      StopTime=500,
+      StopTime=17.7,
       Interval=0.05,
       __Dymola_Algorithm="Dassl"),
     Icon(coordinateSystem(preserveAspectRatio=false)),
