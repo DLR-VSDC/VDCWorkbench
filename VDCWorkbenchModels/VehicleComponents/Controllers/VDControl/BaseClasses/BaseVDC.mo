@@ -2,15 +2,9 @@ within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.BaseClasses;
 model BaseVDC "Interface definition for vehicle dynamics controllers"
   extends VehicleInterfaces.Icons.Controller;
 
-  parameter String filePath = ModelicaServices.ExternalReferences.loadResource(
-    "modelica://VDCWorkbenchModels/Resources/Maps/Techlab2SBahn-NonOpt_TIPI.mat")
-    "File where path table pathName is stored" annotation (
-      Dialog(
-        group="Path data",
-        loadSelector(
-          filter="Matlab files(*.mat)",
-          caption="Open path data file")));
-  parameter String pathName = "path_TIPI" "Table name in filePath" annotation (Dialog(group="Path data"));
+  replaceable parameter Data.Tracks.Techlab2SBahnTIPI track constrainedby VDCWorkbenchModels.Data.Tracks.BaseTrack
+    "Path to be evaluated"
+    annotation(choicesAllMatching=true);
 
   parameter Modelica.Units.SI.Mass m=1000 "Mass of vehicle"
     annotation(Dialog(group="Vehicle parameters"));

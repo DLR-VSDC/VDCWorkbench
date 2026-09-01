@@ -18,9 +18,10 @@ model MiniAFMGeoPFC "Geometry based path following control for the miniAFM"
 
   VDControl.TimeIndependetPathInterpolation.CoGTIPI tIPI(
     e_long_gain=e_long_gain,
-    filePath=filePath,
-    pathName=pathName,
-    maxArcLength=22.737000000000002) "Time-independent path interpolation"
+    final track=track,
+    final maxArcLength,
+    final filePath,
+    final pathName) "Time-independent path interpolation"
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   VDControl.GeoPFC.MotionDemand motionDemand(
     lambda_eLat=lambda_eLat,
