@@ -56,10 +56,18 @@ equation
       extent={{2,2},{2,5}},
       horizontalAlignment=TextAlignment.Left));
   connect(stanleyControl.torque, electricMotorControlBus.torque) annotation (
-      Line(points={{-18.8,-26},{60,-26},{60,-20},{80,-20}},
-                                                   color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{2,2},{2,5}},
-      horizontalAlignment=TextAlignment.Left));
+      Line(
+        points={{-18.8,-26},{60,-26},{60,-20},{80,-20}},
+        color={0,0,127}),
+      Text(
+        string="%second",
+        index=1,
+        extent={{2,2},{2,5}},
+        horizontalAlignment=TextAlignment.Left));
+  annotation (
+    Icon(graphics={
+        Text(
+          extent={{-100,-60},{100,-90}},
+          textColor={0,0,0},
+          textString="Stanley")}));
 end StanleyController;

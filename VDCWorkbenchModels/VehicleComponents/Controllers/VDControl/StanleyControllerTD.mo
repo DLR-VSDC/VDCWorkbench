@@ -60,9 +60,35 @@ equation
         horizontalAlignment=TextAlignment.Left));
   connect(stanleyControl.torque, electricMotorControlBus.torque) annotation (
       Line(points={{-18.8,-26},{60,-26},{60,-20},{80,-20}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{2,2},{2,5}},
-      horizontalAlignment=TextAlignment.Left));
+        color={0,0,127}),
+      Text(
+        string="%second",
+        index=1,
+        extent={{2,2},{2,5}},
+        horizontalAlignment=TextAlignment.Left));
+  annotation (
+    Icon(graphics={
+        Text(
+          extent={{-100,-60},{100,-90}},
+          textColor={0,0,0},
+          textString="Stanley"),
+        Line(
+          points={{-40,-22},{-40,0},{-10,0},{-10,16},{22,16},{22,0},{50,0},{50,28}},
+          color={255,255,255},
+          pattern=LinePattern.Dot),
+        Ellipse(
+          extent={{-46,6},{-34,-6}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-16,22},{-4,10}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{16,6},{28,-6}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}));
 end StanleyControllerTD;

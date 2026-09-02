@@ -68,4 +68,29 @@ equation
         index=1,
         extent={{2,2},{2,5}},
         horizontalAlignment=TextAlignment.Left));
+  annotation (
+    Icon(graphics={
+        Line(
+          points={{-40,-22},{-40,0},{-10,0},{-10,16},{22,16},{22,0},{50,0},{50,28}},
+          color={255,255,255},
+          pattern=LinePattern.Dot),
+        Ellipse(
+          extent={{-46,6},{-34,-6}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-16,22},{-4,10}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{16,6},{28,-6}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-100,-60},{100,-90}},
+          textColor={0,0,0},
+          textString="Stanley RA")}));
 end RearAxleStanleyControllerTD;

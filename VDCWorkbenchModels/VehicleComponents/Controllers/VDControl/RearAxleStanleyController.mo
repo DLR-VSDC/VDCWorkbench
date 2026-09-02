@@ -68,4 +68,10 @@ equation
         index=1,
         extent={{2,2},{2,5}},
         horizontalAlignment=TextAlignment.Left));
+  annotation (
+    Icon(graphics={
+        Text(
+          extent={{-100,-60},{100,-90}},
+          textColor={0,0,0},
+          textString="Stanley RA")}));
 end RearAxleStanleyController;
