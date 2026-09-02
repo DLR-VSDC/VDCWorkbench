@@ -160,7 +160,8 @@ equation
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
 <p>
-Vehicle&apos;s architecture intended for the IEEE VTS Motor Vehicles Challenge 2023.
+Vehicle&apos;s architecture intended for the IEEE VTS Motor Vehicles Challenge 2023,
+see [<a href=\"modelica://VDCWorkbenchModels.UsersGuide.References\">Brembeck2022</a>].
 It considers
 </p>
 <ul>
@@ -179,7 +180,7 @@ It considers
         axle and one central front motor, and
       </li>
       <li>
-        a&nbsp;front steer-by-wire actuation, which is a&nbsp;component of the front alxe of
+        a&nbsp;front steer-by-wire actuation, which is a&nbsp;component of the front axle of
         the planar <code>vehicle</code>.
       </li>
     </ul>
