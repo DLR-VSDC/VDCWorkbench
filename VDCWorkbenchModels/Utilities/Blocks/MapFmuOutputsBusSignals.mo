@@ -215,23 +215,21 @@ equation
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(orientation_error, orientation_error)
-    annotation (Line(points={{110,20},{110,20}}, color={0,0,127}));
   connect(calc_orientation_error.u1, chassisBus.yawAngle) annotation (Line(
-        points={{-22,26},{-42,26},{-42,90},{-40,90}},             color={0,0,
-          127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
+        points={{-22,26},{-42,26},{-42,90},{-40,90}}, color={0,0,127}),
+      Text(
+        string="%second",
+        index=1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
   connect(calc_orientation_error.u2, motionDemandBus.psi_path) annotation (Line(
         points={{-22,14},{-40,14},{-40,-14},{-58,-14},{-58,-18},{-60,-18},{-60,-20}},
         color={0,0,127}),
       Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
+        string="%second",
+        index=1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
   connect(calcVelocityError.chassisBus, chassisBus) annotation (Line(
       points={{-20,64},{-40,64},{-40,90}},
       color={255,204,51},
