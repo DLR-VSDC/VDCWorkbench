@@ -1,7 +1,6 @@
 within VDCWorkbenchModels.VehicleComponents.Powertrain.Components;
 model SimpleBatteryAging
   "Simple battery model based on a inner resistance and SOC_OCV table and aging parameterization"
-  import Modelica.Math.exp;
 
   parameter VDCWorkbenchModels.Utilities.Types.StateOfCharge SOC_init = 1 "Initial value of SOC"
     annotation (Dialog(group="Initialization"));
