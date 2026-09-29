@@ -2,15 +2,17 @@ within VDCWorkbenchModels.VehicleComponents.Controllers.VDControl.TimeIndependet
 block CoGTIPI4Comparison "Time independent path interpolation"
   parameter Real e_long_gain=80 "TIPI Controller gain to force e_long to 0";
   parameter Modelica.Units.SI.Position s_start=0 "Arc length value at start position";
-  parameter String filePath = ModelicaServices.ExternalReferences.loadResource(
-    "modelica://VDCWorkbenchModels/Resources/Maps/RacetrackMini.mat")
+  replaceable parameter Data.Tracks.RacetrackMini track constrainedby VDCWorkbenchModels.Data.Tracks.BaseTrack
+    "Path to be evaluated"
+    annotation(choicesAllMatching=true, Dialog(group="Path data"));
+  parameter String filePath = track.filePath
     "File where path table pathName is stored" annotation (
       Dialog(
         group="Path data",
         loadSelector(
           filter="Matlab files(*.mat)",
           caption="Open data file")));
-  parameter String pathName = "path" "Table name in filePath" annotation (Dialog(group="Path data"));
+  parameter String pathName = track.pathName "Table name in filePath" annotation (Dialog(group="Path data"));
   parameter Modelica.Units.SI.Position maxArcLength = 22.737000000000002 "Maximum arc length value on path file" annotation (Dialog(group="Path data"));
   //Can be improved in final version (store in MAT file)
 
@@ -97,7 +99,8 @@ public
     annotation (Placement(transformation(extent={{40,-62},{60,-42}})));
   Modelica.Blocks.Sources.RealExpression realExpression_e_psi(y=e_psi)
     annotation (Placement(transformation(extent={{40,-20},{60,0}})));
-  Utilities.Blocks.Modulo modulo(k=maxArcLength) annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
+  Utilities.Blocks.Modulo modulo(
+    k=if track.isClosed then maxArcLength else Modelica.Constants.inf) annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
   VDCWorkbenchModels.Utilities.Interfaces.ControlBus controlBus annotation (
       Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
@@ -129,7 +132,7 @@ equation
   lambda[4] = combiTablePath.y[4]*v_scl "scaled long speed";
   lambda[5] = combiTablePath.y[5] "curvature";
   kappa = combiTablePath.y[5];
-  //if sIntegrator.y > (maxArcLength-1.0) then
+  //if not track.isClosed and sIntegrator.y > (maxArcLength-1.0) then
   //  terminate("Vehicle reached end of path");
   //end if;
 
