@@ -2,9 +2,7 @@ within VDCWorkbenchModels.Examples.VDCWorkbenches;
 model MiniAFMGeoPFCTD_Racetrack
   extends VehicleDrivetrains.VariantsVehicleDrivetrains.MiniAFMMotor;
   VehicleComponents.Controllers.VDControl.MiniAFMGeoPFCTD miniAFM_TD_GeoPFC(
-    filePath=ModelicaServices.ExternalReferences.loadResource(
-      "modelica://VDCWorkbenchModels/Resources/Maps/RacetrackMini.mat"),
-    pathName="path")
+    redeclare VDCWorkbenchModels.Data.Tracks.RacetrackMini track)
     annotation (Placement(transformation(extent={{-2,40},{18,60}})));
 equation
   connect(miniAFM_TD_GeoPFC.controlBus, controlBus) annotation (Line(
