@@ -14,10 +14,8 @@ drivetrain.tractionMotorRR.iq_Filter.x[2]
 drivetrain.tractionMotorRR.pMSM.firstOrder.y
 drivetrain.tractionMotorRR.pMSM.lossesFriction.phi
 infinityHeatCapacitor.T
-powerSource.batteryPack.agingCalc.currentMean.mu
 powerSource.batteryPack.agingCalc.derivative.x
 powerSource.batteryPack.agingCalc.dissCycles.y
-powerSource.batteryPack.agingCalc.tempMean.mu
 powerSource.batteryPack.cellThermCap.T
 powerSource.batteryPack.integratorSOC.y
 powerSource.rex.H2_dynamics.y

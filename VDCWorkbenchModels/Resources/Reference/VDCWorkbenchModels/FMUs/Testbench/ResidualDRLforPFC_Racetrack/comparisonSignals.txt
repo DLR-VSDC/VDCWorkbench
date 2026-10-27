@@ -13,10 +13,8 @@ vDCWorkbenchRacetrack.drivetrain.tractionMotorRR.iq_Filter.x[1]
 vDCWorkbenchRacetrack.drivetrain.tractionMotorRR.iq_Filter.x[2]
 vDCWorkbenchRacetrack.drivetrain.tractionMotorRR.pMSM.firstOrder.y
 vDCWorkbenchRacetrack.infinityHeatCapacitor.T
-vDCWorkbenchRacetrack.powerSource.batteryPack.agingCalc.currentMean.mu
 vDCWorkbenchRacetrack.powerSource.batteryPack.agingCalc.derivative.x
 vDCWorkbenchRacetrack.powerSource.batteryPack.agingCalc.dissCycles.y
-vDCWorkbenchRacetrack.powerSource.batteryPack.agingCalc.tempMean.mu
 vDCWorkbenchRacetrack.powerSource.batteryPack.cellThermCap.T
 vDCWorkbenchRacetrack.powerSource.batteryPack.integratorSOC.y
 vDCWorkbenchRacetrack.powerSource.rex.H2_dynamics.y

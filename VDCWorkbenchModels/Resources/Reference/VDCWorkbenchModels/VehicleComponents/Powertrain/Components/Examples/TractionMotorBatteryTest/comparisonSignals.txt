@@ -1,10 +1,8 @@
 time
 inertia.phi
 inertia.w
-rOMOBatteryPack90s1pAging.agingCalc.currentMean.mu
 rOMOBatteryPack90s1pAging.agingCalc.derivative.x
 rOMOBatteryPack90s1pAging.agingCalc.dissCycles.y
-rOMOBatteryPack90s1pAging.agingCalc.tempMean.mu
 rOMOBatteryPack90s1pAging.cellThermCap.T
 rOMOBatteryPack90s1pAging.integratorSOC.y
 rOMOTractionMotor.iq_Filter.x[1]

@@ -1,6 +1,4 @@
 time
-E_loss_total.y
-infinityHeatCapacitor.T
 vehicle.axleFront.inertiaSteering.phi
 vehicle.axleFront.inertiaSteering.w
 vehicle.axleFront.wheelInertiaL.phi
