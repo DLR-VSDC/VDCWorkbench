@@ -2,9 +2,7 @@ within VDCWorkbenchModels.Examples.VDCWorkbenches;
 model Techlab2TrainStationWessling_VDCGeoPFC "Vehicle architecture for Motor Vehicles Challenge with geometric path-following controller"
   extends VehicleArchitectures.VDCWorkbench2025(
     redeclare VehicleComponents.Controllers.VDControl.VDCWorkbenchControl controller(
-      filePath=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://VDCWorkbenchModels/Resources/Maps/Techlab2SBahn-NonOpt_TIPI.mat"),
-      pathName="path_TIPI"));
+      redeclare VDCWorkbenchModels.Data.Tracks.Techlab2SBahnTIPI track));
   annotation (
     experiment(
       StopTime=136,
