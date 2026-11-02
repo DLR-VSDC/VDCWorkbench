@@ -1,5 +1,5 @@
 time
-miniAFM_TD_GeoPFC.tIPI.sIntegrator.y
+controller.tIPI.sIntegrator.y
 vehicle.axleFront.inertiaSteering.phi
 vehicle.axleFront.inertiaSteering.w
 vehicle.axleFront.wheelInertiaL.phi
