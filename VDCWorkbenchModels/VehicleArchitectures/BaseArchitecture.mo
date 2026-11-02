@@ -14,6 +14,7 @@ partial model BaseArchitecture "Basic partial architecture of a planar vehicle"
     mu_S=data.mu_S,
     J_wheel=data.J_wheel,
     J_steer=data.J_steer,
+    steeringRatio=data.steeringRatio,
     wheelBase=data.wheelBase,
     Jz=data.Jz_vehicle,
     m=data.m_vehicle,
