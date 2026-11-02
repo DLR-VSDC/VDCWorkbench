@@ -2,14 +2,15 @@ within VDCWorkbenchModels.VehicleComponents.Chassis;
 model PlanarVehicle "Simple planar model of vehicle"
   extends Modelica.Thermal.HeatTransfer.Interfaces.PartialConditionalHeatPort;
 
-  parameter Modelica.Units.SI.Velocity v_Start=0 "Initial velocity";
+  parameter Modelica.Units.SI.Velocity v_Start=0 "Initial velocity" annotation (Dialog(group="Initial conditions"));
 
   parameter Modelica.Units.SI.Length trackWidth=trackWidth "Track width of vehicle";
   parameter Modelica.Units.SI.Length wheelBase=wheelBase "Wheelbase of Vehicle";
   parameter Modelica.Units.SI.Inertia Jz=Jz "Yaw inertia of vehicle";
   parameter Modelica.Units.SI.Mass m=m "Total mass of vehicle";
   parameter Modelica.Units.SI.Inertia J_steer=J_steer
-    "Inertia of steering rack pinion mechanism";
+    "Inertia of steering rack pinion mechanism" annotation (Dialog(group="Steering"));
+  parameter Real steeringRatio=16 "Steering gear ratio (phi_steeringWheel/phi_rack)" annotation (Dialog(group="Steering"));
   parameter Modelica.Units.SI.Length s[2]=s "Driving direction of the vehicle at angle phi = 0";
   parameter Modelica.Units.SI.Length R0=R0 "Radius of the wheel" annotation (Dialog(group="Wheels and tires"));
   parameter Modelica.Units.SI.Velocity vAdhesion=vAdhesion "Adhesion velocity" annotation (Dialog(group="Wheels and tires"));
@@ -42,6 +43,7 @@ model PlanarVehicle "Simple planar model of vehicle"
     mu_S=mu_S,
     J_wheel=J_wheel,
     J_steer=J_steer,
+    steeringRatio=steeringRatio,
     v_long=v_Start,
     trackWidth=trackWidth,
     animate=carBody.animate,
